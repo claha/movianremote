@@ -1,5 +1,7 @@
 package claha.android.com.showtimeremote;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -95,14 +97,15 @@ public class ShowtimeHTTP {
     private String ipAddress;
     private String port;
 
-    public ShowtimeHTTP(String ipAddress, String port) {
-        this.ipAddress = ipAddress;
-        this.port = port;
+    public ShowtimeHTTP() {
     }
 
+    //TODO: Check return of http request, seems to return "Ok" when fine
+    //TODO: Is threading the best way to do this? can't do it on mainthread so something is needed
     public void sendAction(String action) {
 
         final String urlString = "http://" + ipAddress + ":" + port + "/showtime/input/action/" + action;
+        Log.d("ShowtimeHTTP", urlString);
 
         Thread thread = new Thread((new Runnable() {
             @Override
@@ -121,4 +124,19 @@ public class ShowtimeHTTP {
         thread.start();
     }
 
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
 }

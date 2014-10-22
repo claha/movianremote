@@ -2,7 +2,16 @@
 <resources>
 
     <string name="app_name">Showtime Remote</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="settings_ipAddress_key">ipAddress</string>
+    <string name="settings_ipAddress_title">IP Address</string>
+    <string name="settings_ipAddress_summary">IP address of Showtime</string>
+    <string name="settings_ipAddress_defaultValue">192.168.1.74</string>
+
+    <string name="settings_port_key">port</string>
+    <string name="settings_port_title">Port</string>
+    <string name="settings_port_summary">Port of Showtime</string>
+    <string name="settings_port_defaultValue">42000</string>
 
 </resources>
