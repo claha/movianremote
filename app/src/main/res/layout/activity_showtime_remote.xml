@@ -27,13 +27,87 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonAction"
+            android:id="@+id/buttonHome"
             style="@style/showtime_button"
-            android:background="@drawable/showtime_button"
-            android:text="ACTION" />
+            android:background="@drawable/showtime_button"/>
+        <Button
+            android:id="@+id/buttonUp"
+            style="@style/showtime_button"
+            android:background="@drawable/showtime_button"/>
+        <Button
+            android:id="@+id/buttonMenu"
+            style="@style/showtime_button"
+            android:background="@drawable/showtime_button"/>
+
+         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonLeft"
+                style="@style/showtime_button"
+                android:background="@drawable/showtime_button"/>
+            <Button
+                android:id="@+id/buttonOK"
+                style="@style/showtime_button"
+                android:background="@drawable/showtime_button"/>
+            <Button
+                android:id="@+id/buttonRight"
+                style="@style/showtime_button"
+                android:background="@drawable/showtime_button"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonBack"
+                style="@style/showtime_button"
+                android:background="@drawable/showtime_button"/>
+            <Button
+                android:id="@+id/buttonDown"
+                style="@style/showtime_button"
+                android:background="@drawable/showtime_button"/>
+            <Button
+                android:id="@+id/buttonForward"
+                style="@style/showtime_button"
+                android:background="@drawable/showtime_button"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp">
+
+            <Button
+                android:id="@+id/buttonAction"
+                style="@style/showtime_button"
+                android:background="@drawable/showtime_button"
+                android:text="ACTION"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
