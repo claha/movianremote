@@ -1,13 +1,13 @@
 package claha.android.com.showtimeremote;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-public class ShowtimeRemote extends Activity implements View.OnClickListener, View.OnLongClickListener {
+public class ShowtimeRemote extends ActionBarActivity implements View.OnClickListener, View.OnLongClickListener {
 
     private static final String TAG = "ShowtimeRemote";
 
@@ -48,16 +46,16 @@ public class ShowtimeRemote extends Activity implements View.OnClickListener, Vi
         // Buttons
         buttons = new ArrayList<ShowtimeButton>();
         buttons.add(new ShowtimeButton(R.id.buttonLeft, "LEFT", ShowtimeHTTP.ACTION_LEFT, ShowtimeHTTP.ACTION_SEEK_BACKWARD));
-        buttons.add(new ShowtimeButton(R.id.buttonRight,"RGHT", ShowtimeHTTP.ACTION_RIGHT, ShowtimeHTTP.ACTION_SEEK_FORWARD));
-        buttons.add(new ShowtimeButton(R.id.buttonUp, "UP",ShowtimeHTTP.ACTION_UP, ShowtimeHTTP.ACTION_TOP));
-        buttons.add(new ShowtimeButton(R.id.buttonDown, "DOWN",ShowtimeHTTP.ACTION_DOWN, ShowtimeHTTP.ACTION_BOTTOM));
-        buttons.add(new ShowtimeButton(R.id.buttonOK, "OK",ShowtimeHTTP.ACTION_ACTIVATE));
+        buttons.add(new ShowtimeButton(R.id.buttonRight, "RGHT", ShowtimeHTTP.ACTION_RIGHT, ShowtimeHTTP.ACTION_SEEK_FORWARD));
+        buttons.add(new ShowtimeButton(R.id.buttonUp, "UP", ShowtimeHTTP.ACTION_UP, ShowtimeHTTP.ACTION_PAGE_UP));
+        buttons.add(new ShowtimeButton(R.id.buttonDown, "DOWN", ShowtimeHTTP.ACTION_DOWN, ShowtimeHTTP.ACTION_PAGE_DOWN));
+        buttons.add(new ShowtimeButton(R.id.buttonOK, "OK", ShowtimeHTTP.ACTION_ACTIVATE));
 
-        buttons.add(new ShowtimeButton(R.id.buttonHome, "HOME",ShowtimeHTTP.ACTION_HOME));
-        buttons.add(new ShowtimeButton(R.id.buttonMenu, "MENU",ShowtimeHTTP.ACTION_MENU, ShowtimeHTTP.ACTION_ITEMMENU));
+        buttons.add(new ShowtimeButton(R.id.buttonHome, "HOME", ShowtimeHTTP.ACTION_HOME));
+        buttons.add(new ShowtimeButton(R.id.buttonMenu, "MENU", ShowtimeHTTP.ACTION_MENU, ShowtimeHTTP.ACTION_ITEMMENU));
 
         buttons.add(new ShowtimeButton(R.id.buttonBack, "BACK", ShowtimeHTTP.ACTION_NAV_BACK));
-        buttons.add(new ShowtimeButton(R.id.buttonForward, "FWD",ShowtimeHTTP.ACTION_NAV_FWD));
+        buttons.add(new ShowtimeButton(R.id.buttonForward, "FWD", ShowtimeHTTP.ACTION_NAV_FWD));
 
         // Set on click listener for all buttons
         for (ShowtimeButton showtimeButton : buttons) {
@@ -67,7 +65,7 @@ public class ShowtimeRemote extends Activity implements View.OnClickListener, Vi
             button.setOnLongClickListener(this);
         }
 
-        Button buttonAction = (Button)findViewById(R.id.buttonAction);
+        Button buttonAction = (Button) findViewById(R.id.buttonAction);
         buttonAction.setOnClickListener(this);
 
     }
@@ -98,6 +96,14 @@ public class ShowtimeRemote extends Activity implements View.OnClickListener, Vi
                 loadSettings();
                 break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void loadSettings() {
