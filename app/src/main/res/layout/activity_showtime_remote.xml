@@ -2,120 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ShowtimeRemote">
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
+    <include
+        layout="@layout/toolbar" />
 
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="0.0.0.0:0"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryText"/>
-    </LinearLayout>
+    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ShowtimeRemote">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/textColorPrimary" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+        <ListView
+            android:id="@+id/left_drawer"
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/textColorPrimary"/>
 
-            <Button
-                android:id="@+id/buttonHome"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-            <Button
-                android:id="@+id/buttonUp"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-            <Button
-                android:id="@+id/buttonMenu"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonLeft"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-            <Button
-                android:id="@+id/buttonOK"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-            <Button
-                android:id="@+id/buttonRight"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonBack"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-            <Button
-                android:id="@+id/buttonDown"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-            <Button
-                android:id="@+id/buttonForward"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonAction"
-                style="@style/showtime_button"
-                android:background="@drawable/showtime_button"
-                android:text="ACTION" />
+    </android.support.v4.widget.DrawerLayout>
 
 
-        </LinearLayout>
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -1,21 +1,34 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
-        <item name="popupMenuStyle">@style/MyPopupMenu</item>
+    <style name="AppTheme" parent="AppTheme.Base" />
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:selectableItemBackground">@android:drawable/screen_background_light_transparent</item>
     </style>
 
-    <style name="MyPopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
-        <item name="android:popupBackground">#0F213F</item>
+    <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
+        <item name="android:actionMenuTextColor">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorPrimary</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="showtime_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">6dp</item>
+        <item name="android:minWidth">100dp</item>
+        <item name="android:layout_margin">5dp</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:background">@drawable/showtime_button</item>
     </style>
 
 </resources>

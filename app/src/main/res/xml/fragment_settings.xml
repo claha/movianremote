@@ -8,12 +8,14 @@
         android:inputType="numberDecimal"
         android:key="@string/settings_ipAddress_key"
         android:summary="@string/settings_ipAddress_summary"
-        android:title="@string/settings_ipAddress_title" />
+        android:title="@string/settings_ipAddress_title"
+        android:dialogTitle=""/>
     <EditTextPreference
         android:defaultValue="@string/settings_port_defaultValue"
         android:imeOptions="actionDone"
         android:inputType="number"
         android:key="@string/settings_port_key"
         android:summary="@string/settings_port_summary"
-        android:title="@string/settings_port_title" />
+        android:title="@string/settings_port_title"
+        android:dialogTitle=""/>
 </PreferenceScreen>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonVolumeDown"
+            style="@style/showtime_button"/>
+
+        <Button
+            android:id="@+id/buttonVolumeMute"
+            style="@style/showtime_button"/>
+
+        <Button
+            android:id="@+id/buttonVolumeUp"
+            style="@style/showtime_button"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonSkipBackward"
+            style="@style/showtime_button"/>
+        <Button
+            android:id="@+id/buttonSkipForward"
+            style="@style/showtime_button"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonSeekBackward"
+            style="@style/showtime_button"/>
+
+        <Button
+            android:id="@+id/buttonSeekForward"
+            style="@style/showtime_button"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonStop"
+            style="@style/showtime_button"/>
+
+        <Button
+            android:id="@+id/buttonPlay"
+            style="@style/showtime_button"/>
+
+        <Button
+            android:id="@+id/buttonPause"
+            style="@style/showtime_button"/>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

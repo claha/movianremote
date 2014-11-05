@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryText">#FFFFFFFF</color>
-    <color name="colorButton">#FF888888</color>
-    <color name="colorButtonPressed">#FFAAAAAA</color>
+
+    <color name="colorPrimary">#FF236B8E</color>
+    <color name="colorPrimaryDark">#FFFF00FF</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+
+    <color name="textColorPrimary">#FFFFFFFF</color>
+    <color name="textColorPrimaryInverse">#FF000000</color>
+
+    <color name="textColorSecondary">#FF000000</color>
+
+    <color name="colorButton">#FF236B8E</color>
+    <color name="colorButtonPressed">#CC236B8E</color>
 
 </resources>
