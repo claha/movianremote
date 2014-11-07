@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/textColorPrimary"
-            android:foreground="?android;windowContentOverlay"/>
+            android:foreground="?android:windowContentOverlay"/>
 
         <ListView
             android:id="@+id/left_drawer"
