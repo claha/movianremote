@@ -1,5 +1,8 @@
 package claha.android.com.showtimeremote;
 
+import android.util.Log;
+import android.view.View;
+
 import java.util.ArrayList;
 
 public class NavigationFragment extends BaseFragment {
@@ -22,7 +25,9 @@ public class NavigationFragment extends BaseFragment {
         buttons.add(new ShowtimeButton(R.id.buttonLeft, "Left", ShowtimeHTTP.ACTION_LEFT));
         buttons.add(new ShowtimeButton(R.id.buttonRight, "Right", ShowtimeHTTP.ACTION_RIGHT));
         buttons.add(new ShowtimeButton(R.id.buttonBack, "Back", ShowtimeHTTP.ACTION_NAV_BACK));
-        buttons.add(new ShowtimeButton(R.id.buttonMenu, "Menu", ShowtimeHTTP.ACTION_MENU));
+        buttons.add(new ShowtimeButton(R.id.buttonMenu, "Menu", ShowtimeHTTP.ACTION_MENU, ShowtimeHTTP.ACTION_ITEMMENU));
+        buttons.add(new ShowtimeButton(R.id.buttonHome, "Home", ShowtimeHTTP.ACTION_HOME));
     }
+
 
 }

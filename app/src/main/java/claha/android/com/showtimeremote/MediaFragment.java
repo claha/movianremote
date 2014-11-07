@@ -1,5 +1,7 @@
 package claha.android.com.showtimeremote;
 
+import android.view.View;
+
 import java.util.ArrayList;
 
 public class MediaFragment extends BaseFragment {
@@ -17,10 +19,14 @@ public class MediaFragment extends BaseFragment {
         buttons.add(new ShowtimeButton(R.id.buttonStop, "Stop", ShowtimeHTTP.ACTION_STOP));
         buttons.add(new ShowtimeButton(R.id.buttonPlay, "Play", ShowtimeHTTP.ACTION_PLAY));
         buttons.add(new ShowtimeButton(R.id.buttonPause, "Pause", ShowtimeHTTP.ACTION_PAUSE));
+
+        buttons.add(new ShowtimeButton(R.id.buttonAudio, "Audio", ShowtimeHTTP.ACTION_CYCLE_AUDIO));
+        buttons.add(new ShowtimeButton(R.id.buttonSubtitle, "Subs", ShowtimeHTTP.ACTION_CYCLE_SUBTITLE));
     }
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_video;
+        return R.layout.fragment_media;
     }
+
 }

@@ -10,6 +10,8 @@ import java.util.List;
 
 public class ShowtimeRemote extends NavigationDrawerActivity {
 
+    private static final String TAG = "ShowtimeRemote";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
