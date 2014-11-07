@@ -7,8 +7,4 @@ public class AboutFragment extends BaseFragment {
         return R.layout.fragment_about;
     }
 
-    @Override
-    protected void setupButtons() {
-
-    }
 }

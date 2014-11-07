@@ -1,10 +1,8 @@
 package claha.android.com.showtimeremote;
 
-import android.view.View;
-
 import java.util.ArrayList;
 
-public class MediaFragment extends BaseFragment {
+public class MediaFragment extends ButtonFragment {
 
     @Override
     protected void setupButtons() {

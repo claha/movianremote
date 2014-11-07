@@ -1,11 +1,8 @@
 package claha.android.com.showtimeremote;
 
-import android.util.Log;
-import android.view.View;
-
 import java.util.ArrayList;
 
-public class NavigationFragment extends BaseFragment {
+public class NavigationFragment extends ButtonFragment {
 
     @Override
     protected int getLayoutResource() {

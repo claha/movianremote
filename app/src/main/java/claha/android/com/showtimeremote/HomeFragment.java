@@ -17,7 +17,7 @@ public class HomeFragment extends BaseFragment {
         String ipAddress = sharedPrefs.getString("ipAddress", "NULL");
         String port = sharedPrefs.getString("port", "NULL");
 
-        TextView info = (TextView)view.findViewById(R.id.info);
+        TextView info = (TextView) view.findViewById(R.id.info);
         info.setText(ipAddress + ":" + port);
 
         return view;
@@ -28,8 +28,4 @@ public class HomeFragment extends BaseFragment {
         return R.layout.fragment_home;
     }
 
-    @Override
-    protected void setupButtons() {
-
-    }
 }
