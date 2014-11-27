@@ -13,8 +13,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutResource(), container, false);
-        return view;
+        return inflater.inflate(getLayoutResource(), container, false);
     }
 
     protected abstract int getLayoutResource();

@@ -104,24 +104,27 @@ public class ShowtimeHTTP {
     //TODO: Is threading the best way to do this? can't do it on mainthread so something is needed
     public void sendAction(String action) {
 
-        final String urlString = "http://" + ipAddress + ":" + port + "/showtime/input/action/" + action;
-        Log.d("ShowtimeHTTP", urlString);
+        if (action != null && !action.equals("")) {
 
-        Thread thread = new Thread((new Runnable() {
-            @Override
-            public void run() {
-                URL url;
-                URLConnection connection;
-                try {
-                    url = new URL(urlString);
-                    connection = url.openConnection();
-                    connection.getInputStream();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            final String urlString = "http://" + ipAddress + ":" + port + "/showtime/input/action/" + action;
+            Log.d("ShowtimeHTTP", urlString);
+
+            Thread thread = new Thread((new Runnable() {
+                @Override
+                public void run() {
+                    URL url;
+                    URLConnection connection;
+                    try {
+                        url = new URL(urlString);
+                        connection = url.openConnection();
+                        connection.getInputStream();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }));
-        thread.start();
+            }));
+            thread.start();
+        }
     }
 
     public String getIpAddress() {

@@ -40,8 +40,7 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
 
     @Override
     protected List<String> getDrawerItems() {
-        List<String> drawerItems = new ArrayList(Arrays.asList("Home", "Navigation", "Media", "Settings", "About"));
-        return drawerItems;
+        return new ArrayList(Arrays.asList("Home", "Navigation", "Media", "Settings", "About"));
     }
 
     @Override

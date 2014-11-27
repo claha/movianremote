@@ -3,7 +3,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_pressed="true" >
-        <shape>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
             <solid
                 android:color="@color/colorButtonPressed" />
             <padding
@@ -14,7 +14,7 @@
         </shape>
     </item>
     <item>
-        <shape>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
             <solid
                 android:color="@color/colorButton" />
             <padding
