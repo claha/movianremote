@@ -76,7 +76,7 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                onTouchDown(v);
+                onTouchDown();
                 return true;
             case MotionEvent.ACTION_UP:
                 onTouchUp();
@@ -89,14 +89,16 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
         }
     }
 
-    private void onTouchDown(View v) {
+    private void onTouchDown() {
         handler.removeCallbacks(handlerRunnable);
         handler.postDelayed(handlerRunnable, 400);
-        this.onClick(v);
+        this.onClick(this);
+        this.setPressed(true);
     }
 
     private void onTouchUp() {
         handler.removeCallbacks(handlerRunnable);
+        this.setPressed(false);
     }
 
     private void onTouchCancel() {
