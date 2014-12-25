@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class ShowtimeHTTP {
+class ShowtimeHTTP {
 
     // Constants
-    public static final String ACTION_UP = "Up";
+    /*public static final String ACTION_UP = "Up";
     public static final String ACTION_DOWN = "Down";
     public static final String ACTION_LEFT = "Left";
     public static final String ACTION_RIGHT = "Right";
@@ -32,11 +32,11 @@ public class ShowtimeHTTP {
     public static final String ACTION_FOCUS_NEXT = "FocusNext";
     public static final String ACTION_FOCUS_PREV = "FocusPrev";
 
-    //public static final String ACTION_PAGE_UP = "PageUp";
-    //public static final String ACTION_PAGE_DOWN = "PageDown";
+    public static final String ACTION_PAGE_UP = "PageUp";
+    public static final String ACTION_PAGE_DOWN = "PageDown";
 
-    //public static final String ACTION_TOP = "Top";
-    //public static final String ACTION_BOTTOM = "Bottom";
+    public static final String ACTION_TOP = "Top";
+    public static final String ACTION_BOTTOM = "Bottom";
 
     public static final String ACTION_INCR = "Increase";
     public static final String ACTION_DECR = "Decrease";
@@ -91,7 +91,7 @@ public class ShowtimeHTTP {
     public static final String ACTION_PLAYQUEUE = "Playqueue";
     public static final String ACTION_SYSINFO = "Sysinfo";
 
-    public static final String ACTION_SWITCH_UI = "SwitchUI";
+    public static final String ACTION_SWITCH_UI = "SwitchUI";*/
 
     // Private
     private String ipAddress;

@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ShowtimeRemote extends NavigationDrawerActivity {
-
-    private static final String TAG = "ShowtimeRemote";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +37,13 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
 
     @Override
     protected List<String> getDrawerItems() {
-        return new ArrayList(Arrays.asList("Home", "Navigation", "Media", "Settings", "About"));
+        List<String> drawerItems = new ArrayList<>();
+        drawerItems.add("Home");
+        drawerItems.add("Navigation");
+        drawerItems.add("Media");
+        drawerItems.add("Settings");
+        drawerItems.add("About");
+        return drawerItems;
     }
 
     @Override

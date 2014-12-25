@@ -4,14 +4,12 @@ import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
 
-    private static final String TAG = "BaseFragment";
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -22,17 +20,12 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayoutResource();
 
-    protected String getIPAddress() {
+    String getIPAddress() {
         return sharedPreferences.getString("ipAddress", null);
     }
 
-    protected String getPort() {
+    String getPort() {
         return sharedPreferences.getString("port", null);
     }
-
-    protected void debug(String text) {
-        Log.d(TAG, text);
-    }
-
 }
 

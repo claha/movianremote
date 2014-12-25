@@ -19,11 +19,9 @@ import java.util.List;
 
 abstract public class NavigationDrawerActivity extends ActionBarActivity {
 
-    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
 
     private ListView drawer;
-    private ArrayAdapter<String> drawerAdapter;
 
     private ActionBarDrawerToggle drawerToggle;
     private CharSequence title = "";
@@ -34,7 +32,7 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
         setContentView(getLayoutResourceID());
 
         // Toolbar
-        toolbar = (Toolbar) findViewById(getToolbarResourceID());
+        Toolbar toolbar = (Toolbar) findViewById(getToolbarResourceID());
         setSupportActionBar(toolbar);
 
         // Drawer layout
@@ -43,7 +41,7 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
 
         // Drawer and drawer adapter
         drawer = (ListView) findViewById(getDrawerResourceID());
-        drawerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, getDrawerItems());
+        ArrayAdapter<String> drawerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, getDrawerItems());
         drawer.setAdapter(drawerAdapter);
 
         // Click listener
@@ -124,15 +122,11 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    protected boolean isDrawerOpen() {
+    boolean isDrawerOpen() {
         return drawerLayout.isDrawerOpen(drawer);
     }
 
-    protected void openDrawer() {
-        drawerLayout.openDrawer(drawer);
-    }
-
-    protected void closeDrawer() {
+    void closeDrawer() {
         drawerLayout.closeDrawer(drawer);
     }
 

@@ -16,10 +16,10 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
     private String action;
     private boolean onPress = false;
 
-    private ShowtimeHTTP showtimeHTTP = new ShowtimeHTTP();
+    private final ShowtimeHTTP showtimeHTTP = new ShowtimeHTTP();
 
-    private Handler handler = new Handler();
-    private Runnable handlerRunnable = new Runnable() {
+    private final Handler handler = new Handler();
+    private final Runnable handlerRunnable = new Runnable() {
         @Override
         public void run() {
             handler.postDelayed(this, 100);
@@ -79,10 +79,10 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
                 onTouchDown(v);
                 return true;
             case MotionEvent.ACTION_UP:
-                onTouchUp(v);
+                onTouchUp();
                 return true;
             case MotionEvent.ACTION_CANCEL:
-                onTouchCancel(v);
+                onTouchCancel();
                 return true;
             default:
                 return false;
@@ -95,11 +95,11 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
         this.onClick(v);
     }
 
-    private void onTouchUp(View v) {
+    private void onTouchUp() {
         handler.removeCallbacks(handlerRunnable);
     }
 
-    private void onTouchCancel(View v) {
-        onTouchUp(v);
+    private void onTouchCancel() {
+        onTouchUp();
     }
 }

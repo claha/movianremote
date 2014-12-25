@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:showtime="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,10 +17,11 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/buttonUp"
+            <com.claha.showtimeremote.ShowtimeButton
                 style="@style/showtime_button"
-                android:src="@drawable/ic_action_up" />
+                android:src="@drawable/ic_action_up"
+                showtime:action="Up"
+                showtime:onPress="true" />
 
         </LinearLayout>
 
@@ -31,20 +32,23 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/buttonLeft"
+            <com.claha.showtimeremote.ShowtimeButton
                 style="@style/showtime_button"
-                android:src="@drawable/ic_action_left" />
+                android:src="@drawable/ic_action_left"
+                showtime:action="Left"
+                showtime:onPress="true" />
 
-            <ImageButton
-                android:id="@+id/buttonOk"
+            <com.claha.showtimeremote.ShowtimeButton
                 style="@style/showtime_button"
-                android:src="@drawable/ic_action_activate" />
+                android:src="@drawable/ic_action_activate"
+                showtime:action="Ok"
+                showtime:onPress="false" />
 
-            <ImageButton
-                android:id="@+id/buttonRight"
+            <com.claha.showtimeremote.ShowtimeButton
                 style="@style/showtime_button"
-                android:src="@drawable/ic_action_right" />
+                android:src="@drawable/ic_action_right"
+                showtime:action="Right"
+                showtime:onPress="true" />
 
         </LinearLayout>
 
@@ -54,10 +58,11 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/buttonDown"
+            <com.claha.showtimeremote.ShowtimeButton
                 style="@style/showtime_button"
-                android:src="@drawable/ic_action_down" />
+                android:src="@drawable/ic_action_down"
+                showtime:action="Down"
+                showtime:onPress="true" />
 
         </LinearLayout>
 
@@ -69,20 +74,23 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/buttonBack"
+        <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            android:src="@drawable/ic_action_back" />
+            android:src="@drawable/ic_action_back"
+            showtime:action="Back"
+            showtime:onPress="false" />
 
-        <ImageButton
-            android:id="@+id/buttonHome"
+        <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            android:src="@drawable/ic_action_home" />
+            android:src="@drawable/ic_action_home"
+            showtime:action="Home"
+            showtime:onPress="false" />
 
-        <ImageButton
-            android:id="@+id/buttonMenu"
+        <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            android:src="@drawable/ic_action_menu" />
+            android:src="@drawable/ic_action_menu"
+            showtime:action="Menu"
+            showtime:onPress="false" />
 
     </LinearLayout>
 
