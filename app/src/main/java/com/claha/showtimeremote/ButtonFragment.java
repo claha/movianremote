@@ -1,8 +1,6 @@
-package claha.android.com.showtimeremote;
+package com.claha.showtimeremote;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,38 +15,34 @@ public abstract class ButtonFragment extends BaseFragment implements View.OnClic
     private static final String TAG = "ButtonFragment";
 
     private ShowtimeHTTP showtimeHTTP;
-    protected ArrayList<ShowtimeButton> buttons;
+    protected ArrayList<ShowtimeButtonOld> buttons;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         showtimeHTTP = new ShowtimeHTTP();
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String ipAddress = sharedPreferences.getString("ipAddress", "NULL");
-        String port = sharedPreferences.getString("port", "NULL");
+        showtimeHTTP.setIpAddress(getIPAddress());
+        showtimeHTTP.setPort(getPort());
 
-        showtimeHTTP.setIpAddress(ipAddress);
-        showtimeHTTP.setPort(port);
-
-        buttons = new ArrayList<ShowtimeButton>();
+        buttons = new ArrayList<>();
         setupButtons();
 
         // Set on click listener for all buttons
-        for (final ShowtimeButton showtimeButton : buttons) {
+        for (final ShowtimeButtonOld showtimeButtonOld : buttons) {
             try {
-                Button button = (Button) view.findViewById(showtimeButton.getId());
-                button.setText(showtimeButton.getName());
+                Button button = (Button) view.findViewById(showtimeButtonOld.getId());
+                button.setText(showtimeButtonOld.getName());
                 button.setOnClickListener(this);
             } catch (ClassCastException e) {
-                ImageButton button = (ImageButton) view.findViewById(showtimeButton.getId());
+                ImageButton button = (ImageButton) view.findViewById(showtimeButtonOld.getId());
 
-                if (!showtimeButton.getOnLongClickAction().equals("")) {
+                if (!showtimeButtonOld.getOnLongClickAction().equals("")) {
 
                     button.setOnTouchListener(new OnPressedListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String action = showtimeButton.getOnClickAction();
+                            String action = showtimeButtonOld.getOnClickAction();
                             showtimeHTTP.sendAction(action);
                         }
                     }));
@@ -56,7 +50,7 @@ public abstract class ButtonFragment extends BaseFragment implements View.OnClic
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String action = showtimeButton.getOnClickAction();
+                            String action = showtimeButtonOld.getOnClickAction();
                             showtimeHTTP.sendAction(action);
                         }
                     });
@@ -74,7 +68,7 @@ public abstract class ButtonFragment extends BaseFragment implements View.OnClic
         debug("onClick");
         int id = view.getId();
 
-        int index = buttons.indexOf(new ShowtimeButton(id));
+        int index = buttons.indexOf(new ShowtimeButtonOld(id));
         if (index != -1) {
             String action = buttons.get(index).getOnClickAction();
             showtimeHTTP.sendAction(action);

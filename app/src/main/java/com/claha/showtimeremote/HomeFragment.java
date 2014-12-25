@@ -1,8 +1,6 @@
-package claha.android.com.showtimeremote;
+package com.claha.showtimeremote;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +11,9 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String ipAddress = sharedPrefs.getString("ipAddress", "NULL");
-        String port = sharedPrefs.getString("port", "NULL");
 
         TextView info = (TextView) view.findViewById(R.id.info);
-        info.setText(ipAddress + ":" + port);
+        info.setText(getIPAddress() + ":" + getPort());
 
         return view;
     }

@@ -1,4 +1,4 @@
-package claha.android.com.showtimeremote;
+package com.claha.showtimeremote;
 
 public class AboutFragment extends BaseFragment {
 

@@ -1,4 +1,4 @@
-package claha.android.com.showtimeremote;
+package com.claha.showtimeremote;
 
 
 import android.os.Bundle;

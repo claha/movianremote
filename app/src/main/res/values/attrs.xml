@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ShowtimeButton">
+        <attr name="action" format="string"/>
+        <attr name="onPress" format="boolean"/>
+    </declare-styleable>
+
+</resources>

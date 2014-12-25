@@ -1,4 +1,4 @@
-package claha.android.com.showtimeremote;
+package com.claha.showtimeremote;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -48,16 +48,22 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
         Fragment fragment = null;
         Bundle args = new Bundle();
 
-        if (title.equals("Home")) {
-            fragment = new HomeFragment();
-        } else if (title.equals("Navigation")) {
-            fragment = new NavigationFragment();
-        } else if (title.equals("Media")) {
-            fragment = new MediaFragment();
-        } else if (title.equals("Settings")) {
-            fragment = new SettingsFragment();
-        } else if (title.equals("About")) {
-            fragment = new AboutFragment();
+        switch (title) {
+            case "Home":
+                fragment = new HomeFragment();
+                break;
+            case "Navigation":
+                fragment = new NavigationFragment();
+                break;
+            case "Media":
+                fragment = new MediaFragment();
+                break;
+            case "Settings":
+                fragment = new SettingsFragment();
+                break;
+            case "About":
+                fragment = new AboutFragment();
+                break;
         }
 
         fragment.setArguments(args);

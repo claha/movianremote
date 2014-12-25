@@ -1,6 +1,6 @@
-package claha.android.com.showtimeremote;
+package com.claha.showtimeremote;
 
-public class ShowtimeButton {
+public class ShowtimeButtonOld {
 
     private int id;
     private String name;
@@ -8,19 +8,19 @@ public class ShowtimeButton {
     private String onLongClickAction;
 
 
-    public ShowtimeButton(int id, String name, String onClickAction, String onLongClickAction) {
+    public ShowtimeButtonOld(int id, String name, String onClickAction, String onLongClickAction) {
         init(id, name, onClickAction, onLongClickAction);
     }
 
-    public ShowtimeButton(int id, String name, String onClickAction) {
+    public ShowtimeButtonOld(int id, String name, String onClickAction) {
         init(id, name, onClickAction, "");
     }
 
-    public ShowtimeButton(int id, String name) {
+    public ShowtimeButtonOld(int id, String name) {
         init(id, name, "", "");
     }
 
-    public ShowtimeButton(int id) {
+    public ShowtimeButtonOld(int id) {
         init(id, "", "", "");
     }
 
@@ -33,7 +33,7 @@ public class ShowtimeButton {
 
     @Override
     public boolean equals(Object o) {
-        return id == ((ShowtimeButton)o).getId();
+        return id == ((ShowtimeButtonOld)o).getId();
     }
 
     @Override

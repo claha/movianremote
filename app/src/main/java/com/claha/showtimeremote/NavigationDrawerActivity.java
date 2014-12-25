@@ -1,4 +1,4 @@
-package claha.android.com.showtimeremote;
+package com.claha.showtimeremote;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -43,7 +43,7 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
 
         // Drawer and drawer adapter
         drawer = (ListView) findViewById(getDrawerResourceID());
-        drawerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, getDrawerItems());
+        drawerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, getDrawerItems());
         drawer.setAdapter(drawerAdapter);
 
         // Click listener

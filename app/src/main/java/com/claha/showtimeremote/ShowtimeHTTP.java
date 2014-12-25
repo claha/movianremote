@@ -1,4 +1,4 @@
-package claha.android.com.showtimeremote;
+package com.claha.showtimeremote;
 
 import android.util.Log;
 
@@ -32,11 +32,11 @@ public class ShowtimeHTTP {
     public static final String ACTION_FOCUS_NEXT = "FocusNext";
     public static final String ACTION_FOCUS_PREV = "FocusPrev";
 
-    public static final String ACTION_PAGE_UP = "PageUp";
-    public static final String ACTION_PAGE_DOWN = "PageDown";
+    //public static final String ACTION_PAGE_UP = "PageUp";
+    //public static final String ACTION_PAGE_DOWN = "PageDown";
 
-    public static final String ACTION_TOP = "Top";
-    public static final String ACTION_BOTTOM = "Bottom";
+    //public static final String ACTION_TOP = "Top";
+    //public static final String ACTION_BOTTOM = "Bottom";
 
     public static final String ACTION_INCR = "Increase";
     public static final String ACTION_DECR = "Decrease";
