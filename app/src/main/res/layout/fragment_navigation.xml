@@ -6,73 +6,49 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <LinearLayout style="@style/horizontal_center_layout">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <com.claha.showtimeremote.ShowtimeButton
-                style="@style/showtime_button"
-                android:src="@drawable/ic_action_up"
-                showtime:action="Up"
-                showtime:onPress="true" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <com.claha.showtimeremote.ShowtimeButton
-                style="@style/showtime_button"
-                android:src="@drawable/ic_action_left"
-                showtime:action="Left"
-                showtime:onPress="true" />
-
-            <com.claha.showtimeremote.ShowtimeButton
-                style="@style/showtime_button"
-                android:src="@drawable/ic_action_activate"
-                showtime:action="Ok"
-                showtime:onPress="false" />
-
-            <com.claha.showtimeremote.ShowtimeButton
-                style="@style/showtime_button"
-                android:src="@drawable/ic_action_right"
-                showtime:action="Right"
-                showtime:onPress="true" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <com.claha.showtimeremote.ShowtimeButton
-                style="@style/showtime_button"
-                android:src="@drawable/ic_action_down"
-                showtime:action="Down"
-                showtime:onPress="true" />
-
-        </LinearLayout>
+        <com.claha.showtimeremote.ShowtimeButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_action_up"
+            showtime:action="Up"
+            showtime:onPress="true" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+    <LinearLayout style="@style/horizontal_center_layout">
+
+        <com.claha.showtimeremote.ShowtimeButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_action_left"
+            showtime:action="Left"
+            showtime:onPress="true" />
+
+        <com.claha.showtimeremote.ShowtimeButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_action_activate"
+            showtime:action="Activate"
+            showtime:onPress="false" />
+
+        <com.claha.showtimeremote.ShowtimeButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_action_right"
+            showtime:action="Right"
+            showtime:onPress="true" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontal_center_layout">
+
+        <com.claha.showtimeremote.ShowtimeButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_action_down"
+            showtime:action="Down"
+            showtime:onPress="true" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontal_center_layout">
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
@@ -93,6 +69,5 @@
             showtime:onPress="false" />
 
     </LinearLayout>
-
 
 </LinearLayout>

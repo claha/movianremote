@@ -3,6 +3,8 @@
 
     <string name="app_name">Showtime Remote</string>
 
+    <string name="version">v0.0.3</string>
+
     <string name="settings_ipAddress_key">ipAddress</string>
     <string name="settings_ipAddress_title">IP Address</string>
     <string name="settings_ipAddress_summary">IP address of Showtime</string>
