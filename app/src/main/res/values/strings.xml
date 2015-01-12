@@ -15,4 +15,6 @@
     <string name="settings_port_summary">Port of Showtime</string>
     <string name="settings_port_defaultValue">42000</string>
 
+    <string name="search">Search</string>
+
 </resources>

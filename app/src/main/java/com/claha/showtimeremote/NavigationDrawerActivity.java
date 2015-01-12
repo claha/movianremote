@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +38,7 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
 
         // Drawer layout
         drawerLayout = (DrawerLayout) findViewById(getDrawerLayoutResourceID());
-        //drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 
         // Drawer and drawer adapter
         drawer = (ListView) findViewById(getDrawerResourceID());
@@ -101,7 +102,15 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(getMenuResourceID(), menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (isDrawerOpen()) {
+            menu.clear();
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -137,7 +146,6 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(getContentResourceID(), fragment).addToBackStack(null).commit();
 
-        //drawer.setItemChecked(position, true);
         setTitle(title);
         closeDrawer();
     }

@@ -13,9 +13,9 @@ import android.widget.ImageButton;
 
 public class ShowtimeButton extends ImageButton implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
 
-    private final String TAG = "ShowtimeButton";
-    private final String IP_ADDRESS = "ipAddress";
-    private final String PORT = "port";
+    private final static String TAG = "ShowtimeButton";
+    private final static String IP_ADDRESS = "ipAddress";
+    private final static String PORT = "port";
 
     private String action;
     private String actionLong = null;

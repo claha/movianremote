@@ -1,13 +1,20 @@
 package com.claha.showtimeremote;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowtimeRemote extends NavigationDrawerActivity {
+
+    private final ShowtimeHTTP showtimeHTTP = new ShowtimeHTTP();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +53,20 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
         return drawerItems;
     }
 
+    private boolean showOptionsMenu;
+
     @Override
     protected Fragment createFragment(String title) {
         Fragment fragment = null;
-        Bundle args = new Bundle();
+
+        showOptionsMenu = false;
 
         switch (title) {
             case "Home":
                 fragment = new HomeFragment();
                 break;
             case "Navigation":
+                showOptionsMenu = true;
                 fragment = new NavigationFragment();
                 break;
             case "Media":
@@ -69,13 +80,12 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
                 break;
         }
 
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int getMenuResourceID() {
-        return R.menu.showtime_remote;
+        return R.menu.menu_showtime_remote;
     }
 
     @Override
@@ -86,6 +96,34 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
     @Override
     protected int getAppName() {
         return R.string.app_name;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        showtimeHTTP.setIpAddress(sharedPreferences.getString("ipAddress", null));
+        showtimeHTTP.setPort(sharedPreferences.getString("port", null));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                showtimeHTTP.search(query);
+                getSupportActionBar().collapseActionView();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        return showOptionsMenu;
     }
 
 }

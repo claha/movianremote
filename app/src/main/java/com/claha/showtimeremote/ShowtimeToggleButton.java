@@ -53,6 +53,5 @@ public class ShowtimeToggleButton extends ShowtimeButton {
         } else {
             setImageDrawable(src);
         }
-
     }
 }

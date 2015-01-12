@@ -105,26 +105,33 @@ class ShowtimeHTTP {
     public void sendAction(String action) {
 
         if (action != null && !action.equals("")) {
-
-            final String urlString = "http://" + ipAddress + ":" + port + "/showtime/input/action/" + action;
-            Log.d("ShowtimeHTTP", urlString);
-
-            Thread thread = new Thread((new Runnable() {
-                @Override
-                public void run() {
-                    URL url;
-                    URLConnection connection;
-                    try {
-                        url = new URL(urlString);
-                        connection = url.openConnection();
-                        connection.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }));
-            thread.start();
+            String urlString = "http://" + ipAddress + ":" + port + "/showtime/input/action/" + action;
+            sendURL(urlString);
         }
+    }
+
+    public void search(String text) {
+        String urlString = "http://" + ipAddress + ":" + port + "/showtime/open?url=search:" + text;
+        sendURL(urlString);
+    }
+
+    private void sendURL(final String urlString) {
+        Log.d("ShowtimeHTTP", urlString);
+        Thread thread = new Thread((new Runnable() {
+            @Override
+            public void run() {
+                URL url;
+                URLConnection connection;
+                try {
+                    url = new URL(urlString);
+                    connection = url.openConnection();
+                    connection.getInputStream();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
+        thread.start();
     }
 
     public String getIpAddress() {

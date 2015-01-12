@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
 
+    private final static String IP_ADDRESS = "ipAddress";
+    private final static String PORT = "port";
+
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -21,11 +24,11 @@ public abstract class BaseFragment extends Fragment {
     protected abstract int getLayoutResource();
 
     String getIPAddress() {
-        return sharedPreferences.getString("ipAddress", null);
+        return sharedPreferences.getString(IP_ADDRESS, null);
     }
 
     String getPort() {
-        return sharedPreferences.getString("port", null);
+        return sharedPreferences.getString(PORT, null);
     }
 }
 
