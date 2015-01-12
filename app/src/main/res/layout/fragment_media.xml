@@ -11,20 +11,18 @@
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_volume_down"
-            showtime:action="VolumeDown"
-            showtime:onPress="false" />
+            showtime:action="VolumeDown" />
 
-        <com.claha.showtimeremote.ShowtimeButton
+        <com.claha.showtimeremote.ShowtimeToggleButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_volume_mute"
             showtime:action="VolumeMuteToggle"
-            showtime:onPress="false" />
+            showtime:src2="@drawable/ic_action_volume_off" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_volume_up"
-            showtime:action="VolumeUp"
-            showtime:onPress="false" />
+            showtime:action="VolumeUp" />
 
     </LinearLayout>
 
@@ -33,14 +31,12 @@
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_skip_previous"
-            showtime:action="PreviousTrack"
-            showtime:onPress="false" />
+            showtime:action="PreviousTrack" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_skip_next"
-            showtime:action="NextTrack"
-            showtime:onPress="false" />
+            showtime:action="NextTrack" />
 
     </LinearLayout>
 
@@ -48,37 +44,24 @@
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            android:src="@drawable/ic_action_fast_reqind"
-            showtime:action="SeekReverse"
-            showtime:onPress="false" />
-
-        <com.claha.showtimeremote.ShowtimeButton
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_fast_forward"
-            showtime:action="SeekForward"
-            showtime:onPress="false" />
-
-    </LinearLayout>
-
-    <LinearLayout style="@style/horizontal_center_layout">
+            android:src="@drawable/ic_action_fast_rewind"
+            showtime:action="SeekReverse" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_stop"
-            showtime:action="Stop"
-            showtime:onPress="false" />
+            showtime:action="Stop" />
 
-        <com.claha.showtimeremote.ShowtimeButton
+        <com.claha.showtimeremote.ShowtimeToggleButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_play"
-            showtime:action="Play"
-            showtime:onPress="false" />
+            showtime:action="PlayPause"
+            showtime:src2="@drawable/ic_action_pause" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            android:src="@drawable/ic_action_pause"
-            showtime:action="Pause"
-            showtime:onPress="false" />
+            android:src="@drawable/ic_action_fast_forward"
+            showtime:action="SeekForward" />
 
     </LinearLayout>
 

@@ -27,8 +27,7 @@
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_activate"
-            showtime:action="Activate"
-            showtime:onPress="false" />
+            showtime:action="Activate" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
@@ -54,19 +53,18 @@
             style="@style/showtime_button"
             android:src="@drawable/ic_action_back"
             showtime:action="Back"
-            showtime:onPress="false" />
+            showtime:onPress="true" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_home"
-            showtime:action="Home"
-            showtime:onPress="false" />
+            showtime:action="Home" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_menu"
             showtime:action="Menu"
-            showtime:onPress="false" />
+            showtime:actionLong="ItemMenu" />
 
     </LinearLayout>
 

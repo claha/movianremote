@@ -11,9 +11,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class ShowtimeButton extends ImageButton implements View.OnClickListener, View.OnTouchListener {
+public class ShowtimeButton extends ImageButton implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
+
+    private final String TAG = "ShowtimeButton";
+    private final String IP_ADDRESS = "ipAddress";
+    private final String PORT = "port";
 
     private String action;
+    private String actionLong = null;
     private boolean onPress = false;
 
     private final ShowtimeHTTP showtimeHTTP = new ShowtimeHTTP();
@@ -45,9 +50,11 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
     }
 
     private void initAttrs(AttributeSet attrs) {
+        Log.d(TAG, "initAttrs");
         TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.ShowtimeButton, 0, 0);
         try {
             action = a.getString(R.styleable.ShowtimeButton_action);
+            actionLong = a.getString(R.styleable.ShowtimeButton_actionLong);
             onPress = a.getBoolean(R.styleable.ShowtimeButton_onPress, false);
         } finally {
             a.recycle();
@@ -55,21 +62,32 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
     }
 
     private void init() {
+        Log.d(TAG, "init");
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        showtimeHTTP.setIpAddress(sharedPreferences.getString("ipAddress", null));
-        showtimeHTTP.setPort(sharedPreferences.getString("port", null));
+        showtimeHTTP.setIpAddress(sharedPreferences.getString(IP_ADDRESS, null));
+        showtimeHTTP.setPort(sharedPreferences.getString(PORT, null));
 
         if (onPress) {
             setOnTouchListener(this);
         } else {
             setOnClickListener(this);
+            if (actionLong != null) {
+                setOnLongClickListener(this);
+            }
         }
     }
 
     @Override
     public void onClick(View v) {
-        Log.d("ShowtimeButton", showtimeHTTP.getIpAddress() + ":" + showtimeHTTP.getPort() + " - " + action);
+        Log.d(TAG, showtimeHTTP.getIpAddress() + ":" + showtimeHTTP.getPort() + " - " + action);
         showtimeHTTP.sendAction(action);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        Log.d(TAG, showtimeHTTP.getIpAddress() + ":" + showtimeHTTP.getPort() + " - " + actionLong);
+        showtimeHTTP.sendAction(actionLong);
+        return true;
     }
 
     @Override
@@ -104,4 +122,5 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
     private void onTouchCancel() {
         onTouchUp();
     }
+
 }
