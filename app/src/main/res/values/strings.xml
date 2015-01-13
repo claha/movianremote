@@ -5,6 +5,19 @@
 
     <string name="version">v0.0.3</string>
 
+    <string name="settings_profiles_choose_key">profiles_choose</string>
+    <string name="settings_profiles_choose_title">Choose</string>
+    <string name="settings_profiles_choose_summary">Choose which profile to use</string>
+
+    <string name="settings_profiles_add_key">profiles_add</string>
+    <string name="settings_profiles_add_title">Add</string>
+    <string name="settings_profiles_add_summary">Add a new profile with current settings</string>
+    <string name="settings_profiles_add_hint">Profile Name</string>
+
+    <string name="settings_profiles_delete_key">profiles_delete</string>
+    <string name="settings_profiles_delete_title">Delete</string>
+    <string name="settings_profiles_delete_summary">Delete an existing profile</string>
+
     <string name="settings_ipAddress_key">ipAddress</string>
     <string name="settings_ipAddress_title">IP Address</string>
     <string name="settings_ipAddress_summary">IP address of Showtime</string>
@@ -14,6 +27,10 @@
     <string name="settings_port_title">Port</string>
     <string name="settings_port_summary">Port of Showtime</string>
     <string name="settings_port_defaultValue">42000</string>
+
+    <string name="settings_misc_start_page_key">misc_start_page</string>
+    <string name="settings_misc_start_page_summary">Choose startup page</string>
+    <string name="settings_misc_start_page_title">Start Page</string>
 
     <string name="search">Search</string>
 

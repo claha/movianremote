@@ -9,7 +9,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ShowtimeRemote extends NavigationDrawerActivity {
@@ -44,13 +44,8 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
 
     @Override
     protected List<String> getDrawerItems() {
-        List<String> drawerItems = new ArrayList<>();
-        drawerItems.add("Home");
-        drawerItems.add("Navigation");
-        drawerItems.add("Media");
-        drawerItems.add("Settings");
-        drawerItems.add("About");
-        return drawerItems;
+        String[] drawerItems = getResources().getStringArray(R.array.settings_misc_start_page_entries);
+        return Arrays.asList(drawerItems);
     }
 
     private boolean showOptionsMenu;
@@ -96,6 +91,11 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
     @Override
     protected int getAppName() {
         return R.string.app_name;
+    }
+
+    @Override
+    protected int getStartPage() {
+        return Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("misc_start_page", "0"));
     }
 
     @Override
