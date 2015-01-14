@@ -111,7 +111,7 @@ class ShowtimeHTTP {
     }
 
     public void search(String text) {
-        String urlString = "http://" + ipAddress + ":" + port + "/showtime/open?url=search:" + text;
+        String urlString = "http://" + ipAddress + ":" + port + "/showtime/open?url=search:" + text.replace(" ", "+");
         sendURL(urlString);
     }
 
