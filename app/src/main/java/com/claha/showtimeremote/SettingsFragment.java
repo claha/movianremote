@@ -9,7 +9,6 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -82,12 +81,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Log.d(TAG, "onPreferenceChange");
 
         // Profile add
         if (preference == profilesAdd) {
-            Log.d(TAG, "profiles_add");
-
             String name = profilesAdd.getEditText().getText().toString();
             profiles.add(new Profile(name, networkIPAddress.getText(), networkPort.getText()));
 
@@ -161,11 +157,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private void loadProfiles() {
-        Log.d(TAG, "saveProfiles");
         Set<String> profilesToLoadTemp = sharedPreferences.getStringSet("profiles", new HashSet<String>());
         List<String> profilesToLoad = new ArrayList<>(profilesToLoadTemp);
         Collections.sort(profilesToLoad);
-        Log.d(TAG, "number of profiles: " + profilesToLoad.size());
         profiles = new ArrayList<>();
         for (String profile : profilesToLoad) {
             profiles.add(new Profile(profile));
@@ -173,12 +167,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private void saveProfiles() {
-        Log.d(TAG, "saveProfiles");
         Set<String> profilesToSave = new HashSet<>();
         for (Profile profile : profiles) {
             profilesToSave.add(profile.toString());
         }
-        Log.d(TAG, "number of profiles: " + profilesToSave.size());
         sharedPreferences.edit().putStringSet("profiles", profilesToSave).apply();
     }
 
