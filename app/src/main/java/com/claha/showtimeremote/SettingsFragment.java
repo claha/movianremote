@@ -1,24 +1,14 @@
 package com.claha.showtimeremote;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
-
-    private final String TAG = "SettingsFragment";
 
     private final static int PROFILES = 0;
     private final static int PROFILES_CHOOSE = 0;
@@ -29,8 +19,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private final static int NETWORK_IP_ADDRESS = 0;
     private final static int NETWORK_PORT = 1;
 
-
-    private List<Profile> profiles;
+    private ShowtimeSettings.Profiles profiles;
 
     private EditTextPreference profilesAdd;
     private ListPreference profilesChoose;
@@ -39,10 +28,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private EditTextPreference networkIPAddress;
     private EditTextPreference networkPort;
 
-    private SharedPreferences sharedPreferences;
+    private ShowtimeSettings showtimeSettings;
 
     public SettingsFragment() {
-        profiles = new ArrayList<>();
+        profiles = new ShowtimeSettings.Profiles();
     }
 
     @Override
@@ -50,8 +39,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.fragment_settings);
 
-        // Shared preferences
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        // Settings
+        showtimeSettings = new ShowtimeSettings(getActivity());
 
         // Root
         PreferenceScreen root = getPreferenceScreen();
@@ -69,7 +58,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         profilesAdd.setOnPreferenceClickListener(this);
 
-        loadProfiles();
+        this.profiles = showtimeSettings.loadProfiles();
         updateProfiles();
 
         // Network
@@ -84,10 +73,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         // Profile add
         if (preference == profilesAdd) {
-            String name = profilesAdd.getEditText().getText().toString();
-            profiles.add(new Profile(name, networkIPAddress.getText(), networkPort.getText()));
+            String info = profilesAdd.getEditText().getText().toString();
+            info += "_" + networkIPAddress.getText();
+            info += "_" + networkPort.getText();
 
-            saveProfiles();
+            profiles.add(new ShowtimeSettings.Profile(info));
             updateProfiles();
 
             profilesChoose.setValueIndex(profiles.size() - 1);
@@ -96,22 +86,30 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
             // Profile delete
         } else if (preference == profilesDelete) {
-            String name = (String) newValue;
-            int index = profiles.indexOf(new Profile(name, "", ""));
-            profiles.remove(index);
+            ShowtimeSettings.Profile profile = profiles.getByName((String) newValue);
 
-            saveProfiles();
+            if (profile.equals(showtimeSettings.getCurrentProfile())) {
+                int index = profiles.indexOf(profile);
+
+                if (index == 0 && profiles.size() > 1) {
+                    index = 1;
+                } else if (index > 0) {
+                    index--;
+                }
+
+                if (index >= 0) {
+                    profilesChoose.setValueIndex(index);
+                }
+            }
+
+            profiles.remove(profile);
             updateProfiles();
 
             return true;
 
             // Profile choose
         } else if (preference == profilesChoose) {
-            String name = ((String) newValue).split("_")[0];
-            int index = profiles.indexOf(new Profile(name, "", ""));
-
-            updateNetwork(profiles.get(index));
-
+            updateNetwork();
             return true;
         }
 
@@ -119,12 +117,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private void updateProfiles() {
+        showtimeSettings.saveProfiles(profiles);
         int N = profiles.size();
 
         if (N > 0) {
             CharSequence[] entriesAndEntryValues = new CharSequence[N];
             for (int i = 0; i < N; i++) {
-                entriesAndEntryValues[i] = "" + profiles.get(i).name;
+                entriesAndEntryValues[i] = "" + profiles.get(i).getName();
             }
 
             profilesChoose.setEntries(entriesAndEntryValues);
@@ -140,74 +139,18 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
     }
 
-    private void updateNetwork(Profile profile) {
-        networkIPAddress.setText(profile.ipAddress);
-        networkPort.setText(profile.port);
+    private void updateNetwork() {
+        ShowtimeSettings.Profile profile = showtimeSettings.getCurrentProfile();
+        networkIPAddress.setText(profile.getIPAddress());
+        networkPort.setText(profile.getPort());
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference == profilesAdd) {
-            profilesAdd.setText("");
             profilesAdd.getEditText().setText("");
             return true;
         }
-
         return false;
-    }
-
-    private void loadProfiles() {
-        Set<String> profilesToLoadTemp = sharedPreferences.getStringSet("profiles", new HashSet<String>());
-        List<String> profilesToLoad = new ArrayList<>(profilesToLoadTemp);
-        Collections.sort(profilesToLoad);
-        profiles = new ArrayList<>();
-        for (String profile : profilesToLoad) {
-            profiles.add(new Profile(profile));
-        }
-    }
-
-    private void saveProfiles() {
-        Set<String> profilesToSave = new HashSet<>();
-        for (Profile profile : profiles) {
-            profilesToSave.add(profile.toString());
-        }
-        sharedPreferences.edit().putStringSet("profiles", profilesToSave).apply();
-    }
-
-    private static class Profile {
-        final String name;
-        final String ipAddress;
-        final String port;
-
-        public Profile(String name, String ipAddress, String port) {
-            this.name = name;
-            this.ipAddress = ipAddress;
-            this.port = port;
-        }
-
-        public Profile(String profile) {
-            String[] info = profile.split("_");
-            name = info[0];
-            ipAddress = info[1];
-            port = info[2];
-        }
-
-        @Override
-        public String toString() {
-            return name + "_" + ipAddress + "_" + port;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (!(o instanceof Profile)) {
-                return false;
-            }
-            return ((Profile) o).name.equals(name);
-        }
-
-        @Override
-        public int hashCode() {
-            return name.hashCode();
-        }
     }
 }

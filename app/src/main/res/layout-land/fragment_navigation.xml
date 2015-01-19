@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/horizontal_center_layout"
-    android:layout_height="match_parent"
-    android:baselineAligned="false">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <include layout="@layout/layout_navigation_pad"
+    <LinearLayout
+        style="@style/horizontal_center_layout"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_weight="1"/>
+        android:layout_above="@+id/viewPager"
+        android:baselineAligned="false">
 
-    <include layout="@layout/layout_navigation_ctrl"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_weight="1"/>
+        <include
+            layout="@layout/layout_navigation_pad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
-</LinearLayout>
+        <include
+            layout="@layout/layout_navigation_ctrl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_bottom_view_pager" />
+
+</RelativeLayout>

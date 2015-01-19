@@ -1,7 +1,6 @@
 package com.claha.showtimeremote;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -14,29 +13,27 @@ import java.util.List;
 public class GitHubHTTP {
 
     private static final String URL_GITHUB = "https://github.com/claha/showtimeremote";
+    private OnCommitsCountedListener onCommitsCountedListener;
+    private OnReleasesCountedListener onReleasesCountedListener;
 
     public void run() {
         new Download().execute();
+    }
+
+    public void setOnCommitsCountedListener(OnCommitsCountedListener onCommitsCountedListener) {
+        this.onCommitsCountedListener = onCommitsCountedListener;
+    }
+
+    public void setOnReleasesCountedListener(OnReleasesCountedListener onReleasesCountedListener) {
+        this.onReleasesCountedListener = onReleasesCountedListener;
     }
 
     public interface OnCommitsCountedListener {
         public void onCounted(int count);
     }
 
-    private OnCommitsCountedListener onCommitsCountedListener;
-
-    public void setOnCommitsCountedListener(OnCommitsCountedListener onCommitsCountedListener) {
-        this.onCommitsCountedListener = onCommitsCountedListener;
-    }
-
     public interface OnReleasesCountedListener {
         public void onCounted(int count);
-    }
-
-    private OnReleasesCountedListener onReleasesCountedListener;
-
-    public void setOnReleasesCountedListener(OnReleasesCountedListener onReleasesCountedListener) {
-        this.onReleasesCountedListener = onReleasesCountedListener;
     }
 
     private class Download extends AsyncTask {
@@ -57,7 +54,6 @@ public class GitHubHTTP {
                 }
                 reader.close();
             } catch (Exception e) {
-                Log.d("GitHubHTTP", "ERROR");
                 e.printStackTrace();
             }
 
@@ -74,13 +70,11 @@ public class GitHubHTTP {
             while (!(foundCommits && foundReleases)) {
                 if (!foundCommits) {
                     if (html.get(i).contains("/commits") && html.get(i).contains("data-pjax")) {
-                        Log.d("GitHubHTTP", html.get(i));
                         commits = Integer.parseInt(html.get(i + 3).replace(" ", ""));
                         foundCommits = true;
                     }
-                } else if (!foundReleases) {
+                } else {
                     if (html.get(i).contains("/releases")) {
-                        Log.d("GitHubHTTP", html.get(i));
                         releases = Integer.parseInt(html.get(i + 3).replace(" ", ""));
                         foundReleases = true;
                     }

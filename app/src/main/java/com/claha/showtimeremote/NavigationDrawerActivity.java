@@ -83,7 +83,7 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
 
         //
         if (savedInstanceState == null) {
-            selectFragment(getStartPage());
+            selectFragment(0);
         } else {
             title = savedInstanceState.getCharSequence("title");
             if (!savedInstanceState.getBoolean("isDrawerOpen")) {
@@ -167,10 +167,6 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
     abstract protected int getContentResourceID();
 
     abstract protected int getAppName();
-
-    protected int getStartPage() {
-        return 0;
-    }
 
 }
 

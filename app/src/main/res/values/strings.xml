@@ -3,7 +3,9 @@
 
     <string name="app_name">Showtime Remote</string>
 
-    <string name="version">v0.0.3</string>
+    <string name="version">v0.0.5</string>
+
+    <string name="settings_profiles_key">profiles</string>
 
     <string name="settings_profiles_choose_key">profiles_choose</string>
     <string name="settings_profiles_choose_title">Choose</string>
@@ -12,7 +14,7 @@
     <string name="settings_profiles_add_key">profiles_add</string>
     <string name="settings_profiles_add_title">Add</string>
     <string name="settings_profiles_add_summary">Add a new profile with current settings</string>
-    <string name="settings_profiles_add_hint">Profile Name</string>
+    <string name="settings_profiles_add_hint">name</string>
 
     <string name="settings_profiles_delete_key">profiles_delete</string>
     <string name="settings_profiles_delete_title">Delete</string>
@@ -28,17 +30,17 @@
     <string name="settings_port_summary">Port of Showtime</string>
     <string name="settings_port_defaultValue">42000</string>
 
-    <string name="settings_notify_commit_key">notfiy_commit</string>
+    <string name="settings_notify_commit_key">notify_commit</string>
     <string name="settings_notify_commit_summary">Notify on new commit</string>
     <string name="settings_notify_commit_title">Commit</string>
+    <string name="settings_notify_commit_count">notify_commit_count</string>
 
-    <string name="settings_notify_release_key">notfiy_release</string>
+    <string name="settings_notify_release_key">notify_release</string>
     <string name="settings_notify_release_summary">Notify on new release</string>
     <string name="settings_notify_release_title">Release</string>
+    <string name="settings_notify_release_count">notify_release_count</string>
 
-    <string name="settings_misc_start_page_key">misc_start_page</string>
-    <string name="settings_misc_start_page_summary">Choose startup page</string>
-    <string name="settings_misc_start_page_title">Start Page</string>
+    <string name="settings_about_version">Version</string>
 
     <string name="search">Search</string>
 

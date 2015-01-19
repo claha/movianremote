@@ -1,5 +1,6 @@
 package com.claha.showtimeremote;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
@@ -93,26 +94,34 @@ class ShowtimeHTTP {
 
     public static final String ACTION_SWITCH_UI = "SwitchUI";*/
 
-    // Private
+    private final static String URL_BASE = "http://%s:%s/showtime/";
+    private final static String URL_ACTION = URL_BASE + "input/action/%s";
+    private final static String URL_SEARCH = URL_BASE + "open?url=search:%s";
+
+    private final ShowtimeSettings showtimeSettings;
+
     private String ipAddress;
     private String port;
 
-    public ShowtimeHTTP() {
+    public ShowtimeHTTP(Context context) {
+        showtimeSettings = new ShowtimeSettings(context);
     }
 
     //TODO: Check return of http request, seems to return "Ok" when fine
     //TODO: Is threading the best way to do this? can't do it on mainthread so something is needed
     public void sendAction(String action) {
-
+        updateSettings();
         if (action != null && !action.equals("")) {
-            String urlString = "http://" + ipAddress + ":" + port + "/showtime/input/action/" + action;
-            sendURL(urlString);
+            String url = String.format(URL_ACTION, ipAddress, port, action);
+            sendURL(url);
         }
     }
 
     public void search(String text) {
-        String urlString = "http://" + ipAddress + ":" + port + "/showtime/open?url=search:" + text.replace(" ", "+");
-        sendURL(urlString);
+        updateSettings();
+        text = text.replace(" ", "+");
+        String url = String.format(URL_SEARCH, ipAddress, port, text);
+        sendURL(url);
     }
 
     private void sendURL(final String urlString) {
@@ -134,19 +143,8 @@ class ShowtimeHTTP {
         thread.start();
     }
 
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
+    private void updateSettings() {
+        ipAddress = showtimeSettings.getIPAddress();
+        port = showtimeSettings.getPort();
     }
 }

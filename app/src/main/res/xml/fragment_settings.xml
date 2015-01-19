@@ -70,16 +70,11 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Miscellaneous">
+    <PreferenceCategory android:title="About">
 
-        <ListPreference
-            android:defaultValue="0"
-            android:dialogTitle=""
-            android:entries="@array/settings_misc_start_page_entries"
-            android:entryValues="@array/settings_misc_start_page_entryValues"
-            android:key="@string/settings_misc_start_page_key"
-            android:summary="@string/settings_misc_start_page_summary"
-            android:title="@string/settings_misc_start_page_title" />
+        <Preference
+            android:summary="@string/version"
+            android:title="@string/settings_about_version" />
 
     </PreferenceCategory>
 

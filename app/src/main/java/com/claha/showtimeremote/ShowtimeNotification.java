@@ -19,10 +19,10 @@ public class ShowtimeNotification extends NotificationCompat.Builder {
         this.context = context;
         this.message = message;
 
-        notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         setSmallIcon(R.drawable.ic_launcher);
-        setContentTitle("Showtime Remote");
+        setContentTitle(context.getResources().getString(R.string.app_name));
         setContentText(message);
         setAutoCancel(true);
     }

@@ -1,12 +1,13 @@
 package com.claha.showtimeremote;
 
 import android.app.Fragment;
-import android.content.SharedPreferences;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,15 +16,19 @@ import java.util.List;
 
 public class ShowtimeRemote extends NavigationDrawerActivity {
 
-    private static final String TAG = "ShowtimeRemote";
-    private final ShowtimeHTTP showtimeHTTP = new ShowtimeHTTP();
-    private SharedPreferences sharedPreferences;
+    private ShowtimeHTTP showtimeHTTP;
+    private ShowtimeSettings showtimeSettings;
+
+    private boolean showOptionsMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this, R.xml.fragment_settings, false);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        showtimeHTTP = new ShowtimeHTTP(getApplicationContext());
+
+        showtimeSettings = new ShowtimeSettings(getApplicationContext());
 
         setupNotifications();
     }
@@ -50,11 +55,9 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
 
     @Override
     protected List<String> getDrawerItems() {
-        String[] drawerItems = getResources().getStringArray(R.array.settings_misc_start_page_entries);
+        String[] drawerItems = {"Navigation", "Media", "Settings"};
         return Arrays.asList(drawerItems);
     }
-
-    private boolean showOptionsMenu;
 
     @Override
     protected Fragment createFragment(String title) {
@@ -63,9 +66,6 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
         showOptionsMenu = false;
 
         switch (title) {
-            case "Home":
-                fragment = new HomeFragment();
-                break;
             case "Navigation":
                 showOptionsMenu = true;
                 fragment = new NavigationFragment();
@@ -75,9 +75,6 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
                 break;
             case "Settings":
                 fragment = new SettingsFragment();
-                break;
-            case "About":
-                fragment = new AboutFragment();
                 break;
         }
 
@@ -100,20 +97,11 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
     }
 
     @Override
-    protected int getStartPage() {
-        return Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("misc_start_page", "0"));
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-
-
-        showtimeHTTP.setIpAddress(sharedPreferences.getString("ipAddress", null));
-        showtimeHTTP.setPort(sharedPreferences.getString("port", null));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -133,19 +121,18 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
     }
 
     private void setupNotifications() {
-        final boolean notifyCommit = sharedPreferences.getBoolean("notify_commit", false);
-        final boolean notifyRelease = sharedPreferences.getBoolean("notify_release", false);
+        final boolean notifyCommit = showtimeSettings.getNotifyCommit();
+        final boolean notifyRelease = showtimeSettings.getNotifyRelease();
 
         GitHubHTTP gitHubHTTP = new GitHubHTTP();
 
         gitHubHTTP.setOnCommitsCountedListener(new GitHubHTTP.OnCommitsCountedListener() {
             @Override
             public void onCounted(int count) {
-                int prevCount = sharedPreferences.getInt("notify_commit_count", 0);
-                sharedPreferences.edit().putInt("notify_commit_count", count).apply();
+                int prevCount = showtimeSettings.getCommitCount();
+                showtimeSettings.setCommitCount(count);
 
                 if (prevCount != 0 && notifyCommit && count > prevCount) {
-                    Log.d(TAG, "Notify commit");
                     new ShowtimeNotification(getApplicationContext(), "There is a new commit to GitHub").show();
                 }
             }
@@ -154,11 +141,10 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
         gitHubHTTP.setOnReleasesCountedListener(new GitHubHTTP.OnReleasesCountedListener() {
             @Override
             public void onCounted(int count) {
-                int prevCount = sharedPreferences.getInt("notiy_notify_release_count", 0);
-                sharedPreferences.edit().putInt("notiy_notify_release_count", count).apply();
+                int prevCount = showtimeSettings.getReleaseCount();
+                showtimeSettings.setReleaseCount(count);
 
                 if (prevCount != 0 && notifyRelease && count > prevCount) {
-                    Log.d(TAG, "Notify release");
                     ShowtimeNotification notification = new ShowtimeNotification(getApplicationContext(), "There is a new release on GitHub");
                     notification.setUrl("http://www.github.com/claha/showtimeremote/releases");
                     notification.show();
@@ -166,6 +152,10 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
             }
         });
 
-        gitHubHTTP.run();
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+            gitHubHTTP.run();
+        }
     }
 }
