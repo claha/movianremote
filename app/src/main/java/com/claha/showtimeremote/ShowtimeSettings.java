@@ -99,6 +99,10 @@ public class ShowtimeSettings extends BaseSettings {
             return info.get(PORT);
         }
 
+        public String toPrettyString() {
+            return getName().toUpperCase() + " (" + getIPAddress() + ")";
+        }
+
         @Override
         public String toString() {
             return TextUtils.join("_", info);
@@ -132,6 +136,14 @@ public class ShowtimeSettings extends BaseSettings {
             List<String> profiles = new ArrayList<>();
             for (int i = 0; i < size(); i++) {
                 profiles.add(get(i).toString());
+            }
+            return profiles;
+        }
+
+        public List<String> getPrettyStringList() {
+            List<String> profiles = new ArrayList<>();
+            for (int i = 0; i < size(); i++) {
+                profiles.add(get(i).toPrettyString());
             }
             return profiles;
         }

@@ -2,13 +2,13 @@
 <resources>
 
     <declare-styleable name="ShowtimeButton">
-        <attr name="action" format="string"/>
-        <attr name="actionLong" format="string"/>
-        <attr name="onPress" format="boolean"/>
+        <attr name="action" format="string" />
+        <attr name="actionLong" format="string" />
+        <attr name="onPress" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="ShowtimeToggleButton">
-        <attr name="src2" format="integer"/>
+        <attr name="src2" format="integer" />
     </declare-styleable>
 
 </resources>

@@ -1,15 +1,16 @@
 package com.claha.showtimeremote;
 
 import android.app.Fragment;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseFragment extends Fragment {
@@ -27,28 +28,19 @@ public abstract class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-
-        final List<String> profiles = new ArrayList<>();
-        ShowtimeSettings.Profiles ps = showtimeSettings.loadProfiles();
-        for (ShowtimeSettings.Profile p : ps) {
-            profiles.add(p.getName().toUpperCase() + " (" + p.getIPAddress() + ")");
-        }
-
-        if (profiles.size() > 1) {
-            profiles.add(0, ps.get(ps.size() - 1).getName().toUpperCase() + " (" + ps.get(ps.size() - 1).getIPAddress() + ")");
-            profiles.add(ps.get(0).getName().toUpperCase() + " (" + ps.get(0).getIPAddress() + ")");
-        }
+        final List<String> profiles = showtimeSettings.loadProfiles().getPrettyStringList();
 
         if (profiles.isEmpty()) {
             profiles.add(showtimeSettings.getIPAddress());
+        } else if (profiles.size() > 1) {
+            profiles.add(0, profiles.get(profiles.size() - 1));
+            profiles.add(profiles.get(0));
         }
 
         ProfileAdapter adapter = new ProfileAdapter(profiles);
         viewPager.setAdapter(adapter);
 
-        int index = showtimeSettings.loadProfiles().indexOf(showtimeSettings.getCurrentProfile());
-        index = index < 0 ? 0 : index + 1;
-
+        int index = showtimeSettings.loadProfiles().indexOf(showtimeSettings.getCurrentProfile()) + 1;
         viewPager.setCurrentItem(index);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -66,8 +58,10 @@ public abstract class BaseFragment extends Fragment {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    int pageCount = profiles.size();
+                int pageCount = profiles.size();
+
+                if (state == ViewPager.SCROLL_STATE_IDLE && pageCount > 1) {
+
                     if (currentPage == 0) {
                         viewPager.setCurrentItem(pageCount - 2, false);
                     } else if (currentPage == pageCount - 1) {
@@ -101,10 +95,21 @@ public abstract class BaseFragment extends Fragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            LayoutInflater inflater = LayoutInflater.from(container.getContext());
-            View view = inflater.inflate(R.layout.bottombar, container, false);
-            TextView textView = (TextView) view.findViewById(R.id.profile);
-            textView.setText(profiles.get(position));
+
+            int pageCount = profiles.size();
+            if (pageCount > 1) {
+                if (position == 0) {
+                    position = pageCount - 2;
+                } else if (position == pageCount - 1) {
+                    position = 1;
+                }
+            }
+
+            TextView view = new TextView(getActivity());
+            view.setText(profiles.get(position));
+            view.setGravity(Gravity.CENTER);
+            view.setTextColor(0xFFFFFFFF);
+            view.setTypeface(Typeface.DEFAULT_BOLD);
 
             container.addView(view);
 

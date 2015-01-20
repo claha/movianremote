@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:showtime="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/vertical_center_layout">
 
     <LinearLayout style="@style/horizontal_center_layout">
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            showtime:action="Up"
-            showtime:onPress="true"
+            app:action="Up"
+            app:onPress="true"
             android:src="@drawable/ic_action_up" />
 
     </LinearLayout>
@@ -17,19 +17,19 @@
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            showtime:action="Left"
-            showtime:onPress="true"
+            app:action="Left"
+            app:onPress="true"
             android:src="@drawable/ic_action_left" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            showtime:action="Activate"
+            app:action="Activate"
             android:src="@drawable/ic_action_activate" />
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            showtime:action="Right"
-            showtime:onPress="true"
+            app:action="Right"
+            app:onPress="true"
             android:src="@drawable/ic_action_right" />
 
     </LinearLayout>
@@ -38,9 +38,10 @@
 
         <com.claha.showtimeremote.ShowtimeButton
             style="@style/showtime_button"
-            showtime:action="Down"
-            showtime:onPress="true"
+            app:action="Down"
+            app:onPress="true"
             android:src="@drawable/ic_action_down" />
 
     </LinearLayout>
+
 </LinearLayout>
