@@ -15,10 +15,8 @@
     </style>
 
     <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light">
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
-        <item name="android:actionMenuTextColor">@color/textColorPrimary</item>
-        <item name="android:textColorSecondary">@color/textColorPrimary</item>
+        <item name="android:textColorPrimary">@color/toolbarItemColor</item>
+        <item name="android:textColorSecondary">@color/toolbarItemColor</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
@@ -40,9 +38,6 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">5dp</item>
-        <item name="android:textAppearance">?android:textAppearanceLarge</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/textColorPrimary</item>
         <item name="android:background">@drawable/showtime_button</item>
     </style>
 

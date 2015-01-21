@@ -8,6 +8,9 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     private final static int PROFILES = 0;
@@ -73,14 +76,19 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         // Profile add
         if (preference == profilesAdd) {
-            String info = profilesAdd.getEditText().getText().toString();
-            info += "_" + networkIPAddress.getText();
-            info += "_" + networkPort.getText();
+            String name = profilesAdd.getEditText().getText().toString();
 
-            profiles.add(new ShowtimeSettings.Profile(info));
-            updateProfiles();
+            if (name.length() > 0 && profiles.getByName(name) == null) {
+                List<String> info = new ArrayList<>();
+                info.add(name);
+                info.add(networkIPAddress.getText());
+                info.add(networkPort.getText());
 
-            profilesChoose.setValueIndex(profiles.size() - 1);
+                profiles.add(new ShowtimeSettings.Profile(info));
+                updateProfiles();
+
+                profilesChoose.setValueIndex(profiles.size() - 1);
+            }
 
             return true;
 
@@ -109,7 +117,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
             // Profile choose
         } else if (preference == profilesChoose) {
-            updateNetwork();
+            updateNetwork(profiles.getByName((String) newValue));
             return true;
         }
 
@@ -125,7 +133,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             for (int i = 0; i < N; i++) {
                 entriesAndEntryValues[i] = "" + profiles.get(i).getName();
             }
-
             profilesChoose.setEntries(entriesAndEntryValues);
             profilesDelete.setEntries(entriesAndEntryValues);
             profilesChoose.setEntryValues(entriesAndEntryValues);
@@ -139,8 +146,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
     }
 
-    private void updateNetwork() {
-        ShowtimeSettings.Profile profile = showtimeSettings.getCurrentProfile();
+    private void updateNetwork(ShowtimeSettings.Profile profile) {
         networkIPAddress.setText(profile.getIPAddress());
         networkPort.setText(profile.getPort());
     }

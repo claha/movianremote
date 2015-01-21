@@ -125,7 +125,7 @@ class ShowtimeHTTP {
     }
 
     private void sendURL(final String urlString) {
-        Log.d("ShowtimeHTTP", urlString);
+        Log.d("ShowtimeDebug", urlString);
         Thread thread = new Thread((new Runnable() {
             @Override
             public void run() {

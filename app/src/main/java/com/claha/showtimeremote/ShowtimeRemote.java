@@ -25,11 +25,8 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this, R.xml.fragment_settings, false);
-
         showtimeHTTP = new ShowtimeHTTP(getApplicationContext());
-
         showtimeSettings = new ShowtimeSettings(getApplicationContext());
-
         setupNotifications();
     }
 

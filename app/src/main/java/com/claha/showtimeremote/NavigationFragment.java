@@ -6,4 +6,5 @@ public class NavigationFragment extends BaseFragment {
     protected int getLayoutResource() {
         return R.layout.fragment_navigation;
     }
+
 }

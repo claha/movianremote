@@ -115,7 +115,6 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
@@ -169,4 +168,3 @@ abstract public class NavigationDrawerActivity extends ActionBarActivity {
     abstract protected int getAppName();
 
 }
-

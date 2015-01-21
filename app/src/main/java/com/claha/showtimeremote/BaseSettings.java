@@ -31,7 +31,7 @@ public abstract class BaseSettings {
     /*
      * Shared Preferences Functions
      */
-    protected int getInt(String key) {
+    private int getInt(String key) {
         return sharedPreferences.getInt(key, -1);
     }
 
@@ -39,7 +39,7 @@ public abstract class BaseSettings {
         return getInt(getStringResource(id));
     }
 
-    protected void putInt(String key, int value) {
+    private void putInt(String key, int value) {
         sharedPreferences.edit().putInt(key, value).apply();
     }
 
@@ -47,7 +47,7 @@ public abstract class BaseSettings {
         putInt(getStringResource(id), value);
     }
 
-    protected boolean getBoolean(String key) {
+    private boolean getBoolean(String key) {
         return sharedPreferences.getBoolean(key, false);
     }
 
@@ -55,7 +55,7 @@ public abstract class BaseSettings {
         return getBoolean(getStringResource(id));
     }
 
-    protected String getString(String key) {
+    private String getString(String key) {
         return sharedPreferences.getString(key, null);
     }
 
@@ -63,7 +63,7 @@ public abstract class BaseSettings {
         return getString(getStringResource(id));
     }
 
-    protected void putString(String key, String value) {
+    private void putString(String key, String value) {
         sharedPreferences.edit().putString(key, value).apply();
     }
 
@@ -71,7 +71,7 @@ public abstract class BaseSettings {
         putString(getStringResource(id), value);
     }
 
-    protected Set<String> getStringSet(String key) {
+    private Set<String> getStringSet(String key) {
         return sharedPreferences.getStringSet(key, new HashSet<String>());
     }
 
@@ -79,7 +79,7 @@ public abstract class BaseSettings {
         return getStringSet(getStringResource(id));
     }
 
-    protected void putStringSet(String key, Set<String> values) {
+    private void putStringSet(String key, Set<String> values) {
         sharedPreferences.edit().putStringSet(key, values).apply();
     }
 
@@ -87,7 +87,7 @@ public abstract class BaseSettings {
         putStringSet(getStringResource(id), values);
     }
 
-    protected List<String> getStringList(String key) {
+    private List<String> getStringList(String key) {
         Set<String> temp = getStringSet(key);
         List<String> values = new ArrayList<>(temp);
         Collections.sort(values);
@@ -98,7 +98,7 @@ public abstract class BaseSettings {
         return getStringList(getStringResource(id));
     }
 
-    protected void putStringList(String key, List<String> values) {
+    private void putStringList(String key, List<String> values) {
         putStringSet(key, new HashSet<>(values));
     }
 
