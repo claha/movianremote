@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/horizontal_center_layout">
 
-    <com.claha.showtimeremote.ShowtimeButton
+    <com.claha.showtimeremote.widget.ShowtimeButton
         style="@style/showtime_button"
         android:src="@drawable/ic_action_back"
         app:action="Back"
         app:onPress="true" />
 
-    <com.claha.showtimeremote.ShowtimeButton
+    <com.claha.showtimeremote.widget.ShowtimeButton
         style="@style/showtime_button"
         android:src="@drawable/ic_action_home"
         app:action="Home" />
 
-    <com.claha.showtimeremote.ShowtimeButton
+    <com.claha.showtimeremote.widget.ShowtimeButton
         style="@style/showtime_button"
         android:src="@drawable/ic_action_menu"
         app:action="Menu"

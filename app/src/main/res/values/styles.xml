@@ -2,22 +2,10 @@
 
     <style name="AppTheme" parent="AppTheme.Base" />
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:selectableItemBackground">
-            @android:drawable/screen_background_light_transparent
-        </item>
-    </style>
-
-    <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light">
-        <item name="android:textColorPrimary">@color/toolbarItemColor</item>
-        <item name="android:textColorSecondary">@color/toolbarItemColor</item>
-        <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="horizontal_center_layout">

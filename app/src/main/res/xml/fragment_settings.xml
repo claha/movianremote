@@ -54,22 +54,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="GitHub Notifications">
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/settings_notify_commit_key"
-            android:summary="@string/settings_notify_commit_summary"
-            android:title="@string/settings_notify_commit_title" />
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/settings_notify_release_key"
-            android:summary="@string/settings_notify_release_summary"
-            android:title="@string/settings_notify_release_title" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="About">
 
         <Preference

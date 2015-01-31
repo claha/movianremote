@@ -1,7 +1,10 @@
-package com.claha.showtimeremote;
+package com.claha.showtimeremote.core;
 
 import android.content.Context;
 import android.text.TextUtils;
+
+import com.claha.showtimeremote.R;
+import com.claha.showtimeremote.base.BaseSettings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,30 +50,6 @@ public class ShowtimeSettings extends BaseSettings {
         return getString(R.string.settings_port_key);
     }
 
-    public boolean getNotifyCommit() {
-        return getBoolean(R.string.settings_notify_commit_key);
-    }
-
-    public boolean getNotifyRelease() {
-        return getBoolean(R.string.settings_notify_release_key);
-    }
-
-    public int getCommitCount() {
-        return getInt(R.string.settings_notify_commit_count);
-    }
-
-    public void setCommitCount(int count) {
-        putInt(R.string.settings_notify_commit_count, count);
-    }
-
-    public int getReleaseCount() {
-        return getInt(R.string.settings_notify_release_count);
-    }
-
-    public void setReleaseCount(int count) {
-        putInt(R.string.settings_notify_release_count, count);
-    }
-
     public static class Profile {
 
         private final static int NAME = 0;
@@ -110,10 +89,7 @@ public class ShowtimeSettings extends BaseSettings {
 
         @Override
         public boolean equals(Object o) {
-            if (!(o instanceof Profile)) {
-                return false;
-            }
-            return ((Profile) o).info.get(NAME).equals(info.get(NAME));
+            return o instanceof Profile && ((Profile) o).info.get(NAME).equals(info.get(NAME));
         }
 
         @Override

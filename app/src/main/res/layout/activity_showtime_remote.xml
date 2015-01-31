@@ -1,29 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/vertical_center_layout"
-    tools:context=".ShowtimeRemote">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <include layout="@layout/toolbar" />
-
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPagerMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/viewPagerBottom" />
 
-        <FrameLayout
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/backgroundColor"
-            android:foreground="?android:windowContentOverlay" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPagerBottom"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/colorPrimary" />
 
-        <ListView
-            android:id="@+id/left_drawer"
-            android:layout_width="260dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/backgroundColor" />
+</RelativeLayout>
 
-    </android.support.v4.widget.DrawerLayout>
-
-</LinearLayout>

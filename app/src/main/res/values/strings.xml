@@ -3,7 +3,7 @@
 
     <string name="app_name">Showtime Remote</string>
 
-    <string name="version">v0.0.5</string>
+    <string name="version">v0.0.6</string>
 
     <string name="settings_profiles_key">profiles</string>
 
@@ -30,18 +30,9 @@
     <string name="settings_port_summary">Port of Showtime</string>
     <string name="settings_port_defaultValue">42000</string>
 
-    <string name="settings_notify_commit_key">notify_commit</string>
-    <string name="settings_notify_commit_summary">Notify on new commit</string>
-    <string name="settings_notify_commit_title">Commit</string>
-    <string name="settings_notify_commit_count">notify_commit_count</string>
-
-    <string name="settings_notify_release_key">notify_release</string>
-    <string name="settings_notify_release_summary">Notify on new release</string>
-    <string name="settings_notify_release_title">Release</string>
-    <string name="settings_notify_release_count">notify_release_count</string>
-
     <string name="settings_about_version">Version</string>
 
     <string name="search">Search</string>
+    <string name="settings">Settings</string>
 
 </resources>

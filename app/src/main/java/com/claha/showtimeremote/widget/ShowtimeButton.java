@@ -1,4 +1,4 @@
-package com.claha.showtimeremote;
+package com.claha.showtimeremote.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,6 +7,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.claha.showtimeremote.R;
+import com.claha.showtimeremote.core.ShowtimeHTTP;
 
 public class ShowtimeButton extends ImageButton implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
 

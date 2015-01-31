@@ -1,4 +1,4 @@
-package com.claha.showtimeremote;
+package com.claha.showtimeremote.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +16,7 @@ public abstract class BaseSettings {
     private final Resources resources;
     private final SharedPreferences sharedPreferences;
 
-    public BaseSettings(Context context) {
+    protected BaseSettings(Context context) {
         resources = context.getResources();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }

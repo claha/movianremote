@@ -1,103 +1,87 @@
 package com.claha.showtimeremote;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-import java.util.Arrays;
+import com.claha.showtimeremote.adapter.CircularPagerAdapter;
+import com.claha.showtimeremote.base.BaseActivity;
+import com.claha.showtimeremote.base.BaseFragment;
+import com.claha.showtimeremote.core.ShowtimeHTTP;
+import com.claha.showtimeremote.core.ShowtimeSettings;
+
 import java.util.List;
 
-public class ShowtimeRemote extends NavigationDrawerActivity {
+public class ShowtimeRemote extends BaseActivity {
+
+    private ViewPager viewPagerBottom;
+    private ViewPager viewPagerMain;
 
     private ShowtimeHTTP showtimeHTTP;
     private ShowtimeSettings showtimeSettings;
 
-    private boolean showOptionsMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceManager.setDefaultValues(this, R.xml.fragment_settings, false);
+        setContentView(R.layout.activity_showtime_remote);
+
+        viewPagerBottom = (ViewPager) findViewById(R.id.viewPagerBottom);
+        viewPagerMain = (ViewPager) findViewById(R.id.viewPagerMain);
+
         showtimeHTTP = new ShowtimeHTTP(getApplicationContext());
         showtimeSettings = new ShowtimeSettings(getApplicationContext());
-        setupNotifications();
-    }
 
-    @Override
-    protected int getLayoutResourceID() {
-        return R.layout.activity_showtime_remote;
-    }
-
-    @Override
-    protected int getToolbarResourceID() {
-        return R.id.toolbar;
-    }
-
-    @Override
-    protected int getDrawerLayoutResourceID() {
-        return R.id.drawer;
-    }
-
-    @Override
-    protected int getDrawerResourceID() {
-        return R.id.left_drawer;
-    }
-
-    @Override
-    protected List<String> getDrawerItems() {
-        String[] drawerItems = {"Navigation", "Media", "Settings"};
-        return Arrays.asList(drawerItems);
-    }
-
-    @Override
-    protected Fragment createFragment(String title) {
-        Fragment fragment = null;
-
-        showOptionsMenu = false;
-
-        switch (title) {
-            case "Navigation":
-                showOptionsMenu = true;
-                fragment = new NavigationFragment();
-                break;
-            case "Media":
-                fragment = new MediaFragment();
-                break;
-            case "Settings":
-                fragment = new SettingsFragment();
-                break;
-        }
-
-        return fragment;
-    }
-
-    @Override
-    protected int getMenuResourceID() {
-        return R.menu.menu_showtime_remote;
-    }
-
-    @Override
-    protected int getContentResourceID() {
-        return R.id.content;
-    }
-
-    @Override
-    protected int getAppName() {
-        return R.string.app_name;
+        setupAdapters();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_showtime_remote, menu);
+        setupSearchView(menu.findItem(R.id.menu_search));
+        return true;
+    }
 
-        MenuItem searchItem = menu.findItem(R.id.menu_search);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                showSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setupAdapters() {
+        List<String> profiles = showtimeSettings.loadProfiles().getPrettyStringList();
+        if (profiles.isEmpty()) {
+            profiles.add(showtimeSettings.getIPAddress());
+        }
+
+        ProfileAdapter adapter = new ProfileAdapter(viewPagerBottom, profiles);
+        viewPagerBottom.setAdapter(adapter);
+
+        int index = showtimeSettings.loadProfiles().indexOf(showtimeSettings.getCurrentProfile()) + 1;
+        viewPagerBottom.setCurrentItem(index);
+
+        RemoteFragmentPagerAdapter adapter2 = new RemoteFragmentPagerAdapter(getSupportFragmentManager());
+        viewPagerMain.setAdapter(adapter2);
+    }
+
+    private void setupSearchView(MenuItem searchItem) {
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -113,46 +97,70 @@ public class ShowtimeRemote extends NavigationDrawerActivity {
                 return false;
             }
         });
-
-        return showOptionsMenu;
     }
 
-    private void setupNotifications() {
-        final boolean notifyCommit = showtimeSettings.getNotifyCommit();
-        final boolean notifyRelease = showtimeSettings.getNotifyRelease();
+    private void showSettings() {
+        Intent intent = new Intent(this, SettingsScreen.class);
+        startActivity(intent);
+    }
 
-        GitHubHTTP gitHubHTTP = new GitHubHTTP();
+    private class ProfileAdapter extends CircularPagerAdapter<String> {
 
-        gitHubHTTP.setOnCommitsCountedListener(new GitHubHTTP.OnCommitsCountedListener() {
-            @Override
-            public void onCounted(int count) {
-                int prevCount = showtimeSettings.getCommitCount();
-                showtimeSettings.setCommitCount(count);
+        public ProfileAdapter(ViewPager viewPager, List<String> data) {
+            super(viewPager, data);
+        }
 
-                if (prevCount != 0 && notifyCommit && count > prevCount) {
-                    new ShowtimeNotification(getApplicationContext(), "There is a new commit to GitHub").show();
-                }
+        @Override
+        protected View instantiateView(Context context, String item) {
+            TextView view = new TextView(context);
+            view.setText(item);
+            view.setGravity(Gravity.CENTER);
+            view.setTextColor(0xFFFFFFFF);
+            view.setTypeface(Typeface.DEFAULT_BOLD);
+            return view;
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            super.onPageSelected(position);
+            position = getOriginalPosition(position);
+            showtimeSettings.setCurrentProfile(showtimeSettings.loadProfiles().get(position));
+        }
+    }
+
+    private class RemoteFragmentPagerAdapter extends FragmentPagerAdapter {
+
+        private final int NUM_FRAGMENTS = 2;
+
+        public RemoteFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new BaseFragment() {
+                        @Override
+                        protected int getFragmentLayoutResource() {
+                            return R.layout.fragment_navigation;
+                        }
+                    };
+                case 1:
+                    return new BaseFragment() {
+                        @Override
+                        protected int getFragmentLayoutResource() {
+                            return R.layout.fragment_media;
+                        }
+                    };
+                default:
+                    return null;
             }
-        });
+        }
 
-        gitHubHTTP.setOnReleasesCountedListener(new GitHubHTTP.OnReleasesCountedListener() {
-            @Override
-            public void onCounted(int count) {
-                int prevCount = showtimeSettings.getReleaseCount();
-                showtimeSettings.setReleaseCount(count);
-
-                if (prevCount != 0 && notifyRelease && count > prevCount) {
-                    ShowtimeNotification notification = new ShowtimeNotification(getApplicationContext(), "There is a new release on GitHub");
-                    notification.setUrl("http://www.github.com/claha/showtimeremote/releases");
-                    notification.show();
-                }
-            }
-        });
-
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
-            gitHubHTTP.run();
+        @Override
+        public int getCount() {
+            return NUM_FRAGMENTS;
         }
     }
 }

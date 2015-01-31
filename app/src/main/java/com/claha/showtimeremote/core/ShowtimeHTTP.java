@@ -1,4 +1,4 @@
-package com.claha.showtimeremote;
+package com.claha.showtimeremote.core;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-class ShowtimeHTTP {
+public class ShowtimeHTTP {
 
     // Constants
     /*public static final String ACTION_UP = "Up";

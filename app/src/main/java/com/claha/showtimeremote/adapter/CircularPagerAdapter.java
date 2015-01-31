@@ -1,4 +1,4 @@
-package com.claha.showtimeremote;
+package com.claha.showtimeremote.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -38,7 +38,7 @@ public abstract class CircularPagerAdapter<T> extends PagerAdapter implements Vi
         return data.size();
     }
 
-    protected T getItem(int position) {
+    T getItem(int position) {
         return data.get(position);
     }
 
