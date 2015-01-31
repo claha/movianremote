@@ -3,6 +3,8 @@ package com.claha.showtimeremote;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,7 +21,9 @@ import android.widget.TextView;
 import com.claha.showtimeremote.adapter.CircularPagerAdapter;
 import com.claha.showtimeremote.base.BaseActivity;
 import com.claha.showtimeremote.base.BaseFragment;
+import com.claha.showtimeremote.core.GitHubHTTP;
 import com.claha.showtimeremote.core.ShowtimeHTTP;
+import com.claha.showtimeremote.core.ShowtimeNotification;
 import com.claha.showtimeremote.core.ShowtimeSettings;
 
 import java.util.List;
@@ -45,6 +49,8 @@ public class ShowtimeRemote extends BaseActivity {
         showtimeSettings = new ShowtimeSettings(getApplicationContext());
 
         setupAdapters();
+
+        setupNotifications();
     }
 
     @Override
@@ -79,6 +85,45 @@ public class ShowtimeRemote extends BaseActivity {
 
         RemoteFragmentPagerAdapter adapter2 = new RemoteFragmentPagerAdapter(getSupportFragmentManager());
         viewPagerMain.setAdapter(adapter2);
+    }
+
+    private void setupNotifications() {
+        final boolean notifyCommit = showtimeSettings.getNotifyCommit();
+        final boolean notifyRelease = showtimeSettings.getNotifyRelease();
+
+        GitHubHTTP gitHubHTTP = new GitHubHTTP();
+
+        gitHubHTTP.setOnCommitsCountedListener(new GitHubHTTP.OnCommitsCountedListener() {
+            @Override
+            public void onCounted(int count) {
+                int prevCount = showtimeSettings.getCommitCount();
+                showtimeSettings.setCommitCount(count);
+
+                if (prevCount != 0 && notifyCommit && count > prevCount) {
+                    new ShowtimeNotification(getApplicationContext(), "There is a new commit to GitHub").show();
+                }
+            }
+        });
+
+        gitHubHTTP.setOnReleasesCountedListener(new GitHubHTTP.OnReleasesCountedListener() {
+            @Override
+            public void onCounted(int count) {
+                int prevCount = showtimeSettings.getReleaseCount();
+                showtimeSettings.setReleaseCount(count);
+
+                if (prevCount != 0 && notifyRelease && count > prevCount) {
+                    ShowtimeNotification notification = new ShowtimeNotification(getApplicationContext(), "There is a new release on GitHub");
+                    notification.setUrl("http://www.github.com/claha/showtimeremote/releases");
+                    notification.show();
+                }
+            }
+        });
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+            gitHubHTTP.run();
+        }
     }
 
     private void setupSearchView(MenuItem searchItem) {
@@ -140,19 +185,9 @@ public class ShowtimeRemote extends BaseActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new BaseFragment() {
-                        @Override
-                        protected int getFragmentLayoutResource() {
-                            return R.layout.fragment_navigation;
-                        }
-                    };
+                    return new NavigationFragment();
                 case 1:
-                    return new BaseFragment() {
-                        @Override
-                        protected int getFragmentLayoutResource() {
-                            return R.layout.fragment_media;
-                        }
-                    };
+                    return new MediaFragment();
                 default:
                     return null;
             }
@@ -163,4 +198,22 @@ public class ShowtimeRemote extends BaseActivity {
             return NUM_FRAGMENTS;
         }
     }
+
+    public static class NavigationFragment extends BaseFragment {
+
+        @Override
+        protected int getFragmentLayoutResource() {
+            return R.layout.fragment_navigation;
+        }
+    }
+
+    public static class MediaFragment extends BaseFragment {
+
+        @Override
+        protected int getFragmentLayoutResource() {
+            return R.layout.fragment_media;
+        }
+    }
+
+
 }

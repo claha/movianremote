@@ -37,7 +37,6 @@ public class SettingsScreen extends BaseActivity {
 
         private final static int NETWORK = 1;
         private final static int NETWORK_IP_ADDRESS = 0;
-        private final static int NETWORK_PORT = 1;
 
         private ShowtimeSettings.Profiles profiles;
 
@@ -46,7 +45,6 @@ public class SettingsScreen extends BaseActivity {
         private ListPreference profilesDelete;
 
         private EditTextPreference networkIPAddress;
-        private EditTextPreference networkPort;
 
         private ShowtimeSettings showtimeSettings;
 
@@ -87,7 +85,6 @@ public class SettingsScreen extends BaseActivity {
             PreferenceCategory network = (PreferenceCategory) root.getPreference(NETWORK);
 
             networkIPAddress = (EditTextPreference) network.getPreference(NETWORK_IP_ADDRESS);
-            networkPort = (EditTextPreference) network.getPreference(NETWORK_PORT);
         }
 
         @Override
@@ -101,7 +98,6 @@ public class SettingsScreen extends BaseActivity {
                     List<String> info = new ArrayList<>();
                     info.add(name);
                     info.add(networkIPAddress.getText());
-                    info.add(networkPort.getText());
 
                     profiles.add(new ShowtimeSettings.Profile(info));
                     updateProfiles();
@@ -167,7 +163,6 @@ public class SettingsScreen extends BaseActivity {
 
         private void updateNetwork(ShowtimeSettings.Profile profile) {
             networkIPAddress.setText(profile.getIPAddress());
-            networkPort.setText(profile.getPort());
         }
 
         @Override

@@ -39,7 +39,6 @@ public class ShowtimeSettings extends BaseSettings {
     public void setCurrentProfile(Profile profile) {
         putString(R.string.settings_profiles_choose_key, profile.getName());
         putString(R.string.settings_ipAddress_key, profile.getIPAddress());
-        putString(R.string.settings_port_key, profile.getPort());
     }
 
     public String getIPAddress() {
@@ -47,14 +46,37 @@ public class ShowtimeSettings extends BaseSettings {
     }
 
     public String getPort() {
-        return getString(R.string.settings_port_key);
+        return "42000";
+    }
+
+    public boolean getNotifyCommit() {
+        return getBoolean(R.string.settings_notify_commit_key);
+    }
+
+    public boolean getNotifyRelease() {
+        return getBoolean(R.string.settings_notify_release_key);
+    }
+
+    public int getCommitCount() {
+        return getInt(R.string.settings_notify_commit_count);
+    }
+
+    public void setCommitCount(int count) {
+        putInt(R.string.settings_notify_commit_count, count);
+    }
+
+    public int getReleaseCount() {
+        return getInt(R.string.settings_notify_release_count);
+    }
+
+    public void setReleaseCount(int count) {
+        putInt(R.string.settings_notify_release_count, count);
     }
 
     public static class Profile {
 
         private final static int NAME = 0;
         private final static int IP_ADDRESS = 1;
-        private final static int PORT = 2;
 
         private final List<String> info;
 
@@ -72,10 +94,6 @@ public class ShowtimeSettings extends BaseSettings {
 
         public String getIPAddress() {
             return info.get(IP_ADDRESS);
-        }
-
-        public String getPort() {
-            return info.get(PORT);
         }
 
         public String toPrettyString() {
