@@ -1,67 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/vertical_center_layout">
 
-    <LinearLayout style="@style/horizontal_center_layout">
+    <include
+        layout="@layout/layout_media_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <com.claha.showtimeremote.widget.ShowtimeButton
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_volume_down"
-            app:action="VolumeDown" />
+    <include
+        layout="@layout/layout_media_ctrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <com.claha.showtimeremote.widget.ShowtimeToggleButton
-            android:id="@+id/muteToggle"
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_volume_mute"
-            app:action="VolumeMuteToggle"
-            app:src2="@drawable/ic_action_volume_off" />
-
-        <com.claha.showtimeremote.widget.ShowtimeButton
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_volume_up"
-            app:action="VolumeUp" />
-
-    </LinearLayout>
-
-    <LinearLayout style="@style/horizontal_center_layout">
-
-        <com.claha.showtimeremote.widget.ShowtimeButton
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_skip_previous"
-            app:action="PreviousTrack" />
-
-        <com.claha.showtimeremote.widget.ShowtimeButton
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_skip_next"
-            app:action="NextTrack" />
-
-    </LinearLayout>
-
-    <LinearLayout style="@style/horizontal_center_layout">
-
-        <com.claha.showtimeremote.widget.ShowtimeButton
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_fast_rewind"
-            app:action="SeekReverse" />
-
-        <com.claha.showtimeremote.widget.ShowtimeButton
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_stop"
-            app:action="Stop" />
-
-        <com.claha.showtimeremote.widget.ShowtimeToggleButton
-            android:id="@+id/playPause"
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_play"
-            app:action="PlayPause"
-            app:src2="@drawable/ic_action_pause" />
-
-        <com.claha.showtimeremote.widget.ShowtimeButton
-            style="@style/showtime_button"
-            android:src="@drawable/ic_action_fast_forward"
-            app:action="SeekForward" />
-
-    </LinearLayout>
+    <include
+        layout="@layout/layout_media_misc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

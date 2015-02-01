@@ -149,6 +149,22 @@ public class ShowtimeRemote extends BaseActivity {
         startActivity(intent);
     }
 
+    public static class NavigationFragment extends BaseFragment {
+
+        @Override
+        protected int getFragmentLayoutResource() {
+            return R.layout.fragment_navigation;
+        }
+    }
+
+    public static class MediaFragment extends BaseFragment {
+
+        @Override
+        protected int getFragmentLayoutResource() {
+            return R.layout.fragment_media;
+        }
+    }
+
     private class ProfileAdapter extends CircularPagerAdapter<String> {
 
         public ProfileAdapter(ViewPager viewPager, List<String> data) {
@@ -196,22 +212,6 @@ public class ShowtimeRemote extends BaseActivity {
         @Override
         public int getCount() {
             return NUM_FRAGMENTS;
-        }
-    }
-
-    public static class NavigationFragment extends BaseFragment {
-
-        @Override
-        protected int getFragmentLayoutResource() {
-            return R.layout.fragment_navigation;
-        }
-    }
-
-    public static class MediaFragment extends BaseFragment {
-
-        @Override
-        protected int getFragmentLayoutResource() {
-            return R.layout.fragment_media;
         }
     }
 

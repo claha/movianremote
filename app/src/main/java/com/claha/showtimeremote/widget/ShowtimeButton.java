@@ -98,13 +98,13 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
     private void onTouchDown() {
         handler.removeCallbacks(handlerRunnable);
         handler.postDelayed(handlerRunnable, 400);
-        this.onClick(this);
-        this.setPressed(true);
+        onClick(this);
+        setPressed(true);
     }
 
     private void onTouchUp() {
         handler.removeCallbacks(handlerRunnable);
-        this.setPressed(false);
+        setPressed(false);
     }
 
     private void onTouchCancel() {

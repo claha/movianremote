@@ -5,15 +5,21 @@
     android:baselineAligned="false">
 
     <include
-        layout="@layout/layout_navigation_pad"
+        layout="@layout/layout_media_ctrl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <include
-        layout="@layout/layout_navigation_ctrl"
+    <LinearLayout
+        style="@style/vertical_center_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <include layout="@layout/layout_media_volume" />
+
+        <include layout="@layout/layout_media_misc" />
+
+    </LinearLayout>
 
 </LinearLayout>
