@@ -22,17 +22,21 @@ import android.widget.TextView;
 import com.claha.showtimeremote.adapter.CircularPagerAdapter;
 import com.claha.showtimeremote.base.BaseActivity;
 import com.claha.showtimeremote.base.BaseFragment;
+import com.claha.showtimeremote.base.BaseFragmentPagerAdapter;
+import com.claha.showtimeremote.base.BaseViewPagerIndicator;
 import com.claha.showtimeremote.core.GitHubHTTP;
 import com.claha.showtimeremote.core.ShowtimeHTTP;
 import com.claha.showtimeremote.core.ShowtimeNotification;
 import com.claha.showtimeremote.core.ShowtimeSettings;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowtimeRemote extends BaseActivity {
 
     private ViewPager viewPagerBottom;
     private ViewPager viewPagerMain;
+    private BaseViewPagerIndicator viewPagerIndicator;
 
     private ShowtimeHTTP showtimeHTTP;
     private ShowtimeSettings showtimeSettings;
@@ -42,8 +46,9 @@ public class ShowtimeRemote extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showtime_remote);
 
-        viewPagerBottom = (ViewPager) findViewById(R.id.viewPagerBottom);
-        viewPagerMain = (ViewPager) findViewById(R.id.viewPagerMain);
+        viewPagerBottom = (ViewPager)findViewById(R.id.viewPagerBottom);
+        viewPagerMain = (ViewPager)findViewById(R.id.viewPagerMain);
+        viewPagerIndicator = (BaseViewPagerIndicator)findViewById(R.id.viewPagerIndicator);
 
         showtimeHTTP = new ShowtimeHTTP(getApplicationContext());
         showtimeSettings = new ShowtimeSettings(getApplicationContext());
@@ -80,13 +85,17 @@ public class ShowtimeRemote extends BaseActivity {
         ProfileAdapter adapter = new ProfileAdapter(viewPagerBottom, profiles);
         viewPagerBottom.setAdapter(adapter);
 
-        Log.d("ShowtimeDebug", "setupAdapters: " + showtimeSettings.getCurrentProfile());
-
         int index = showtimeSettings.getCurrentProfileIndex() + 1;
         viewPagerBottom.setCurrentItem(index);
 
-        RemoteFragmentPagerAdapter adapter2 = new RemoteFragmentPagerAdapter(getSupportFragmentManager());
+        List<Class<? extends BaseFragment>> fragments = new ArrayList<>();
+        fragments.add(NavigationFragment.class);
+        fragments.add(MediaFragment.class);
+
+        BaseFragmentPagerAdapter adapter2 = new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragments);
         viewPagerMain.setAdapter(adapter2);
+
+        viewPagerIndicator.setViewPager(viewPagerMain);
     }
 
     private void setupNotifications() {
@@ -190,32 +199,4 @@ public class ShowtimeRemote extends BaseActivity {
             showtimeSettings.chooseProfile(showtimeSettings.getProfiles().get(position));
         }
     }
-
-    private class RemoteFragmentPagerAdapter extends FragmentPagerAdapter {
-
-        private final int NUM_FRAGMENTS = 2;
-
-        public RemoteFragmentPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new NavigationFragment();
-                case 1:
-                    return new MediaFragment();
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_FRAGMENTS;
-        }
-    }
-
-
 }
