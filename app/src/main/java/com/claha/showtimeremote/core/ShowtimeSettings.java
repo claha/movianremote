@@ -1,48 +1,120 @@
 package com.claha.showtimeremote.core;
 
 import android.content.Context;
-import android.text.TextUtils;
+import android.util.Log;
 
 import com.claha.showtimeremote.R;
 import com.claha.showtimeremote.base.BaseSettings;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ShowtimeSettings extends BaseSettings {
 
+    private Profile currentProfile;
+    private Profiles profiles;
+
     public ShowtimeSettings(Context context) {
         super(context);
+        loadPreferences();
     }
 
-    public Profiles loadProfiles() {
-        Profiles profiles = new Profiles();
+    private void loadPreferences() {
+        Log.d("ShowtimeDebug", "loadPreferences");
+        loadProfiles();
+        loadCurrentProfile();
+    }
+
+    public void savePreferences() {
+        saveProfiles();
+    }
+
+    private void loadProfiles() {
+        String name, ipAddress;
+        profiles = new Profiles();
         for (String profile : getStringList(R.string.settings_profiles_key)) {
-            profiles.add(new Profile(profile));
+            name = profile.split("_")[0];
+            ipAddress = profile.split("_")[1];
+            profiles.add(new Profile(name, ipAddress));
         }
+    }
+
+    private void loadCurrentProfile() {
+        currentProfile = profiles.getByName(getString(R.string.settings_profiles_choose_key));
+    }
+
+    private void saveProfile() {
+        putString(R.string.settings_profiles_choose_key, currentProfile.getName());
+    }
+
+    private void saveProfiles() {
+        putStringList(R.string.settings_profiles_key, profiles.toStringList());
+    }
+
+    public Profiles getProfiles() {
         return profiles;
     }
 
-    public void saveProfiles(Profiles profiles) {
-        putStringList(R.string.settings_profiles_key, profiles.getStringList());
-        if (!profiles.contains(getCurrentProfile())) {
-            putString(R.string.settings_profiles_choose_key, null);
+    public int getNumProfiles() {
+        return profiles.size();
+    }
+
+    public void addProfile(String name, String ipAddress) {
+        Log.d("ShowtimeDebug", "addProfile: " + name + " " + ipAddress);
+        Profile profileToAdd = new Profile(name, ipAddress);
+        profiles.add(profileToAdd);
+        chooseProfile(profileToAdd);
+    }
+
+    public void chooseProfile(Profile profile) {
+        Log.d("ShowtimeDebug", "chooseProfile: " + profile);
+        currentProfile = profile;
+        saveProfile();
+        setIPAddress(profile.getIPAddress());
+    }
+
+    public void chooseProfile(String name) {
+        chooseProfile(profiles.getByName(name));
+    }
+
+    public void deleteProfile(String name) {
+        Log.d("ShowtimeDebug", "deleteProfile: " + name);
+        Profile profileToDelete = profiles.getByName(name);
+
+        if (profileToDelete.equals(currentProfile)) {
+            int index = profiles.indexOf(currentProfile);
+
+            if (index == 0 && profiles.size() > 1) {
+                index = 1;
+            } else if (index > 0) {
+                index--;
+            }
+
+            if (index >= 0 && profiles.size() > 1) {
+                chooseProfile(profiles.get(index));
+            } else {
+                currentProfile = null;
+            }
         }
+
+        profiles.remove(profileToDelete);
     }
 
     public Profile getCurrentProfile() {
-        Profiles profiles = loadProfiles();
-        return profiles.getByName(getString(R.string.settings_profiles_choose_key));
+        return currentProfile;
     }
 
-    public void setCurrentProfile(Profile profile) {
-        putString(R.string.settings_profiles_choose_key, profile.getName());
-        putString(R.string.settings_ipAddress_key, profile.getIPAddress());
+    public int getCurrentProfileIndex() {
+        return profiles.indexOf(currentProfile);
     }
 
     public String getIPAddress() {
         return getString(R.string.settings_ipAddress_key);
+    }
+
+    private void setIPAddress(String ipAddress) {
+        Log.d("ShowtimeDebug", "setIPAddress: " + ipAddress);
+        putString(R.string.settings_ipAddress_key, ipAddress);
     }
 
     public String getPort() {
@@ -75,58 +147,61 @@ public class ShowtimeSettings extends BaseSettings {
 
     public static class Profile {
 
-        private final static int NAME = 0;
-        private final static int IP_ADDRESS = 1;
+        private String name;
+        private String ipAddress;
 
-        private final List<String> info;
-
-        public Profile(List<String> info) {
-            this.info = info;
-        }
-
-        public Profile(String info) {
-            this.info = Arrays.asList(info.split("_"));
+        public Profile(String name, String ipAddress) {
+            this.name = name;
+            this.ipAddress = ipAddress;
         }
 
         public String getName() {
-            return info.get(NAME);
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getIPAddress() {
-            return info.get(IP_ADDRESS);
+            return ipAddress;
+        }
+
+        public void setIpAddress(String ipAddress) {
+            this.ipAddress = ipAddress;
         }
 
         public String toPrettyString() {
-            return getName().toUpperCase() + " (" + getIPAddress() + ")";
+            return name.toUpperCase() + " (" + ipAddress + ")";
         }
 
         @Override
         public String toString() {
-            return TextUtils.join("_", info);
+            return name + "_" + ipAddress;
         }
 
         @Override
         public boolean equals(Object o) {
-            return o instanceof Profile && ((Profile) o).info.get(NAME).equals(info.get(NAME));
+            return o instanceof Profile && ((Profile) o).name.equals(name);
         }
 
         @Override
         public int hashCode() {
-            return info.hashCode();
+            return name.hashCode();
         }
     }
 
     public static class Profiles extends ArrayList<Profile> {
 
         public Profile getByName(String name) {
-            int index = indexOf(new Profile(name + "_ _ "));
+            int index = indexOf(new Profile(name, ""));
             if (index < 0) {
                 return null;
             }
             return get(index);
         }
 
-        public List<String> getStringList() {
+        public List<String> toStringList() {
             List<String> profiles = new ArrayList<>();
             for (int i = 0; i < size(); i++) {
                 profiles.add(get(i).toString());
@@ -134,13 +209,12 @@ public class ShowtimeSettings extends BaseSettings {
             return profiles;
         }
 
-        public List<String> getPrettyStringList() {
+        public List<String> toPrettyStringList() {
             List<String> profiles = new ArrayList<>();
             for (int i = 0; i < size(); i++) {
                 profiles.add(get(i).toPrettyString());
             }
             return profiles;
         }
-
     }
 }

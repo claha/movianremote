@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +36,6 @@ public class ShowtimeRemote extends BaseActivity {
 
     private ShowtimeHTTP showtimeHTTP;
     private ShowtimeSettings showtimeSettings;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class ShowtimeRemote extends BaseActivity {
     }
 
     private void setupAdapters() {
-        List<String> profiles = showtimeSettings.loadProfiles().getPrettyStringList();
+        List<String> profiles = showtimeSettings.getProfiles().toPrettyStringList();
         if (profiles.isEmpty()) {
             profiles.add(showtimeSettings.getIPAddress());
         }
@@ -80,7 +80,9 @@ public class ShowtimeRemote extends BaseActivity {
         ProfileAdapter adapter = new ProfileAdapter(viewPagerBottom, profiles);
         viewPagerBottom.setAdapter(adapter);
 
-        int index = showtimeSettings.loadProfiles().indexOf(showtimeSettings.getCurrentProfile()) + 1;
+        Log.d("ShowtimeDebug", "setupAdapters: " + showtimeSettings.getCurrentProfile());
+
+        int index = showtimeSettings.getCurrentProfileIndex() + 1;
         viewPagerBottom.setCurrentItem(index);
 
         RemoteFragmentPagerAdapter adapter2 = new RemoteFragmentPagerAdapter(getSupportFragmentManager());
@@ -185,7 +187,7 @@ public class ShowtimeRemote extends BaseActivity {
         public void onPageSelected(int position) {
             super.onPageSelected(position);
             position = getOriginalPosition(position);
-            showtimeSettings.setCurrentProfile(showtimeSettings.loadProfiles().get(position));
+            showtimeSettings.chooseProfile(showtimeSettings.getProfiles().get(position));
         }
     }
 

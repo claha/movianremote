@@ -21,16 +21,10 @@ public abstract class BaseSettings {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    /*
-     * Resources Functions
-     */
     private String getStringResource(int id) {
         return resources.getString(id);
     }
 
-    /*
-     * Shared Preferences Functions
-     */
     private int getInt(String key) {
         return sharedPreferences.getInt(key, -1);
     }
