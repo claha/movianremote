@@ -6,13 +6,10 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,9 +43,11 @@ public class ShowtimeRemote extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showtime_remote);
 
-        viewPagerBottom = (ViewPager)findViewById(R.id.viewPagerBottom);
-        viewPagerMain = (ViewPager)findViewById(R.id.viewPagerMain);
-        viewPagerIndicator = (BaseViewPagerIndicator)findViewById(R.id.viewPagerIndicator);
+        PreferenceManager.setDefaultValues(this, R.xml.fragment_settings, false);
+
+        viewPagerBottom = (ViewPager) findViewById(R.id.viewPagerBottom);
+        viewPagerMain = (ViewPager) findViewById(R.id.viewPagerMain);
+        viewPagerIndicator = (BaseViewPagerIndicator) findViewById(R.id.viewPagerIndicator);
 
         showtimeHTTP = new ShowtimeHTTP(getApplicationContext());
         showtimeSettings = new ShowtimeSettings(getApplicationContext());
@@ -56,6 +55,13 @@ public class ShowtimeRemote extends BaseActivity {
         setupAdapters();
 
         setupNotifications();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showtimeSettings = new ShowtimeSettings(getApplicationContext());
+        setupAdapters();
     }
 
     @Override
@@ -86,6 +92,7 @@ public class ShowtimeRemote extends BaseActivity {
         viewPagerBottom.setAdapter(adapter);
 
         int index = showtimeSettings.getCurrentProfileIndex() + 1;
+
         viewPagerBottom.setCurrentItem(index);
 
         List<Class<? extends BaseFragment>> fragments = new ArrayList<>();

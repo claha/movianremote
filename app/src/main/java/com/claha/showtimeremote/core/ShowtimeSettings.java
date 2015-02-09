@@ -20,7 +20,6 @@ public class ShowtimeSettings extends BaseSettings {
     }
 
     private void loadPreferences() {
-        Log.d("ShowtimeDebug", "loadPreferences");
         loadProfiles();
         loadCurrentProfile();
     }
@@ -41,6 +40,7 @@ public class ShowtimeSettings extends BaseSettings {
 
     private void loadCurrentProfile() {
         currentProfile = profiles.getByName(getString(R.string.settings_profiles_choose_key));
+        Log.d("ShowtimeDebug", "loadCurrentProfile: " + currentProfile);
     }
 
     private void saveProfile() {
@@ -105,6 +105,7 @@ public class ShowtimeSettings extends BaseSettings {
     }
 
     public int getCurrentProfileIndex() {
+        Log.d("ShowtimeDebug", "getCurrentProfileIndex: " + currentProfile);
         return profiles.indexOf(currentProfile);
     }
 

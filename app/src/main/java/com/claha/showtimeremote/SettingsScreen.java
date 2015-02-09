@@ -6,9 +6,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.claha.showtimeremote.base.BaseActivity;
@@ -38,8 +36,6 @@ public class SettingsScreen extends BaseActivity {
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
-        private final static int PREFERENCE_RESOURCE = R.xml.fragment_settings;
-
         private final static int PROFILES = 0;
         private final static int PROFILES_CHOOSE = 0;
         private final static int PROFILES_ADD = 1;
@@ -64,8 +60,7 @@ public class SettingsScreen extends BaseActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(PREFERENCE_RESOURCE);
-            PreferenceManager.setDefaultValues(getActivity(), PREFERENCE_RESOURCE, false);
+            addPreferencesFromResource(R.xml.fragment_settings);
 
             // Settings
             showtimeSettings = new ShowtimeSettings(getActivity());
@@ -93,7 +88,7 @@ public class SettingsScreen extends BaseActivity {
             networkIPAddress = (EditTextPreference) network.getPreference(NETWORK_IP_ADDRESS);
 
             // About
-            PreferenceCategory about = (PreferenceCategory)root.getPreference(3);
+            PreferenceCategory about = (PreferenceCategory) root.getPreference(3);
             aboutVersion = about.getPreference(0);
             aboutVersion.setOnPreferenceClickListener(this);
         }
@@ -169,29 +164,11 @@ public class SettingsScreen extends BaseActivity {
             }
         }
 
-
-
         @Override
         public boolean onPreferenceClick(Preference preference) {
             if (preference == profilesAdd) {
                 profilesAdd.getEditText().setText("");
                 return true;
-            } else if (preference == aboutVersion) {
-                String message = "==========SETTINGS INFORMATION ==========\n";
-                message += "List of profiles:\n" + showtimeSettings.getProfiles().toPrettyStringList() + "\n";
-                if (profilesChoose.getEntries() != null) {
-                    for (CharSequence i : profilesChoose.getEntries()) {
-                        message += i + ", ";
-                    }
-                }
-
-                message += "\nCurrent profile:\n" + showtimeSettings.getCurrentProfile().toPrettyString() + "\n" + profilesChoose.getValue();
-
-                message += "\nIP:\n" + showtimeSettings.getIPAddress() + "\n" + networkIPAddress.getText();
-
-                Log.d("ShowtimeDebug", message);
-
-
             }
             return false;
         }

@@ -36,8 +36,4 @@ public class BaseFragmentPagerAdapter extends FragmentStatePagerAdapter {
         return PagerAdapter.POSITION_NONE;
     }
 
-    public void setFragments(List<Class<? extends BaseFragment>> fragments) {
-        this.fragments = fragments;
-        notifyDataSetChanged();
-    }
 }
