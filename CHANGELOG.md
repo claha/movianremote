@@ -1,5 +1,14 @@
 Changelog
 =========
+0.0.6 (2015-02-09)
+------------------
+* View Pager instead of Navigation Drawer
+* Two new buttons (MediaStats & PlayQueue)
+
+0.0.5 (2015-01-22)
+------------------
+* View Pager to switch between profiles
+
 0.0.4 (2015-01-16)
 ------------------
 * Toggle buttons
