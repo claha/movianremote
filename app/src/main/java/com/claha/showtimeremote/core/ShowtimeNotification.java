@@ -23,7 +23,7 @@ public class ShowtimeNotification extends NotificationCompat.Builder {
 
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        setSmallIcon(R.drawable.ic_launcher);
+        setSmallIcon(R.mipmap.ic_launcher);
         setContentTitle(context.getResources().getString(R.string.app_name));
         setContentText(message);
         setAutoCancel(true);

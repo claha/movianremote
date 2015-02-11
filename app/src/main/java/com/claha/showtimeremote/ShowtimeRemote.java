@@ -61,7 +61,13 @@ public class ShowtimeRemote extends BaseActivity {
     protected void onResume() {
         super.onResume();
         showtimeSettings = new ShowtimeSettings(getApplicationContext());
-        setupAdapters();
+        //setupAdapters();
+        List<String> profiles = showtimeSettings.getProfiles().toPrettyStringList();
+        if (profiles.isEmpty()) {
+            profiles.add(showtimeSettings.getIPAddress());
+        }
+        viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, profiles));
+        viewPagerBottom.setCurrentItem(showtimeSettings.getCurrentProfileIndex() + 1); // +1 because it is a circular adapter
     }
 
     @Override
@@ -75,7 +81,7 @@ public class ShowtimeRemote extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_settings:
-                showSettings();
+                startActivity(new Intent(this, SettingsScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -83,24 +89,20 @@ public class ShowtimeRemote extends BaseActivity {
     }
 
     private void setupAdapters() {
+
+        //
         List<String> profiles = showtimeSettings.getProfiles().toPrettyStringList();
         if (profiles.isEmpty()) {
             profiles.add(showtimeSettings.getIPAddress());
         }
+        viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, profiles));
+        viewPagerBottom.setCurrentItem(showtimeSettings.getCurrentProfileIndex() + 1); // +1 because it is a circular adapter
 
-        ProfileAdapter adapter = new ProfileAdapter(viewPagerBottom, profiles);
-        viewPagerBottom.setAdapter(adapter);
-
-        int index = showtimeSettings.getCurrentProfileIndex() + 1;
-
-        viewPagerBottom.setCurrentItem(index);
-
+        //
         List<Class<? extends BaseFragment>> fragments = new ArrayList<>();
         fragments.add(NavigationFragment.class);
         fragments.add(MediaFragment.class);
-
-        BaseFragmentPagerAdapter adapter2 = new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragments);
-        viewPagerMain.setAdapter(adapter2);
+        viewPagerMain.setAdapter(new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragments));
 
         viewPagerIndicator.setViewPager(viewPagerMain);
     }
@@ -160,11 +162,6 @@ public class ShowtimeRemote extends BaseActivity {
                 return false;
             }
         });
-    }
-
-    private void showSettings() {
-        Intent intent = new Intent(this, SettingsScreen.class);
-        startActivity(intent);
     }
 
     public static class NavigationFragment extends BaseFragment {

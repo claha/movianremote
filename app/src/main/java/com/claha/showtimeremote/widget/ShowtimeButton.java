@@ -28,17 +28,20 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
 
     public ShowtimeButton(Context context) {
         super(context);
+        if (this.isInEditMode()) return;
         init();
     }
 
     public ShowtimeButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        if (this.isInEditMode()) return;
         initAttrs(attrs);
         init();
     }
 
     public ShowtimeButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        if (this.isInEditMode()) return;
         initAttrs(attrs);
         init();
     }

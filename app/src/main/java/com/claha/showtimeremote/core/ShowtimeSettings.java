@@ -11,6 +11,8 @@ import java.util.List;
 
 public class ShowtimeSettings extends BaseSettings {
 
+    public final String PORT = "42000";
+
     private Profile currentProfile;
     private Profiles profiles;
 
@@ -118,10 +120,6 @@ public class ShowtimeSettings extends BaseSettings {
         putString(R.string.settings_ipAddress_key, ipAddress);
     }
 
-    public String getPort() {
-        return "42000";
-    }
-
     public boolean getNotifyCommit() {
         return getBoolean(R.string.settings_notify_commit_key);
     }
@@ -148,8 +146,8 @@ public class ShowtimeSettings extends BaseSettings {
 
     public static class Profile {
 
-        private String name;
-        private String ipAddress;
+        private final String name;
+        private final String ipAddress;
 
         public Profile(String name, String ipAddress) {
             this.name = name;
@@ -160,16 +158,8 @@ public class ShowtimeSettings extends BaseSettings {
             return name;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
         public String getIPAddress() {
             return ipAddress;
-        }
-
-        public void setIpAddress(String ipAddress) {
-            this.ipAddress = ipAddress;
         }
 
         public String toPrettyString() {

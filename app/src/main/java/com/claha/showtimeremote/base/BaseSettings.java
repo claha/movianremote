@@ -69,16 +69,8 @@ public abstract class BaseSettings {
         return sharedPreferences.getStringSet(key, new HashSet<String>());
     }
 
-    protected Set<String> getStringSet(int id) {
-        return getStringSet(getStringResource(id));
-    }
-
     private void putStringSet(String key, Set<String> values) {
         sharedPreferences.edit().putStringSet(key, values).apply();
-    }
-
-    protected void putStringSet(int id, Set<String> values) {
-        putStringSet(getStringResource(id), values);
     }
 
     private List<String> getStringList(String key) {
