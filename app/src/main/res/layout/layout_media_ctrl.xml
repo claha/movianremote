@@ -22,7 +22,8 @@
         <com.claha.showtimeremote.widget.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_fast_rewind"
-            app:action="SeekReverse" />
+            app:action="SeekReverse"
+            app:onPress="true" />
 
         <com.claha.showtimeremote.widget.ShowtimeButton
             style="@style/showtime_button"
@@ -39,7 +40,8 @@
         <com.claha.showtimeremote.widget.ShowtimeButton
             style="@style/showtime_button"
             android:src="@drawable/ic_action_fast_forward"
-            app:action="SeekForward" />
+            app:action="SeekForward"
+            app:onPress="true" />
 
     </LinearLayout>
 
