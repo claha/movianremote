@@ -47,8 +47,12 @@
     <PreferenceCategory android:title="About">
 
         <Preference
-            android:summary="@string/version"
-            android:title="@string/settings_about_version" />
+            android:summary="@string/settings_about_version_summary"
+            android:title="@string/settings_about_version_title" />
+        
+        <Preference
+            android:summary="@string/settings_about_rate_summary"
+            android:title="@string/settings_about_rate_title" />
 
     </PreferenceCategory>
 

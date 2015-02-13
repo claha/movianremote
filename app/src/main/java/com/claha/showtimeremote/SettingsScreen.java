@@ -1,5 +1,7 @@
 package com.claha.showtimeremote;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
@@ -36,6 +38,8 @@ public class SettingsScreen extends BaseActivity {
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
+        private final static String PACKAGE_NAME = "com.claha.showtimeremote"; // TODO: Change to correct one once published
+
         private final static int PROFILES = 0;
         private final static int PROFILES_CHOOSE = 0;
         private final static int PROFILES_ADD = 1;
@@ -43,17 +47,15 @@ public class SettingsScreen extends BaseActivity {
 
         private final static int NETWORK = 1;
         private final static int NETWORK_IP_ADDRESS = 0;
-        
-        private final static int ABOUT = 2;
 
+        private final static int ABOUT = 2;
+        //private final static int ABOUT_VERSION = 0;
+        private final static int ABOUT_RATE = 1;
+        Preference aboutRate;
         private EditTextPreference profilesAdd;
         private ListPreference profilesChoose;
         private ListPreference profilesDelete;
-
         private EditTextPreference networkIPAddress;
-
-        private Preference aboutVersion;
-
         private ShowtimeSettings showtimeSettings;
 
         public SettingsFragment() {
@@ -91,8 +93,10 @@ public class SettingsScreen extends BaseActivity {
 
             // About
             PreferenceCategory about = (PreferenceCategory) root.getPreference(ABOUT);
-            aboutVersion = about.getPreference(0);
-            aboutVersion.setOnPreferenceClickListener(this);
+            //aboutVersion = about.getPreference(ABOUT_VERSION);
+            aboutRate = about.getPreference(ABOUT_RATE);
+            aboutRate.setOnPreferenceClickListener(this);
+
         }
 
         @Override
@@ -170,6 +174,9 @@ public class SettingsScreen extends BaseActivity {
         public boolean onPreferenceClick(Preference preference) {
             if (preference == profilesAdd) {
                 profilesAdd.getEditText().setText("");
+                return true;
+            } else if (preference == aboutRate) {
+                getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + PACKAGE_NAME)));
                 return true;
             }
             return false;

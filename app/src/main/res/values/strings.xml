@@ -25,7 +25,11 @@
     <string name="settings_ipAddress_summary">IP address of Showtime</string>
     <string name="settings_ipAddress_defaultValue">192.168.1.74</string>
 
-    <string name="settings_about_version">Version</string>
+    <string name="settings_about_version_title">Version</string>
+    <string name="settings_about_version_summary">@string/version</string>
+
+    <string name="settings_about_rate_title">Rate</string>
+    <string name="settings_about_rate_summary">Please rate Showtime Remote in Google Play</string>
 
     <string name="search">Search</string>
     <string name="settings">Settings</string>
