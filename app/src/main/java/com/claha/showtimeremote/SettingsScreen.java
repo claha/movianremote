@@ -43,6 +43,8 @@ public class SettingsScreen extends BaseActivity {
 
         private final static int NETWORK = 1;
         private final static int NETWORK_IP_ADDRESS = 0;
+        
+        private final static int ABOUT = 2;
 
         private EditTextPreference profilesAdd;
         private ListPreference profilesChoose;
@@ -88,7 +90,7 @@ public class SettingsScreen extends BaseActivity {
             networkIPAddress = (EditTextPreference) network.getPreference(NETWORK_IP_ADDRESS);
 
             // About
-            PreferenceCategory about = (PreferenceCategory) root.getPreference(3);
+            PreferenceCategory about = (PreferenceCategory) root.getPreference(ABOUT);
             aboutVersion = about.getPreference(0);
             aboutVersion.setOnPreferenceClickListener(this);
         }

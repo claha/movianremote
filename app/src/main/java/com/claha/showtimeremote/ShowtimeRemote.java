@@ -3,8 +3,6 @@ package com.claha.showtimeremote;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
@@ -21,9 +19,7 @@ import com.claha.showtimeremote.base.BaseActivity;
 import com.claha.showtimeremote.base.BaseFragment;
 import com.claha.showtimeremote.base.BaseFragmentPagerAdapter;
 import com.claha.showtimeremote.base.BaseViewPagerIndicator;
-import com.claha.showtimeremote.core.GitHubHTTP;
 import com.claha.showtimeremote.core.ShowtimeHTTP;
-import com.claha.showtimeremote.core.ShowtimeNotification;
 import com.claha.showtimeremote.core.ShowtimeSettings;
 
 import java.util.ArrayList;
@@ -54,7 +50,6 @@ public class ShowtimeRemote extends BaseActivity {
 
         setupAdapters();
 
-        setupNotifications();
     }
 
     @Override
@@ -105,45 +100,6 @@ public class ShowtimeRemote extends BaseActivity {
         viewPagerMain.setAdapter(new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragments));
 
         viewPagerIndicator.setViewPager(viewPagerMain);
-    }
-
-    private void setupNotifications() {
-        final boolean notifyCommit = showtimeSettings.getNotifyCommit();
-        final boolean notifyRelease = showtimeSettings.getNotifyRelease();
-
-        GitHubHTTP gitHubHTTP = new GitHubHTTP();
-
-        gitHubHTTP.setOnCommitsCountedListener(new GitHubHTTP.OnCommitsCountedListener() {
-            @Override
-            public void onCounted(int count) {
-                int prevCount = showtimeSettings.getCommitCount();
-                showtimeSettings.setCommitCount(count);
-
-                if (prevCount != 0 && notifyCommit && count > prevCount) {
-                    new ShowtimeNotification(getApplicationContext(), "There is a new commit to GitHub").show();
-                }
-            }
-        });
-
-        gitHubHTTP.setOnReleasesCountedListener(new GitHubHTTP.OnReleasesCountedListener() {
-            @Override
-            public void onCounted(int count) {
-                int prevCount = showtimeSettings.getReleaseCount();
-                showtimeSettings.setReleaseCount(count);
-
-                if (prevCount != 0 && notifyRelease && count > prevCount) {
-                    ShowtimeNotification notification = new ShowtimeNotification(getApplicationContext(), "There is a new release on GitHub");
-                    notification.setUrl("http://www.github.com/claha/showtimeremote/releases");
-                    notification.show();
-                }
-            }
-        });
-
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
-            gitHubHTTP.run();
-        }
     }
 
     private void setupSearchView(MenuItem searchItem) {

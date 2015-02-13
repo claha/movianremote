@@ -120,30 +120,6 @@ public class ShowtimeSettings extends BaseSettings {
         putString(R.string.settings_ipAddress_key, ipAddress);
     }
 
-    public boolean getNotifyCommit() {
-        return getBoolean(R.string.settings_notify_commit_key);
-    }
-
-    public boolean getNotifyRelease() {
-        return getBoolean(R.string.settings_notify_release_key);
-    }
-
-    public int getCommitCount() {
-        return getInt(R.string.settings_notify_commit_count);
-    }
-
-    public void setCommitCount(int count) {
-        putInt(R.string.settings_notify_commit_count, count);
-    }
-
-    public int getReleaseCount() {
-        return getInt(R.string.settings_notify_release_count);
-    }
-
-    public void setReleaseCount(int count) {
-        putInt(R.string.settings_notify_release_count, count);
-    }
-
     public static class Profile {
 
         private final String name;
