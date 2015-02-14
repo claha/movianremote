@@ -1,5 +1,10 @@
 Changelog
 =========
+1.0.0 (2015-02-13)
+------------------
+* Showtime Remote now available on Google Play
+* Two new buttons (AudioTrack & SubtitleTrack)
+
 0.0.6 (2015-02-09)
 ------------------
 * View Pager instead of Navigation Drawer
