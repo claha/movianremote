@@ -1,18 +1,13 @@
 # Showtime Remote
-Use your Android phone as a remote for Showtime (https://showtimemediacenter.com/)
+Use your Android phone as a remote for Showtime (https://showtimemediacenter.com/). Now available on Google Play (https://play.google.com/store/apps/details?id=com.claha.showtimeremote)
 
 ## Features
+* Buttons for most common actions, see below for a more detailed description
 * Use the integrated searchbar to search in Showtime
-* Toggle buttons for play/pause and mute button
-* Long press on button, long press Menu shows ItemMenu
 * Use profiles if you are running Showtime on multiple devices
 * Swipe to switch between profiles
-* Swipe to switch between the navigation and media remote
+* Swipe to switch between navigation and media remote
 
-## Next version
-* Make sure there are no major bugs left
-* Release on Google Play
- 
 ## Buttons
 Listed as they appear in the app, from top/left.
 
@@ -27,17 +22,19 @@ Listed as they appear in the app, from top/left.
 * Menu (Long press brings up Item Menu)
 
 ### Media
-* Volume Down
+* Volume Down (Press and hold to send multiple times)
 * Volume Mute Toggle
-* Volume Up
+* Volume Up (Press and hold to send multiple times)
 * Previous Track
-* Seek Reverse
+* Next Track
+* Seek Reverse (Press and hold to send multiple times)
 * Stop
 * Play Pause Toggle
-* Seek Forward
-* Next Track
+* Seek Forward (Press and hold to send multiple times)
 * Play Queue
 * Media Stats (Long press brings up Log Window)
+* Audio Track
+* Subtitle Track
 
 ## License
 GNU GPLv3
