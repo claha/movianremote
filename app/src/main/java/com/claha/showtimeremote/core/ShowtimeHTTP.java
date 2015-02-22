@@ -1,54 +1,91 @@
 package com.claha.showtimeremote.core;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 
+/**
+ * Class that handles the communication with Showtime.
+ * This class is used to send actions and search queries to Showtime
+ *
+ * @author Claes Hallstrom
+ * @version 1.0.1
+ */
 public class ShowtimeHTTP {
 
-    private final static String URL_BASE = "http://%s:%s/showtime/";
-    private final static String URL_ACTION = URL_BASE + "input/action/%s";
-    private final static String URL_SEARCH = URL_BASE + "open?url=search:%s";
+    /**
+     * Base URL used for communication.
+     */
+    private static final String URL_BASE = "http://%s:%s/showtime/";
 
-    private final ShowtimeSettings showtimeSettings;
+    /**
+     * URL used for sending action.
+     */
+    private static final String URL_ACTION = URL_BASE + "input/action/%s";
 
-    private String ipAddress;
-    private String port;
+    /**
+     * URL used for sending search queries.
+     */
+    private static final String URL_SEARCH = URL_BASE + "open?url=search:%s";
 
+    /**
+     * ShowtimeSettings instance to access current IP address and port.
+     */
+    private final ShowtimeSettings settings;
+
+    /**
+     * Create a Showtime HTTP object.
+     *
+     * @param context The context of the current activity.
+     */
     public ShowtimeHTTP(Context context) {
-        showtimeSettings = new ShowtimeSettings(context);
+        settings = new ShowtimeSettings(context);
     }
 
+    /**
+     * Send an action to Showtime.
+     *
+     * @param action The action to be sent.
+     */
     public void sendAction(String action) {
-        updateSettings();
         if (action != null && !action.equals("")) {
-            String url = String.format(URL_ACTION, ipAddress, port, action);
+            String url = String.format(URL_ACTION, getIPAddress(), getPort(), action);
             sendURL(url);
         }
     }
 
-    public void search(String text) {
-        updateSettings();
-        text = text.replace(" ", "+");
-        String url = String.format(URL_SEARCH, ipAddress, port, text);
+    /**
+     * Send a search query to Showtime.
+     *
+     * @param query The query to be sent.
+     */
+    public void search(String query) {
+        query = query.replace(" ", "+");
+        try {
+            query = URLEncoder.encode(query, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String url = String.format(URL_SEARCH, getIPAddress(), getPort(), query);
         sendURL(url);
     }
 
-    //TODO: Check return of http request, seems to return "Ok" when fine
-    //TODO: Is threading the best way to do this? can't do it on main thread so something is needed
-    private void sendURL(final String urlString) {
-        Log.d("ShowtimeDebug", urlString);
+    /**
+     * Send an url to Showtime.
+     *
+     * @param url The url to be sent.
+     */
+    private void sendURL(final String url) {
         Thread thread = new Thread((new Runnable() {
             @Override
             public void run() {
-                URL url;
                 URLConnection connection;
                 try {
-                    url = new URL(urlString);
-                    connection = url.openConnection();
+                    connection = new URL(url).openConnection();
                     connection.getInputStream();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -58,8 +95,21 @@ public class ShowtimeHTTP {
         thread.start();
     }
 
-    private void updateSettings() {
-        ipAddress = showtimeSettings.getIPAddress();
-        port = showtimeSettings.PORT;
+    /**
+     * Get the IP address of Showtime.
+     *
+     * @return The IP address
+     */
+    private String getIPAddress() {
+        return settings.getIPAddress();
+    }
+
+    /**
+     * Get the port of Showtime
+     *
+     * @return The port
+     */
+    private String getPort() {
+        return settings.PORT;
     }
 }
