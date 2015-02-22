@@ -1,4 +1,4 @@
-package com.claha.showtimeremote.base;
+package com.claha.movianremote.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;

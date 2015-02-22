@@ -1,4 +1,4 @@
-package com.claha.showtimeremote.widget;
+package com.claha.movianremote.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,31 +9,31 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.claha.showtimeremote.R;
+import com.claha.movianremote.R;
 
-public class ShowtimeToggleButton extends ShowtimeButton {
+public class MovianRemoteToggleButton extends MovianRemoteButton {
 
     private Drawable src;
     private Drawable src2;
 
-    public ShowtimeToggleButton(Context context) {
+    public MovianRemoteToggleButton(Context context) {
         super(context);
     }
 
-    public ShowtimeToggleButton(Context context, AttributeSet attrs) {
+    public MovianRemoteToggleButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         initAttrs(attrs);
     }
 
-    public ShowtimeToggleButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MovianRemoteToggleButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttrs(attrs);
     }
 
     private void initAttrs(AttributeSet attrs) {
-        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.ShowtimeToggleButton, 0, 0);
+        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.MovianRemoteToggleButton, 0, 0);
         try {
-            src2 = a.getDrawable(R.styleable.ShowtimeToggleButton_src2);
+            src2 = a.getDrawable(R.styleable.MovianRemoteToggleButton_src2);
             src = getDrawable();
         } finally {
             a.recycle();

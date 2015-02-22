@@ -1,4 +1,4 @@
-package com.claha.showtimeremote.base;
+package com.claha.movianremote.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

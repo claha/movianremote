@@ -1,4 +1,4 @@
-package com.claha.showtimeremote.adapter;
+package com.claha.movianremote.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

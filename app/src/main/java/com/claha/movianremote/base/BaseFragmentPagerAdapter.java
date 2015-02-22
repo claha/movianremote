@@ -1,4 +1,4 @@
-package com.claha.showtimeremote.base;
+package com.claha.movianremote.base;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

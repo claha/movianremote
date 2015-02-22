@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/viewPagerIndicator" />
 
-    <com.claha.showtimeremote.base.BaseViewPagerIndicator
+    <com.claha.movianremote.base.BaseViewPagerIndicator
         android:id="@+id/viewPagerIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

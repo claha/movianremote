@@ -1,4 +1,4 @@
-package com.claha.showtimeremote;
+package com.claha.movianremote;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,8 +11,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.view.MenuItem;
 
-import com.claha.showtimeremote.base.BaseActivity;
-import com.claha.showtimeremote.core.ShowtimeSettings;
+import com.claha.movianremote.base.BaseActivity;
+import com.claha.movianremote.core.MovianRemoteSettings;
 
 public class SettingsScreen extends BaseActivity {
 
@@ -56,7 +56,7 @@ public class SettingsScreen extends BaseActivity {
         private ListPreference profilesChoose;
         private ListPreference profilesDelete;
         private EditTextPreference networkIPAddress;
-        private ShowtimeSettings showtimeSettings;
+        private MovianRemoteSettings movianRemoteSettings;
 
         public SettingsFragment() {
         }
@@ -67,7 +67,7 @@ public class SettingsScreen extends BaseActivity {
             addPreferencesFromResource(R.xml.fragment_settings);
 
             // Settings
-            showtimeSettings = new ShowtimeSettings(getActivity());
+            movianRemoteSettings = new MovianRemoteSettings(getActivity());
 
             // Root
             PreferenceScreen root = getPreferenceScreen();
@@ -103,7 +103,7 @@ public class SettingsScreen extends BaseActivity {
         public boolean onPreferenceChange(Preference preference, Object newValue) {
 
             String name = (String) newValue;
-            int numProfiles = showtimeSettings.getNumProfiles();
+            int numProfiles = movianRemoteSettings.getNumProfiles();
 
             // Profile add
             if (preference == profilesAdd) {
@@ -113,7 +113,7 @@ public class SettingsScreen extends BaseActivity {
 
                 if (name.length() > 0) {
 
-                    showtimeSettings.addProfile(name, ipAddress);
+                    movianRemoteSettings.addProfile(name, ipAddress);
 
                     updateProfiles();
 
@@ -124,10 +124,10 @@ public class SettingsScreen extends BaseActivity {
 
                 // Profile delete
             } else if (preference == profilesDelete) {
-                showtimeSettings.deleteProfile(name);
+                movianRemoteSettings.deleteProfile(name);
                 updateProfiles();
 
-                ShowtimeSettings.Profile profile = showtimeSettings.getCurrentProfile();
+                MovianRemoteSettings.Profile profile = movianRemoteSettings.getCurrentProfile();
 
                 if (profile != null) {
                     profilesChoose.setValue(profile.getName());
@@ -138,8 +138,8 @@ public class SettingsScreen extends BaseActivity {
 
                 // Profile choose
             } else if (preference == profilesChoose) {
-                showtimeSettings.chooseProfile(name);
-                networkIPAddress.setText(showtimeSettings.getCurrentProfile().getIPAddress());
+                movianRemoteSettings.chooseProfile(name);
+                networkIPAddress.setText(movianRemoteSettings.getCurrentProfile().getIPAddress());
                 return true;
             }
 
@@ -147,10 +147,10 @@ public class SettingsScreen extends BaseActivity {
         }
 
         private void updateProfiles() {
-            showtimeSettings.savePreferences();
+            movianRemoteSettings.savePreferences();
 
-            int N = showtimeSettings.getNumProfiles();
-            ShowtimeSettings.Profiles profiles = showtimeSettings.getProfiles();
+            int N = movianRemoteSettings.getNumProfiles();
+            MovianRemoteSettings.Profiles profiles = movianRemoteSettings.getProfiles();
 
             if (N > 0) {
                 CharSequence[] entriesAndEntryValues = new CharSequence[N];

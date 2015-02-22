@@ -1,4 +1,4 @@
-package com.claha.showtimeremote.core;
+package com.claha.movianremote.core;
 
 import android.content.Context;
 
@@ -9,13 +9,13 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 /**
- * Class that handles the communication with Showtime.
- * This class is used to send actions and search queries to Showtime
+ * Class that handles the communication with Movian.
+ * This class is used to send actions and search queries to Movian.
  *
  * @author Claes Hallstrom
- * @version 1.0.1
+ * @version 1.1.0
  */
-public class ShowtimeHTTP {
+public class MovianHTTP {
 
     /**
      * Base URL used for communication.
@@ -23,7 +23,7 @@ public class ShowtimeHTTP {
     private static final String URL_BASE = "http://%s:%s/showtime/";
 
     /**
-     * URL used for sending action.
+     * URL used for sending actions.
      */
     private static final String URL_ACTION = URL_BASE + "input/action/%s";
 
@@ -35,19 +35,19 @@ public class ShowtimeHTTP {
     /**
      * ShowtimeSettings instance to access current IP address and port.
      */
-    private final ShowtimeSettings settings;
+    private final MovianRemoteSettings settings;
 
     /**
-     * Create a Showtime HTTP object.
+     * Create a Movian HTTP object.
      *
      * @param context The context of the current activity.
      */
-    public ShowtimeHTTP(Context context) {
-        settings = new ShowtimeSettings(context);
+    public MovianHTTP(Context context) {
+        settings = new MovianRemoteSettings(context);
     }
 
     /**
-     * Send an action to Showtime.
+     * Send an action to Movian.
      *
      * @param action The action to be sent.
      */
@@ -59,7 +59,7 @@ public class ShowtimeHTTP {
     }
 
     /**
-     * Send a search query to Showtime.
+     * Send a search query to Movian.
      *
      * @param query The query to be sent.
      */
@@ -75,7 +75,7 @@ public class ShowtimeHTTP {
     }
 
     /**
-     * Send an url to Showtime.
+     * Send an url to Movian.
      *
      * @param url The url to be sent.
      */
@@ -96,18 +96,18 @@ public class ShowtimeHTTP {
     }
 
     /**
-     * Get the IP address of Showtime.
+     * Get the IP address of Movian.
      *
-     * @return The IP address
+     * @return The IP address.
      */
     private String getIPAddress() {
         return settings.getIPAddress();
     }
 
     /**
-     * Get the port of Showtime
+     * Get the port of Movian.
      *
-     * @return The port
+     * @return The port.
      */
     private String getPort() {
         return settings.PORT;

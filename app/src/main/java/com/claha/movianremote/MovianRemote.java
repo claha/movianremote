@@ -1,4 +1,4 @@
-package com.claha.showtimeremote;
+package com.claha.movianremote;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,30 +14,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.claha.showtimeremote.adapter.CircularPagerAdapter;
-import com.claha.showtimeremote.base.BaseActivity;
-import com.claha.showtimeremote.base.BaseFragment;
-import com.claha.showtimeremote.base.BaseFragmentPagerAdapter;
-import com.claha.showtimeremote.base.BaseViewPagerIndicator;
-import com.claha.showtimeremote.core.ShowtimeHTTP;
-import com.claha.showtimeremote.core.ShowtimeSettings;
+import com.claha.movianremote.adapter.CircularPagerAdapter;
+import com.claha.movianremote.base.BaseActivity;
+import com.claha.movianremote.base.BaseFragment;
+import com.claha.movianremote.base.BaseFragmentPagerAdapter;
+import com.claha.movianremote.base.BaseViewPagerIndicator;
+import com.claha.movianremote.core.MovianHTTP;
+import com.claha.movianremote.core.MovianRemoteSettings;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowtimeRemote extends BaseActivity {
+public class MovianRemote extends BaseActivity {
 
     private ViewPager viewPagerBottom;
     private ViewPager viewPagerMain;
     private BaseViewPagerIndicator viewPagerIndicator;
 
-    private ShowtimeHTTP showtimeHTTP;
-    private ShowtimeSettings showtimeSettings;
+    private MovianHTTP movianHTTP;
+    private MovianRemoteSettings movianRemoteSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_showtime_remote);
+        setContentView(R.layout.activity_movian_remote);
 
         PreferenceManager.setDefaultValues(this, R.xml.fragment_settings, false);
 
@@ -45,8 +45,8 @@ public class ShowtimeRemote extends BaseActivity {
         viewPagerMain = (ViewPager) findViewById(R.id.viewPagerMain);
         viewPagerIndicator = (BaseViewPagerIndicator) findViewById(R.id.viewPagerIndicator);
 
-        showtimeHTTP = new ShowtimeHTTP(getApplicationContext());
-        showtimeSettings = new ShowtimeSettings(getApplicationContext());
+        movianHTTP = new MovianHTTP(getApplicationContext());
+        movianRemoteSettings = new MovianRemoteSettings(getApplicationContext());
 
         setupAdapters();
 
@@ -55,19 +55,19 @@ public class ShowtimeRemote extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        showtimeSettings = new ShowtimeSettings(getApplicationContext());
+        movianRemoteSettings = new MovianRemoteSettings(getApplicationContext());
         //setupAdapters();
-        List<String> profiles = showtimeSettings.getProfiles().toPrettyStringList();
+        List<String> profiles = movianRemoteSettings.getProfiles().toPrettyStringList();
         if (profiles.isEmpty()) {
-            profiles.add(showtimeSettings.getIPAddress());
+            profiles.add(movianRemoteSettings.getIPAddress());
         }
         viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, profiles));
-        viewPagerBottom.setCurrentItem(showtimeSettings.getCurrentProfileIndex() + 1); // +1 because it is a circular adapter
+        viewPagerBottom.setCurrentItem(movianRemoteSettings.getCurrentProfileIndex() + 1); // +1 because it is a circular adapter
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_showtime_remote, menu);
+        getMenuInflater().inflate(R.menu.menu_movian_remote, menu);
         setupSearchView(menu.findItem(R.id.menu_search));
         return true;
     }
@@ -86,12 +86,12 @@ public class ShowtimeRemote extends BaseActivity {
     private void setupAdapters() {
 
         //
-        List<String> profiles = showtimeSettings.getProfiles().toPrettyStringList();
+        List<String> profiles = movianRemoteSettings.getProfiles().toPrettyStringList();
         if (profiles.isEmpty()) {
-            profiles.add(showtimeSettings.getIPAddress());
+            profiles.add(movianRemoteSettings.getIPAddress());
         }
         viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, profiles));
-        viewPagerBottom.setCurrentItem(showtimeSettings.getCurrentProfileIndex() + 1); // +1 because it is a circular adapter
+        viewPagerBottom.setCurrentItem(movianRemoteSettings.getCurrentProfileIndex() + 1); // +1 because it is a circular adapter
 
         //
         List<Class<? extends BaseFragment>> fragments = new ArrayList<>();
@@ -108,7 +108,7 @@ public class ShowtimeRemote extends BaseActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                showtimeHTTP.search(query);
+                movianHTTP.search(query);
                 getSupportActionBar().collapseActionView();
                 return true;
             }
@@ -156,7 +156,7 @@ public class ShowtimeRemote extends BaseActivity {
         public void onPageSelected(int position) {
             super.onPageSelected(position);
             position = getOriginalPosition(position);
-            showtimeSettings.chooseProfile(showtimeSettings.getProfiles().get(position));
+            movianRemoteSettings.chooseProfile(movianRemoteSettings.getProfiles().get(position));
         }
     }
 }

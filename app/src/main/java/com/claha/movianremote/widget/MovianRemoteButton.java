@@ -1,4 +1,4 @@
-package com.claha.showtimeremote.widget;
+package com.claha.movianremote.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,38 +8,38 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.claha.showtimeremote.R;
-import com.claha.showtimeremote.core.ShowtimeHTTP;
+import com.claha.movianremote.R;
+import com.claha.movianremote.core.MovianHTTP;
 
-public class ShowtimeButton extends ImageButton implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
+public class MovianRemoteButton extends ImageButton implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
 
     private final Handler handler = new Handler();
     private final Runnable handlerRunnable = new Runnable() {
         @Override
         public void run() {
             handler.postDelayed(this, 100);
-            ShowtimeButton.this.onClick(ShowtimeButton.this);
+            MovianRemoteButton.this.onClick(MovianRemoteButton.this);
         }
     };
     private String action;
     private String actionLong = null;
     private boolean onPress = false;
-    private ShowtimeHTTP showtimeHTTP;
+    private MovianHTTP movianHTTP;
 
-    public ShowtimeButton(Context context) {
+    public MovianRemoteButton(Context context) {
         super(context);
         if (this.isInEditMode()) return;
         init();
     }
 
-    public ShowtimeButton(Context context, AttributeSet attrs) {
+    public MovianRemoteButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (this.isInEditMode()) return;
         initAttrs(attrs);
         init();
     }
 
-    public ShowtimeButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MovianRemoteButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         if (this.isInEditMode()) return;
         initAttrs(attrs);
@@ -47,18 +47,18 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
     }
 
     private void initAttrs(AttributeSet attrs) {
-        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.ShowtimeButton, 0, 0);
+        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.MovianRemoteButton, 0, 0);
         try {
-            action = a.getString(R.styleable.ShowtimeButton_action);
-            actionLong = a.getString(R.styleable.ShowtimeButton_actionLong);
-            onPress = a.getBoolean(R.styleable.ShowtimeButton_onPress, false);
+            action = a.getString(R.styleable.MovianRemoteButton_action);
+            actionLong = a.getString(R.styleable.MovianRemoteButton_actionLong);
+            onPress = a.getBoolean(R.styleable.MovianRemoteButton_onPress, false);
         } finally {
             a.recycle();
         }
     }
 
     private void init() {
-        showtimeHTTP = new ShowtimeHTTP(getContext());
+        movianHTTP = new MovianHTTP(getContext());
 
         if (onPress) {
             setOnTouchListener(this);
@@ -72,12 +72,12 @@ public class ShowtimeButton extends ImageButton implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        showtimeHTTP.sendAction(action);
+        movianHTTP.sendAction(action);
     }
 
     @Override
     public boolean onLongClick(View v) {
-        showtimeHTTP.sendAction(actionLong);
+        movianHTTP.sendAction(actionLong);
         return true;
     }
 

@@ -1,22 +1,22 @@
-package com.claha.showtimeremote.core;
+package com.claha.movianremote.core;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.claha.showtimeremote.R;
-import com.claha.showtimeremote.base.BaseSettings;
+import com.claha.movianremote.R;
+import com.claha.movianremote.base.BaseSettings;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowtimeSettings extends BaseSettings {
+public class MovianRemoteSettings extends BaseSettings {
 
     public final String PORT = "42000";
 
     private Profile currentProfile;
     private Profiles profiles;
 
-    public ShowtimeSettings(Context context) {
+    public MovianRemoteSettings(Context context) {
         super(context);
         loadPreferences();
     }
