@@ -10,12 +10,6 @@
 
     <com.claha.movianremote.widget.MovianRemoteButton
         style="@style/showtime_button"
-        android:src="@drawable/ic_action_media_stats"
-        app:action="MediaStats"
-        app:actionLong="LogWindow" />
-
-    <com.claha.movianremote.widget.MovianRemoteButton
-        style="@style/showtime_button"
         android:src="@drawable/ic_action_audio_track"
         app:action="AudioTrack" />
 
