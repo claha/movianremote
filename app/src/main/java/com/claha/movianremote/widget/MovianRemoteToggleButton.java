@@ -70,7 +70,6 @@ public class MovianRemoteToggleButton extends MovianRemoteButton {
     private static class SavedState extends BaseSavedState {
 
         public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
-
             @Override
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);

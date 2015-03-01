@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -26,7 +25,6 @@ public class BaseViewPagerIndicator extends RadioGroup implements RadioGroup.OnC
     }
 
     private void createIndicators() {
-        Log.d("DEBUG", "createIndicators: " + viewPager.getAdapter().getCount());
         removeAllViews();
         for (int i = 0; i < viewPager.getAdapter().getCount(); i++) {
             View indicator = inflate(getContext(), R.layout.indicator, null);

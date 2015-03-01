@@ -1,7 +1,6 @@
 package com.claha.movianremote.core;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.claha.movianremote.R;
 import com.claha.movianremote.base.BaseSettings;
@@ -42,7 +41,6 @@ public class MovianRemoteSettings extends BaseSettings {
 
     private void loadCurrentProfile() {
         currentProfile = profiles.getByName(getString(R.string.settings_profiles_choose_key));
-        Log.d("ShowtimeDebug", "loadCurrentProfile: " + currentProfile);
     }
 
     private void saveProfile() {
@@ -62,14 +60,12 @@ public class MovianRemoteSettings extends BaseSettings {
     }
 
     public void addProfile(String name, String ipAddress) {
-        Log.d("ShowtimeDebug", "addProfile: " + name + " " + ipAddress);
         Profile profileToAdd = new Profile(name, ipAddress);
         profiles.add(profileToAdd);
         chooseProfile(profileToAdd);
     }
 
     public void chooseProfile(Profile profile) {
-        Log.d("ShowtimeDebug", "chooseProfile: " + profile);
         currentProfile = profile;
         saveProfile();
         setIPAddress(profile.getIPAddress());
@@ -80,7 +76,6 @@ public class MovianRemoteSettings extends BaseSettings {
     }
 
     public void deleteProfile(String name) {
-        Log.d("ShowtimeDebug", "deleteProfile: " + name);
         Profile profileToDelete = profiles.getByName(name);
 
         if (profileToDelete.equals(currentProfile)) {
@@ -107,7 +102,6 @@ public class MovianRemoteSettings extends BaseSettings {
     }
 
     public int getCurrentProfileIndex() {
-        Log.d("ShowtimeDebug", "getCurrentProfileIndex: " + currentProfile);
         return profiles.indexOf(currentProfile);
     }
 
@@ -116,7 +110,6 @@ public class MovianRemoteSettings extends BaseSettings {
     }
 
     private void setIPAddress(String ipAddress) {
-        Log.d("ShowtimeDebug", "setIPAddress: " + ipAddress);
         putString(R.string.settings_ipAddress_key, ipAddress);
     }
 

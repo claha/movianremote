@@ -19,9 +19,7 @@ public class SettingsScreen extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
 
@@ -38,7 +36,7 @@ public class SettingsScreen extends BaseActivity {
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
-        private final static String PACKAGE_NAME = "com.claha.showtimeremote"; // TODO: Change to correct one once published
+        private final static String PACKAGE_NAME = "com.claha.movianremote";
 
         private final static int PROFILES = 0;
         private final static int PROFILES_CHOOSE = 0;
@@ -51,7 +49,7 @@ public class SettingsScreen extends BaseActivity {
         private final static int ABOUT = 2;
         //private final static int ABOUT_VERSION = 0;
         private final static int ABOUT_RATE = 1;
-        Preference aboutRate;
+        private Preference aboutRate;
         private EditTextPreference profilesAdd;
         private ListPreference profilesChoose;
         private ListPreference profilesDelete;
