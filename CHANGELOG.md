@@ -1,5 +1,10 @@
 Changelog
 =========
+1.1.0 (2015-03-01)
+------------------
+* Showtime Remote renamed to Movian Remote
+* Encode search strings, i.e. support cyrillic alphabet
+
 1.0.0 (2015-02-13)
 ------------------
 * Showtime Remote now available on Google Play
