@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.claha.movianremote"
+        applicationId "com.claha.showtimeremote"
         minSdkVersion 11
         targetSdkVersion 21
         versionCode 2

@@ -36,7 +36,7 @@ public class SettingsScreen extends BaseActivity {
 
     public static class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
-        private final static String PACKAGE_NAME = "com.claha.movianremote";
+        private final static String PACKAGE_NAME = "com.claha.showtimeremote";
 
         private final static int PROFILES = 0;
         private final static int PROFILES_CHOOSE = 0;
@@ -94,7 +94,6 @@ public class SettingsScreen extends BaseActivity {
             //aboutVersion = about.getPreference(ABOUT_VERSION);
             aboutRate = about.getPreference(ABOUT_RATE);
             aboutRate.setOnPreferenceClickListener(this);
-
         }
 
         @Override
