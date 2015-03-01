@@ -1,5 +1,5 @@
-# Showtime Remote
-Use your Android phone as a remote for Showtime (https://showtimemediacenter.com/). Now available on Google Play (https://play.google.com/store/apps/details?id=com.claha.showtimeremote)
+# Movian Remote
+Use your Android phone as a remote for Movian (https://movian.tv/). Now available on Google Play (https://play.google.com/store/apps/details?id=com.claha.showtimeremote)
 
 ## Features
 * Buttons for most common actions, see below for a more detailed description
@@ -18,8 +18,9 @@ Listed as they appear in the app, from top/left.
 * Right (Press and hold to send multiple times)
 * Down (Press and hold to send multiple times)
 * Back (Press and hold to send multiple times)
-* Home
+* Home (Long press brings up Sys Info)
 * Menu (Long press brings up Item Menu)
+* Media Stats (Long press brings up Log Window)
 
 ### Media
 * Volume Down (Press and hold to send multiple times)
@@ -32,7 +33,6 @@ Listed as they appear in the app, from top/left.
 * Play Pause Toggle
 * Seek Forward (Press and hold to send multiple times)
 * Play Queue
-* Media Stats (Long press brings up Log Window)
 * Audio Track
 * Subtitle Track
 
