@@ -1,4 +1,4 @@
-package com.claha.movianremote.core;
+package com.claha.showtimeremote.core;
 
 import android.content.Context;
 

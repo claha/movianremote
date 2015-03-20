@@ -1,4 +1,4 @@
-package com.claha.movianremote.base;
+package com.claha.showtimeremote.base;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
-import com.claha.movianremote.R;
+import com.claha.showtimeremote.R;
 
 public class BaseViewPagerIndicator extends RadioGroup implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 

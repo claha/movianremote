@@ -1,4 +1,4 @@
-package com.claha.movianremote;
+package com.claha.showtimeremote;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,13 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.claha.movianremote.adapter.CircularPagerAdapter;
-import com.claha.movianremote.base.BaseActivity;
-import com.claha.movianremote.base.BaseFragment;
-import com.claha.movianremote.base.BaseFragmentPagerAdapter;
-import com.claha.movianremote.base.BaseViewPagerIndicator;
-import com.claha.movianremote.core.MovianHTTP;
-import com.claha.movianremote.core.MovianRemoteSettings;
+import com.claha.showtimeremote.adapter.CircularPagerAdapter;
+import com.claha.showtimeremote.base.BaseActivity;
+import com.claha.showtimeremote.base.BaseFragment;
+import com.claha.showtimeremote.base.BaseFragmentPagerAdapter;
+import com.claha.showtimeremote.base.BaseViewPagerIndicator;
+import com.claha.showtimeremote.core.MovianHTTP;
+import com.claha.showtimeremote.core.MovianRemoteSettings;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.claha.movianremote.base;
+package com.claha.showtimeremote.base;
 
 import android.support.v7.app.ActionBarActivity;
 

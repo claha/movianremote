@@ -1,4 +1,4 @@
-package com.claha.movianremote.widget;
+package com.claha.showtimeremote.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.claha.movianremote.R;
+import com.claha.showtimeremote.R;
 
 public class MovianRemoteToggleButton extends MovianRemoteButton {
 

@@ -5,7 +5,7 @@
 
     <LinearLayout style="@style/horizontal_center_layout">
 
-        <com.claha.movianremote.widget.MovianRemoteButton
+        <com.claha.showtimeremote.widget.MovianRemoteButton
             style="@style/showtime_button"
             app:action="Up"
             app:onPress="true"
@@ -15,18 +15,18 @@
 
     <LinearLayout style="@style/horizontal_center_layout">
 
-        <com.claha.movianremote.widget.MovianRemoteButton
+        <com.claha.showtimeremote.widget.MovianRemoteButton
             style="@style/showtime_button"
             app:action="Left"
             app:onPress="true"
             android:src="@drawable/ic_action_left" />
 
-        <com.claha.movianremote.widget.MovianRemoteButton
+        <com.claha.showtimeremote.widget.MovianRemoteButton
             style="@style/showtime_button"
             app:action="Activate"
             android:src="@drawable/ic_action_activate" />
 
-        <com.claha.movianremote.widget.MovianRemoteButton
+        <com.claha.showtimeremote.widget.MovianRemoteButton
             style="@style/showtime_button"
             app:action="Right"
             app:onPress="true"
@@ -36,7 +36,7 @@
 
     <LinearLayout style="@style/horizontal_center_layout">
 
-        <com.claha.movianremote.widget.MovianRemoteButton
+        <com.claha.showtimeremote.widget.MovianRemoteButton
             style="@style/showtime_button"
             app:action="Down"
             app:onPress="true"

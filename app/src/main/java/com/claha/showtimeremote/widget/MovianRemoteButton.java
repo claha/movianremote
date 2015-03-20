@@ -1,4 +1,4 @@
-package com.claha.movianremote.widget;
+package com.claha.showtimeremote.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,8 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.claha.movianremote.R;
-import com.claha.movianremote.core.MovianHTTP;
+import com.claha.showtimeremote.R;
+import com.claha.showtimeremote.core.MovianHTTP;
 
 public class MovianRemoteButton extends ImageButton implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
 

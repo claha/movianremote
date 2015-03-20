@@ -1,4 +1,4 @@
-package com.claha.movianremote;
+package com.claha.showtimeremote;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,8 +11,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.view.MenuItem;
 
-import com.claha.movianremote.base.BaseActivity;
-import com.claha.movianremote.core.MovianRemoteSettings;
+import com.claha.showtimeremote.base.BaseActivity;
+import com.claha.showtimeremote.core.MovianRemoteSettings;
 
 public class SettingsScreen extends BaseActivity {
 

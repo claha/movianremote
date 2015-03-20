@@ -1,9 +1,9 @@
-package com.claha.movianremote.core;
+package com.claha.showtimeremote.core;
 
 import android.content.Context;
 
-import com.claha.movianremote.R;
-import com.claha.movianremote.base.BaseSettings;
+import com.claha.showtimeremote.R;
+import com.claha.showtimeremote.base.BaseSettings;
 
 import java.util.ArrayList;
 import java.util.List;

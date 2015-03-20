@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/horizontal_center_layout">
 
-    <com.claha.movianremote.widget.MovianRemoteButton
+    <com.claha.showtimeremote.widget.MovianRemoteButton
         style="@style/showtime_button"
         android:src="@drawable/ic_action_back"
         app:action="Back"
         app:onPress="true" />
 
-    <com.claha.movianremote.widget.MovianRemoteButton
+    <com.claha.showtimeremote.widget.MovianRemoteButton
         style="@style/showtime_button"
         android:src="@drawable/ic_action_home"
         app:action="Home"
         app:actionLong="Sysinfo" />
 
-    <com.claha.movianremote.widget.MovianRemoteButton
+    <com.claha.showtimeremote.widget.MovianRemoteButton
         style="@style/showtime_button"
         android:src="@drawable/ic_action_menu"
         app:action="Menu"
         app:actionLong="ItemMenu" />
 
-    <com.claha.movianremote.widget.MovianRemoteButton
+    <com.claha.showtimeremote.widget.MovianRemoteButton
         style="@style/showtime_button"
         android:src="@drawable/ic_action_media_stats"
         app:action="MediaStats"
