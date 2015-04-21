@@ -1,56 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Profiles">
+    <!-- PROFILES -->
+    <PreferenceCategory
+        android:title="@string/settings_profiles_title"
+        android:key="@string/settings_profiles_key">
 
+        <!-- SELECT -->
         <ListPreference
             android:dialogTitle=""
-            android:key="@string/settings_profiles_choose_key"
+            android:key="@string/settings_profiles_select_key"
             android:shouldDisableView="true"
-            android:summary="@string/settings_profiles_choose_summary"
-            android:title="@string/settings_profiles_choose_title" />
+            android:summary="@string/settings_profiles_select_summary"
+            android:title="@string/settings_profiles_select_title" />
 
-        <EditTextPreference
-            android:dialogTitle=""
-            android:hint="@string/settings_profiles_add_hint"
-            android:imeOptions="actionDone"
-            android:key="@string/settings_profiles_add_key"
-            android:singleLine="true"
-            android:summary="@string/settings_profiles_add_summary"
-            android:title="@string/settings_profiles_add_title" />
-
-        <ListPreference
-            android:dialogTitle=""
-            android:key="@string/settings_profiles_delete_key"
-            android:shouldDisableView="true"
-            android:summary="@string/settings_profiles_delete_summary"
-            android:title="@string/settings_profiles_delete_title" />
+        <!-- MANAGE -->
+        <Preference
+            android:key="@string/settings_profiles_manage_key"
+            android:title="@string/settings_profiles_manage_title"
+            android:summary="@string/settings_profiles_manage_summary" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Network">
+    <!-- ABOUT -->
+    <PreferenceCategory
+        android:key="@string/settings_about_key"
+        android:title="@string/settings_about_title">
 
-        <EditTextPreference
-            android:defaultValue="@string/settings_ipAddress_defaultValue"
-            android:dialogTitle=""
-            android:digits="0123456789."
-            android:imeOptions="actionDone"
-            android:inputType="numberDecimal"
-            android:key="@string/settings_ipAddress_key"
-            android:singleLine="true"
-            android:summary="@string/settings_ipAddress_summary"
-            android:title="@string/settings_ipAddress_title" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="About">
-
+        <!-- VERSION -->
         <Preference
             android:summary="@string/settings_about_version_summary"
             android:title="@string/settings_about_version_title" />
-        
+
+        <!-- RATE -->
         <Preference
+            android:key="@string/settings_about_rate_key"
             android:summary="@string/settings_about_rate_summary"
             android:title="@string/settings_about_rate_title" />
 

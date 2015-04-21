@@ -156,7 +156,7 @@ public class MovianRemote extends BaseActivity {
         public void onPageSelected(int position) {
             super.onPageSelected(position);
             position = getOriginalPosition(position);
-            movianRemoteSettings.chooseProfile(movianRemoteSettings.getProfiles().get(position));
+            movianRemoteSettings.selectProfile(movianRemoteSettings.getProfiles().get(position));
         }
     }
 }
