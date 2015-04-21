@@ -18,8 +18,8 @@ public class IPAddressPickerPreference extends DialogPreference {
     private String ipAddress;
     private List<NumberPicker> numberPickers;
 
-    public IPAddressPickerPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public IPAddressPickerPreference(Context context) {
+        super(context, null);
     }
 
 

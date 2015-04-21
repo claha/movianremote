@@ -9,6 +9,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
+import android.widget.Toast;
 
 import com.claha.showtimeremote.core.MovianRemoteSettings;
 
@@ -38,8 +39,46 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         // About
         PreferenceCategory about = (PreferenceCategory) screen.findPreference(getKey(R.string.settings_about_key));
+
+        Preference aboutVersion = screen.findPreference(getKey(R.string.settings_about_version_key));
+        aboutVersion.setOnPreferenceClickListener(new OnPreferenceMultipleClickListener() {
+            @Override
+            protected void onPreferenceMultipleClick() {
+                Toast.makeText(getActivity(), "Clicked 5 times", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         Preference aboutRate = about.findPreference(getKey(R.string.settings_about_rate_key));
         aboutRate.setOnPreferenceClickListener(this);
+    }
+
+    private abstract class OnPreferenceMultipleClickListener implements Preference.OnPreferenceClickListener {
+
+        private long time;
+        private int count;
+
+        public OnPreferenceMultipleClickListener() {
+            count = 0;
+        }
+
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            count++;
+            if (count == 5) {
+                onPreferenceMultipleClick();
+                count = 0;
+            } else {
+                if (System.currentTimeMillis() - time > 500) {
+                    count = 1;
+                }
+                time = System.currentTimeMillis();
+            }
+
+            return true;
+        }
+
+        protected abstract void onPreferenceMultipleClick();
     }
 
     @Override
@@ -66,7 +105,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         PreferenceCategory profilesCategory = (PreferenceCategory) screen.findPreference(getKey(R.string.settings_profiles_key));
 
-        ListPreference profilesSelect = (ListPreference)profilesCategory.findPreference(getKey(R.string.settings_profiles_select_key));
+        ListPreference profilesSelect = (ListPreference) profilesCategory.findPreference(getKey(R.string.settings_profiles_select_key));
         profilesSelect.setOnPreferenceChangeListener(this);
 
         Preference profilesManage = profilesCategory.findPreference(getKey(R.string.settings_profiles_manage_key));

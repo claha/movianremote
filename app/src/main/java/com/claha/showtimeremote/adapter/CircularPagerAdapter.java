@@ -38,7 +38,7 @@ public abstract class CircularPagerAdapter<T> extends PagerAdapter implements Vi
         return data.size();
     }
 
-    T getItem(int position) {
+    private T getItem(int position) {
         return data.get(position);
     }
 

@@ -104,7 +104,7 @@ public class SettingsProfilesFragment extends PreferenceFragment {
     }
 
     private IPAddressPickerPreference createIPAddressPreference(final MovianRemoteSettings.Profile profile, final PreferenceCategory category) {
-        final IPAddressPickerPreference ipAddress = new IPAddressPickerPreference(context, null);
+        final IPAddressPickerPreference ipAddress = new IPAddressPickerPreference(context);
         ipAddress.setTitle("IP-Address");
         ipAddress.setSummary("Change ip-address of this profile");
         ipAddress.setIPAddress(profile.getIPAddress());

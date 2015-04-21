@@ -37,7 +37,6 @@ public class MovianRemote extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movian_remote);
 
         PreferenceManager.setDefaultValues(this, R.xml.fragment_settings, false);
 
@@ -50,6 +49,11 @@ public class MovianRemote extends BaseActivity {
 
         setupAdapters();
 
+    }
+
+    @Override
+    protected int activityLayoutResource() {
+        return R.layout.activity_movian_remote;
     }
 
     @Override
@@ -67,9 +71,19 @@ public class MovianRemote extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_movian_remote, menu);
+        super.onCreateOptionsMenu(menu);
         setupSearchView(menu.findItem(R.id.menu_search));
         return true;
+    }
+
+    @Override
+    protected int optionsMenuResource() {
+        return R.menu.menu_movian_remote;
+    }
+
+    @Override
+    protected int toolbarResource() {
+        return R.id.toolbar;
     }
 
     @Override

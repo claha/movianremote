@@ -29,6 +29,7 @@
 
         <!-- VERSION -->
         <Preference
+            android:key="@string/settings_about_version_key"
             android:summary="@string/settings_about_version_summary"
             android:title="@string/settings_about_version_title" />
 
