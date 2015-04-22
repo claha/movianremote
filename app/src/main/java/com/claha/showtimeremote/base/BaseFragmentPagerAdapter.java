@@ -20,7 +20,9 @@ public class BaseFragmentPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         try {
             return fragments.get(position).newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;

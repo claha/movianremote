@@ -1,14 +1,11 @@
 package com.claha.showtimeremote.base;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 
-public abstract class BaseActivity extends ActionBarActivity {
-
-    private Toolbar toolbar;
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +16,10 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         int toolbarResource = toolbarResource();
         if (toolbarResource != -1) {
-            toolbar = (Toolbar) findViewById(toolbarResource);
-            setSupportActionBar(toolbar);
+            Toolbar toolbar = (Toolbar) findViewById(toolbarResource);
+            if (toolbar != null) {
+                setSupportActionBar(toolbar);
+            }
         }
     }
 

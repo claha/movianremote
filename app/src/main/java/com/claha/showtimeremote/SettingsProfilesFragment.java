@@ -115,6 +115,9 @@ public class SettingsProfilesFragment extends PreferenceFragment {
                 settings.getProfiles().getByName(profile.getName()).setIpAddress(newIPAddress);
                 settings.savePreferences();
 
+                settings.selectProfile(settings.getProfiles().get(settings.getCurrentProfileIndex()));
+                settings.savePreferences();
+
                 profile.setIpAddress(newIPAddress);
                 category.setTitle(profile.toPrettyString());
                 return true;
