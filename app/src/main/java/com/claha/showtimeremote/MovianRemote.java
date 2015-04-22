@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.Menu;
@@ -31,8 +32,8 @@ public class MovianRemote extends BaseActivity {
     private ViewPager viewPagerMain;
     private BaseViewPagerIndicator viewPagerIndicator;
 
-    private MovianHTTP movianHTTP;
-    private MovianRemoteSettings movianRemoteSettings;
+    private MovianHTTP http;
+    private MovianRemoteSettings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,8 @@ public class MovianRemote extends BaseActivity {
         viewPagerMain = (ViewPager) findViewById(R.id.viewPagerMain);
         viewPagerIndicator = (BaseViewPagerIndicator) findViewById(R.id.viewPagerIndicator);
 
-        movianHTTP = new MovianHTTP(getApplicationContext());
-        movianRemoteSettings = new MovianRemoteSettings(getApplicationContext());
+        http = new MovianHTTP(getApplicationContext());
+        settings = new MovianRemoteSettings(getApplicationContext());
 
         setupAdapters();
 
@@ -59,14 +60,13 @@ public class MovianRemote extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        movianRemoteSettings = new MovianRemoteSettings(getApplicationContext());
-        //setupAdapters();
-        List<String> profiles = movianRemoteSettings.getProfiles().toPrettyStringList();
-        if (profiles.isEmpty()) {
-            profiles.add(movianRemoteSettings.getIPAddress());
+        if (settings.getProfiles().isEmpty()) {
+            settings.addProfile(new MovianRemoteSettings.Profile("DEFAULT", "192.168.0.0"));
+            settings.setCurrentProfile(settings.getProfiles().get(0));
         }
+        List<String> profiles = settings.getProfiles().toPrettyStringList();
         viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, profiles));
-        viewPagerBottom.setCurrentItem(movianRemoteSettings.getCurrentProfileIndex() + 1); // +1 because it is a circular adapter
+        viewPagerBottom.setCurrentItem(settings.getProfiles().indexOf(settings.getCurrentProfile()) + 1); // +1 because it is a circular adapter
     }
 
     @Override
@@ -100,12 +100,13 @@ public class MovianRemote extends BaseActivity {
     private void setupAdapters() {
 
         //
-        List<String> profiles = movianRemoteSettings.getProfiles().toPrettyStringList();
-        if (profiles.isEmpty()) {
-            profiles.add(movianRemoteSettings.getIPAddress());
+        if (settings.getProfiles().isEmpty()) {
+            settings.addProfile(new MovianRemoteSettings.Profile("DEFAULT", "192.168.0.0"));
+            settings.setCurrentProfile(settings.getProfiles().get(0));
         }
-        viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, profiles));
-        viewPagerBottom.setCurrentItem(movianRemoteSettings.getCurrentProfileIndex() + 1); // +1 because it is a circular adapter
+
+        viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, settings.getProfiles().toPrettyStringList()));
+        viewPagerBottom.setCurrentItem(settings.getProfiles().indexOf(settings.getCurrentProfile()) + 1); // +1 because it is a circular adapter
 
         //
         List<Class<? extends BaseFragment>> fragments = new ArrayList<>();
@@ -122,8 +123,11 @@ public class MovianRemote extends BaseActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                movianHTTP.search(query);
-                getSupportActionBar().collapseActionView();
+                http.search(query);
+                ActionBar actionBar = getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.collapseActionView();
+                }
                 return true;
             }
 
@@ -170,7 +174,7 @@ public class MovianRemote extends BaseActivity {
         public void onPageSelected(int position) {
             super.onPageSelected(position);
             position = getOriginalPosition(position);
-            movianRemoteSettings.selectProfile(movianRemoteSettings.getProfiles().get(position));
+            settings.setCurrentProfile(settings.getProfiles().get(position));
         }
     }
 }

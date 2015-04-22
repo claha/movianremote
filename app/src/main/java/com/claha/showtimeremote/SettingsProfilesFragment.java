@@ -7,7 +7,6 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
-import android.util.Log;
 
 import com.claha.showtimeremote.core.MovianRemoteSettings;
 import com.claha.showtimeremote.preference.IPAddressPickerPreference;
@@ -26,7 +25,6 @@ public class SettingsProfilesFragment extends PreferenceFragment {
         initPreferenceScreen();
     }
 
-
     private void initPreferenceScreen() {
 
         // Preference Screen
@@ -40,8 +38,6 @@ public class SettingsProfilesFragment extends PreferenceFragment {
             public boolean onPreferenceClick(Preference preference) {
                 MovianRemoteSettings.Profile profile = new MovianRemoteSettings.Profile("NEW PROFILE", "192.168.0.0");
                 settings.addProfile(profile);
-                settings.selectProfile(profile);
-                settings.savePreferences();
                 addProfile(profile);
                 return true;
             }
@@ -58,8 +54,6 @@ public class SettingsProfilesFragment extends PreferenceFragment {
     }
 
     private void addProfile(MovianRemoteSettings.Profile profile) {
-        Log.d("DEBUG", "addProfile : " + profile.toPrettyString());
-
         PreferenceCategory category = createCategory(profile);
         screen.addPreference(category);
 
@@ -87,12 +81,18 @@ public class SettingsProfilesFragment extends PreferenceFragment {
         name.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                String newName = (String)newValue;
-                settings.getProfiles().getByName(profile.getName()).setName(newName);
-                settings.savePreferences();
+                String newName = (String) newValue;
 
-                settings.selectProfile(settings.getProfiles().get(settings.getCurrentProfileIndex()));
-                settings.savePreferences();
+                MovianRemoteSettings.Profiles profiles = settings.getProfiles();
+                profiles.getByName(profile.getName()).setName(newName);
+
+                MovianRemoteSettings.Profile currentProfile = settings.getCurrentProfile();
+
+                settings.setProfiles(profiles);
+
+                if (currentProfile.getName().equals(profile.getName())) {
+                    settings.setCurrentProfile(settings.getProfiles().getByName(newName));
+                }
 
                 profile.setName(newName);
                 category.setTitle(profile.toPrettyString());
@@ -104,19 +104,19 @@ public class SettingsProfilesFragment extends PreferenceFragment {
     }
 
     private IPAddressPickerPreference createIPAddressPreference(final MovianRemoteSettings.Profile profile, final PreferenceCategory category) {
-        final IPAddressPickerPreference ipAddress = new IPAddressPickerPreference(context);
+        final IPAddressPickerPreference ipAddress = new IPAddressPickerPreference(context, null);
         ipAddress.setTitle("IP-Address");
         ipAddress.setSummary("Change ip-address of this profile");
         ipAddress.setIPAddress(profile.getIPAddress());
         ipAddress.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                String newIPAddress = (String) newValue;
-                settings.getProfiles().getByName(profile.getName()).setIpAddress(newIPAddress);
-                settings.savePreferences();
 
-                settings.selectProfile(settings.getProfiles().get(settings.getCurrentProfileIndex()));
-                settings.savePreferences();
+                String newIPAddress = (String) newValue;
+
+                MovianRemoteSettings.Profiles profiles = settings.getProfiles();
+                profiles.getByName(profile.getName()).setIpAddress(newIPAddress);
+                settings.setProfiles(profiles);
 
                 profile.setIpAddress(newIPAddress);
                 category.setTitle(profile.toPrettyString());
@@ -135,7 +135,6 @@ public class SettingsProfilesFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 settings.deleteProfile(profile);
-                settings.savePreferences();
                 screen.removePreference(category);
                 return true;
             }

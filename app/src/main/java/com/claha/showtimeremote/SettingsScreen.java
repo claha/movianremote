@@ -2,6 +2,7 @@ package com.claha.showtimeremote;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 import com.claha.showtimeremote.base.BaseActivity;
@@ -13,7 +14,10 @@ public class SettingsScreen extends BaseActivity implements SettingsFragment.OnN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content, new SettingsFragment()).commit();
     }
@@ -45,7 +49,7 @@ public class SettingsScreen extends BaseActivity implements SettingsFragment.OnN
             super.onBackPressed();
         } else {
             fragmentManager.popBackStack();
-            getSupportActionBar().setTitle("Settings");
+            setTitle("Settings");
         }
     }
 
@@ -53,11 +57,8 @@ public class SettingsScreen extends BaseActivity implements SettingsFragment.OnN
     public void onClick(String key) {
         if (key.equals(getResources().getString(R.string.settings_profiles_manage_key))) {
             fragmentManager.beginTransaction().replace(R.id.content, new SettingsProfilesFragment()).addToBackStack(null).commit();
-            getSupportActionBar().setTitle("Manage Profiles");
+            setTitle("Manage Profiles");
         }
     }
-
-
-
 
 }

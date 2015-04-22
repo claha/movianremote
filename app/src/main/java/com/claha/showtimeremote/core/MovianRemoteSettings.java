@@ -12,65 +12,32 @@ public class MovianRemoteSettings extends BaseSettings {
 
     public final String PORT = "42000";
 
-    private Profile currentProfile;
-    private Profiles profiles;
-
     public MovianRemoteSettings(Context context) {
         super(context);
-        loadPreferences();
-    }
-
-    private void loadPreferences() {
-        loadProfiles();
-        loadCurrentProfile();
-    }
-
-    public void savePreferences() {
-        saveProfiles();
-    }
-
-    private void loadProfiles() {
-        String name, ipAddress;
-        profiles = new Profiles();
-        for (String profile : getStringList(R.string.settings_profiles_key)) {
-            name = profile.split("_")[0];
-            ipAddress = profile.split("_")[1];
-            profiles.add(new Profile(name, ipAddress));
-        }
-    }
-
-    private void loadCurrentProfile() {
-        currentProfile = profiles.getByName(getString(R.string.settings_profiles_select_key));
-    }
-
-    private void saveProfile() {
-        putString(R.string.settings_profiles_select_key, currentProfile.getName());
-    }
-
-    private void saveProfiles() {
-        putStringList(R.string.settings_profiles_key, profiles.toStringList());
     }
 
     public Profiles getProfiles() {
+        Profiles profiles = new Profiles();
+        for (String info : getStringList(R.string.settings_profiles_key)) {
+            profiles.add(new Profile(info));
+        }
         return profiles;
     }
 
+    public void setProfiles(Profiles profiles) {
+        putStringList(R.string.settings_profiles_key, profiles.toStringList());
+    }
+
     public void addProfile(Profile profile) {
+        Profiles profiles = getProfiles();
         profiles.add(profile);
-        selectProfile(profile);
-    }
-
-    public void selectProfile(Profile profile) {
-        currentProfile = profile;
-        saveProfile();
-        setIPAddress(profile.getIPAddress());
-    }
-
-    public void selectProfile(String name) {
-        selectProfile(profiles.getByName(name));
+        setProfiles(profiles);
     }
 
     public void deleteProfile(Profile profile) {
+        Profiles profiles = getProfiles();
+        Profile currentProfile = getCurrentProfile();
+
         if (profile.equals(currentProfile)) {
             int index = profiles.indexOf(currentProfile);
 
@@ -81,24 +48,20 @@ public class MovianRemoteSettings extends BaseSettings {
             }
 
             if (index >= 0 && profiles.size() > 1) {
-                selectProfile(profiles.get(index));
-            } else {
-                currentProfile = null;
+                setCurrentProfile(profiles.get(index));
             }
         }
         profiles.remove(profile);
+        setProfiles(profiles);
     }
 
-    public int getCurrentProfileIndex() {
-        return profiles.indexOf(currentProfile);
+    public Profile getCurrentProfile() {
+        Profiles profiles = getProfiles();
+        return profiles.getByName(getString(R.string.settings_profiles_select_key));
     }
 
-    public String getIPAddress() {
-        return getString(R.string.settings_ipAddress_key);
-    }
-
-    private void setIPAddress(String ipAddress) {
-        putString(R.string.settings_ipAddress_key, ipAddress);
+    public void setCurrentProfile(Profile profile) {
+        putString(R.string.settings_profiles_select_key, profile.getName());
     }
 
     public static class Profile {
@@ -109,6 +72,11 @@ public class MovianRemoteSettings extends BaseSettings {
         public Profile(String name, String ipAddress) {
             this.name = name;
             this.ipAddress = ipAddress;
+        }
+
+        public Profile(String info) {
+            this.name = info.split("_")[0];
+            this.ipAddress = info.split("_")[1];
         }
 
         public String getName() {

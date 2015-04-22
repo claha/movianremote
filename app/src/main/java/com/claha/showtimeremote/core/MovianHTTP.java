@@ -1,6 +1,7 @@
 package com.claha.showtimeremote.core;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -13,7 +14,7 @@ import java.net.URLEncoder;
  * This class is used to send actions and search queries to Movian.
  *
  * @author Claes Hallstrom
- * @version 1.1.0
+ * @version 1.2.0
  */
 public class MovianHTTP {
 
@@ -80,6 +81,7 @@ public class MovianHTTP {
      * @param url The url to be sent.
      */
     private void sendURL(final String url) {
+        Log.d("DEBUG", url);
         Thread thread = new Thread((new Runnable() {
             @Override
             public void run() {
@@ -101,7 +103,12 @@ public class MovianHTTP {
      * @return The IP address.
      */
     private String getIPAddress() {
-        return settings.getIPAddress();
+        MovianRemoteSettings.Profile currentProfile = settings.getCurrentProfile();
+        if (currentProfile != null) {
+            return settings.getCurrentProfile().getIPAddress();
+        } else {
+            return null;
+        }
     }
 
     /**

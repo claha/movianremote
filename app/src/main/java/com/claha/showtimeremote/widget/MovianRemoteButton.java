@@ -24,7 +24,7 @@ public class MovianRemoteButton extends ImageButton implements View.OnClickListe
     private String action;
     private String actionLong = null;
     private boolean onPress = false;
-    private MovianHTTP movianHTTP;
+    private MovianHTTP http;
 
     public MovianRemoteButton(Context context) {
         super(context);
@@ -58,7 +58,7 @@ public class MovianRemoteButton extends ImageButton implements View.OnClickListe
     }
 
     private void init() {
-        movianHTTP = new MovianHTTP(getContext());
+        http = new MovianHTTP(getContext());
 
         if (onPress) {
             setOnTouchListener(this);
@@ -72,12 +72,12 @@ public class MovianRemoteButton extends ImageButton implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        movianHTTP.sendAction(action);
+        http.sendAction(action);
     }
 
     @Override
     public boolean onLongClick(View v) {
-        movianHTTP.sendAction(actionLong);
+        http.sendAction(actionLong);
         return true;
     }
 

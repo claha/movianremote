@@ -3,8 +3,8 @@
 
     <!-- PROFILES -->
     <PreferenceCategory
-        android:title="@string/settings_profiles_title"
-        android:key="@string/settings_profiles_key">
+        android:key="@string/settings_profiles_key"
+        android:title="@string/settings_profiles_title">
 
         <!-- SELECT -->
         <ListPreference
@@ -17,8 +17,8 @@
         <!-- MANAGE -->
         <Preference
             android:key="@string/settings_profiles_manage_key"
-            android:title="@string/settings_profiles_manage_title"
-            android:summary="@string/settings_profiles_manage_summary" />
+            android:summary="@string/settings_profiles_manage_summary"
+            android:title="@string/settings_profiles_manage_title" />
 
     </PreferenceCategory>
 

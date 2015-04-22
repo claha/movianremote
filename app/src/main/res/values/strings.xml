@@ -12,9 +12,9 @@
     <string name="settings_profiles_select_title">Select</string>
     <string name="settings_profiles_select_summary">Select profile to use</string>
 
-    <string name="settings_profiles_manage_key" translatable="false">profiles_manager</string>
+    <string name="settings_profiles_manage_key" translatable="false">profiles_manage</string>
     <string name="settings_profiles_manage_title">Manage</string>
-    <string name="settings_profiles_manage_summary">Add, edit and delete profiles</string>
+    <string name="settings_profiles_manage_summary">Add, edit or delete profiles</string>
 
     <string name="settings_about_key">about</string>
     <string name="settings_about_title">About</string>
@@ -26,8 +26,6 @@
     <string name="settings_about_rate_key">about_rate</string>
     <string name="settings_about_rate_title">Rate</string>
     <string name="settings_about_rate_summary">Please rate Movian Remote in Google Play</string>
-
-    <string name="settings_ipAddress_key" translatable="false">ipAddress</string>
 
     <string name="search">Search</string>
     <string name="settings">Settings</string>

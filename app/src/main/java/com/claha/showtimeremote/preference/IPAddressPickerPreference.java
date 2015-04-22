@@ -4,6 +4,7 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
@@ -13,14 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IPAddressPickerPreference extends DialogPreference {
+
     private final String DEFAULT_IP_ADDRESS = "192.168.0.0";
     private String ipAddress;
     private List<NumberPicker> numberPickers;
 
-    public IPAddressPickerPreference(Context context) {
-        super(context, null);
+    public IPAddressPickerPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
-
 
     @Override
     protected void onSetInitialValue(final boolean restoreValue, final Object defaultValue) {
