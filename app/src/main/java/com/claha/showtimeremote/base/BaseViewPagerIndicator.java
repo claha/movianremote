@@ -3,9 +3,12 @@ package com.claha.showtimeremote.base;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.claha.showtimeremote.R;
@@ -27,7 +30,7 @@ public class BaseViewPagerIndicator extends RadioGroup implements RadioGroup.OnC
     private void createIndicators() {
         removeAllViews();
         for (int i = 0; i < viewPager.getAdapter().getCount(); i++) {
-            View indicator = inflate(getContext(), R.layout.indicator, null);
+            View indicator = new AppCompatRadioButton(getContext());
             addView(indicator);
         }
         setChecked(viewPager.getCurrentItem());
