@@ -64,6 +64,9 @@ public class MovianRemote extends BaseActivity {
             settings.addProfile(new MovianRemoteSettings.Profile("DEFAULT", "192.168.0.0"));
             settings.setCurrentProfile(settings.getProfiles().get(0));
         }
+        if (settings.getCurrentProfile() == null) {
+            settings.setCurrentProfile(settings.getProfiles().get(0));
+        }
         List<String> profiles = settings.getProfiles().toPrettyStringList();
         viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, profiles));
         viewPagerBottom.setCurrentItem(settings.getProfiles().indexOf(settings.getCurrentProfile()) + 1); // +1 because it is a circular adapter
@@ -102,6 +105,10 @@ public class MovianRemote extends BaseActivity {
         //
         if (settings.getProfiles().isEmpty()) {
             settings.addProfile(new MovianRemoteSettings.Profile("DEFAULT", "192.168.0.0"));
+            settings.setCurrentProfile(settings.getProfiles().get(0));
+        }
+
+        if (settings.getCurrentProfile() == null) {
             settings.setCurrentProfile(settings.getProfiles().get(0));
         }
 

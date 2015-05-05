@@ -1,7 +1,7 @@
 package com.claha.showtimeremote.core;
 
 import android.content.Context;
-import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -81,7 +81,9 @@ public class MovianHTTP {
      * @param url The url to be sent.
      */
     private void sendURL(final String url) {
-        Log.d("DEBUG", url);
+        if (settings.showURL()) {
+            Toast.makeText(settings.getContext(), url, Toast.LENGTH_SHORT).show();
+        }
         Thread thread = new Thread((new Runnable() {
             @Override
             public void run() {

@@ -9,8 +9,6 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.claha.showtimeremote.core.MovianRemoteSettings;
 
@@ -38,6 +36,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         setupProfiles();
 
+        // Developer
+        final PreferenceCategory developer = (PreferenceCategory) screen.findPreference(getKey(R.string.settings_developer_key));
+        screen.removePreference(developer);
+
         // About
         PreferenceCategory about = (PreferenceCategory) screen.findPreference(getKey(R.string.settings_about_key));
 
@@ -45,7 +47,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         aboutVersion.setOnPreferenceClickListener(new OnPreferenceMultipleClickListener() {
             @Override
             protected void onPreferenceMultipleClick() {
-                Toast.makeText(getActivity(), "Clicked 5 times", Toast.LENGTH_SHORT).show();
+                screen.addPreference(developer);
+
             }
         });
 
@@ -98,7 +101,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     @Override
     public void onResume() {
         super.onResume();
-        //settings = new MovianRemoteSettings(getActivity());
         setupProfiles();
     }
 
@@ -123,10 +125,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             profilesSelect.setEntries(entriesAndEntryValues);
             profilesSelect.setEntryValues(entriesAndEntryValues);
             profilesSelect.setEnabled(true);
-            for (String i : settings.getProfiles().toPrettyStringList()) {
-                Log.d("DEBUG", i);
-            }
-            Log.d("DEBUG", settings.getCurrentProfile().toPrettyString());
             profilesSelect.setValueIndex(settings.getProfiles().indexOf(settings.getCurrentProfile()));
         } else {
             profilesSelect.setEnabled(false);

@@ -22,6 +22,17 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="@string/settings_developer_key"
+        android:title="Developer">
+
+        <com.claha.showtimeremote.preference.SwitchPreferenceCompat
+            android:key="@string/settings_developer_url_key"
+            android:title="@string/settings_developer_url_title"
+            android:summary="@string/settings_developer_url_summary"/>
+
+    </PreferenceCategory>
+
     <!-- ABOUT -->
     <PreferenceCategory
         android:key="@string/settings_about_key"

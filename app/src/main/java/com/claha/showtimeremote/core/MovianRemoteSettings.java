@@ -16,6 +16,12 @@ public class MovianRemoteSettings extends BaseSettings {
         super(context);
     }
 
+
+    
+    public boolean showURL() {
+        return getBoolean(R.string.settings_developer_url_key);
+    }
+
     public Profiles getProfiles() {
         Profiles profiles = new Profiles();
         for (String info : getStringList(R.string.settings_profiles_key)) {

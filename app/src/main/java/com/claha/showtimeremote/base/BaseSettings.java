@@ -13,12 +13,18 @@ import java.util.Set;
 
 public abstract class BaseSettings {
 
+    private final Context context;
     private final Resources resources;
     private final SharedPreferences sharedPreferences;
 
     protected BaseSettings(Context context) {
+        this.context = context;
         resources = context.getResources();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     private String getStringResource(int id) {

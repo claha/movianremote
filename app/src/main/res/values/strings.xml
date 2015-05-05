@@ -16,6 +16,11 @@
     <string name="settings_profiles_manage_title">Manage</string>
     <string name="settings_profiles_manage_summary">Add, edit or delete profiles</string>
 
+    <string name="settings_developer_key">developer</string>
+    <string name="settings_developer_url_key">developer_url</string>
+    <string name="settings_developer_url_title">URL</string>
+    <string name="settings_developer_url_summary">Show url sent to Movian</string>
+
     <string name="settings_about_key">about</string>
     <string name="settings_about_title">About</string>
 

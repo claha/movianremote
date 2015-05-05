@@ -6,12 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import com.claha.showtimeremote.R;
 
 public class BaseViewPagerIndicator extends RadioGroup implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
