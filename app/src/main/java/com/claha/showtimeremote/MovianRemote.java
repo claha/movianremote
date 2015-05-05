@@ -60,16 +60,7 @@ public class MovianRemote extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (settings.getProfiles().isEmpty()) {
-            settings.addProfile(new MovianRemoteSettings.Profile("DEFAULT", "192.168.0.0"));
-            settings.setCurrentProfile(settings.getProfiles().get(0));
-        }
-        if (settings.getCurrentProfile() == null) {
-            settings.setCurrentProfile(settings.getProfiles().get(0));
-        }
-        List<String> profiles = settings.getProfiles().toPrettyStringList();
-        viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, profiles));
-        viewPagerBottom.setCurrentItem(settings.getProfiles().indexOf(settings.getCurrentProfile()) + 1); // +1 because it is a circular adapter
+        setupProfileSelector();
     }
 
     @Override
@@ -100,20 +91,22 @@ public class MovianRemote extends BaseActivity {
         }
     }
 
-    private void setupAdapters() {
-
-        //
+    private void setupProfileSelector() {
         if (settings.getProfiles().isEmpty()) {
             settings.addProfile(new MovianRemoteSettings.Profile("DEFAULT", "192.168.0.0"));
             settings.setCurrentProfile(settings.getProfiles().get(0));
         }
-
         if (settings.getCurrentProfile() == null) {
             settings.setCurrentProfile(settings.getProfiles().get(0));
         }
 
-        viewPagerBottom.setAdapter(new ProfileAdapter(viewPagerBottom, settings.getProfiles().toPrettyStringList()));
+        viewPagerBottom.setAdapter(new ProfileSelector(viewPagerBottom, settings.getProfiles().toPrettyStringList()));
         viewPagerBottom.setCurrentItem(settings.getProfiles().indexOf(settings.getCurrentProfile()) + 1); // +1 because it is a circular adapter
+    }
+
+    private void setupAdapters() {
+
+        setupProfileSelector();
 
         //
         List<Class<? extends BaseFragment>> fragments = new ArrayList<>();
@@ -161,9 +154,9 @@ public class MovianRemote extends BaseActivity {
         }
     }
 
-    private class ProfileAdapter extends CircularPagerAdapter<String> {
+    private class ProfileSelector extends CircularPagerAdapter<String> {
 
-        public ProfileAdapter(ViewPager viewPager, List<String> data) {
+        public ProfileSelector(ViewPager viewPager, List<String> data) {
             super(viewPager, data);
         }
 
