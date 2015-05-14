@@ -48,7 +48,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             @Override
             protected void onPreferenceMultipleClick() {
                 screen.addPreference(developer);
-
             }
         });
 

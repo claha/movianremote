@@ -22,14 +22,17 @@
 
     </PreferenceCategory>
 
+    <!-- DEVELOPER -->
     <PreferenceCategory
         android:key="@string/settings_developer_key"
         android:title="Developer">
 
-        <com.claha.showtimeremote.preference.SwitchPreferenceCompat
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="@string/settings_developer_url_key"
             android:title="@string/settings_developer_url_title"
-            android:summary="@string/settings_developer_url_summary"/>
+            android:summary="@string/settings_developer_url_summary"
+            android:widgetLayout="@layout/preference_switch_layout"/>
 
     </PreferenceCategory>
 
