@@ -34,7 +34,7 @@ public class BaseViewPagerIndicator extends RadioGroup implements RadioGroup.OnC
 
     public void setViewPager(ViewPager viewPager) {
         this.viewPager = viewPager;
-        this.viewPager.setOnPageChangeListener(this);
+        this.viewPager.addOnPageChangeListener(this);
         createIndicators();
 
         this.viewPager.getAdapter().registerDataSetObserver(new DataSetObserver() {

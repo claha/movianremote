@@ -25,7 +25,7 @@ public abstract class CircularPagerAdapter<T> extends PagerAdapter implements Vi
         }
 
         this.viewPager = viewPager;
-        this.viewPager.setOnPageChangeListener(this);
+        this.viewPager.addOnPageChangeListener(this);
     }
 
     @Override
