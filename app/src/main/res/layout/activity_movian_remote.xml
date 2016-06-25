@@ -1,53 +1,94 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MovianRemote">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+    <LinearLayout style="@style/horizontal_center_layout">
 
-    <FrameLayout
-        android:foreground="?android:windowContentOverlay"
-        android:id="@+id/content"
-        android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/viewPagerBottom"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_nav_up"
+            app:action="Up"
+            app:onPress="true" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPagerMain"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary" />
+    </LinearLayout>
 
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_action_search"
-            fab:fab_colorNormal="#FFFFFF"
-            fab:fab_colorPressed="#EEEEEE" />
+    <LinearLayout style="@style/horizontal_center_layout">
 
-    </FrameLayout>
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_nav_left"
+            app:action="Left"
+            app:onPress="true" />
 
-    <com.claha.showtimeremote.base.BaseViewPagerIndicator
-        android:id="@+id/viewPagerIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/viewPagerBottom"
-        android:layout_centerHorizontal="true" />
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_nav_ok"
+            app:action="Activate" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPagerBottom"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/colorPrimary" />
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_nav_right"
+            app:action="Right"
+            app:onPress="true" />
 
-</RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontal_center_layout">
+
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_nav_down"
+            app:action="Down"
+            app:onPress="true" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontal_center_layout">
+
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_nav_back"
+            app:action="Back"
+            app:onPress="true" />
+
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            style="@style/showtime_button"
+            android:src="@drawable/ic_misc_menu"
+            app:action="Menu"
+            app:actionLong="ItemMenu" />
+
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            android:id="@+id/btn_misc_settings"
+            style="@style/showtime_button"
+            android:src="@drawable/ic_misc_settings" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontal_center_layout">
+
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            android:id="@+id/btn_prog_a"
+            style="@style/showtime_button"
+            android:src="@drawable/ic_prog_a" />
+
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            android:id="@+id/btn_prog_b"
+            style="@style/showtime_button"
+            android:src="@drawable/ic_prog_b" />
+
+        <com.claha.showtimeremote.widget.MovianRemoteButton
+            android:id="@+id/btn_prog_c"
+            style="@style/showtime_button"
+            android:src="@drawable/ic_prog_c" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
 

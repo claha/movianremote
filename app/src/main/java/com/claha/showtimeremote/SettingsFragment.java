@@ -1,23 +1,18 @@
 package com.claha.showtimeremote;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
-
-import com.claha.showtimeremote.core.MovianRemoteSettings;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     private final static String PACKAGE_NAME = "com.claha.showtimeremote";
 
     private PreferenceScreen screen;
-    private MovianRemoteSettings settings;
 
     private String getKey(int id) {
         return getResources().getString(id);
@@ -28,17 +23,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.fragment_settings);
 
-        // Settings
-        settings = new MovianRemoteSettings(getActivity());
-
         // Screen
         screen = getPreferenceScreen();
 
-        setupProfiles();
+        //setupProfiles();
 
         // Developer
         final PreferenceCategory developer = (PreferenceCategory) screen.findPreference(getKey(R.string.settings_developer_key));
-        screen.removePreference(developer);
+        //screen.removePreference(developer);
 
         // About
         PreferenceCategory about = (PreferenceCategory) screen.findPreference(getKey(R.string.settings_about_key));
@@ -54,6 +46,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         Preference aboutRate = about.findPreference(getKey(R.string.settings_about_rate_key));
         aboutRate.setOnPreferenceClickListener(this);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        return false;
     }
 
     private abstract class OnPreferenceMultipleClickListener implements Preference.OnPreferenceClickListener {
@@ -84,7 +81,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         protected abstract void onPreferenceMultipleClick();
     }
 
-    @Override
+    /*@Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
 
         String name = (String) newValue;
@@ -95,14 +92,15 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
 
         return false;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onResume() {
         super.onResume();
         setupProfiles();
-    }
+    }*/
 
+    /*
     private void setupProfiles() {
 
         PreferenceCategory profilesCategory = (PreferenceCategory) screen.findPreference(getKey(R.string.settings_profiles_key));
@@ -128,15 +126,15 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         } else {
             profilesSelect.setEnabled(false);
         }
-    }
+    }*/
 
-    private OnNestedPreferenceClickListener onNestedPreferenceClickListener;
+    //private OnNestedPreferenceClickListener onNestedPreferenceClickListener;
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        onNestedPreferenceClickListener = (OnNestedPreferenceClickListener) activity;
-    }
+    /*@Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        onNestedPreferenceClickListener = (OnNestedPreferenceClickListener) context.getApplicationContext();
+    }*/
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
@@ -144,15 +142,16 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         if (key.equals(getKey(R.string.settings_about_rate_key))) {
             getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + PACKAGE_NAME)));
-            return true;
-        } else {
+        }
+        return true;
+        /*else {
             onNestedPreferenceClickListener.onClick(preference.getKey());
             return true;
-        }
+        }*/
     }
 
-    public interface OnNestedPreferenceClickListener {
+    /*public interface OnNestedPreferenceClickListener {
         void onClick(String key);
-    }
+    }*/
 
 }

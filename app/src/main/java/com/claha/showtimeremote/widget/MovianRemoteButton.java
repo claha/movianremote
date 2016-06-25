@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.claha.showtimeremote.R;
-import com.claha.showtimeremote.core.MovianHTTP;
+import com.claha.showtimeremote.core.MovianRemoteHTTP;
 
 public class MovianRemoteButton extends ImageButton implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
 
@@ -24,7 +25,7 @@ public class MovianRemoteButton extends ImageButton implements View.OnClickListe
     private String action;
     private String actionLong = null;
     private boolean onPress = false;
-    private MovianHTTP http;
+    private MovianRemoteHTTP http;
 
     public MovianRemoteButton(Context context) {
         super(context);
@@ -58,7 +59,7 @@ public class MovianRemoteButton extends ImageButton implements View.OnClickListe
     }
 
     private void init() {
-        http = new MovianHTTP(getContext());
+        http = new MovianRemoteHTTP(getContext());
 
         if (onPress) {
             setOnTouchListener(this);
@@ -70,15 +71,43 @@ public class MovianRemoteButton extends ImageButton implements View.OnClickListe
         }
     }
 
+    public void setOnClickAction(String action) {
+        this.action = action;
+    }
+
+    public void setOnLongClickAction(String actionLong) {
+        this.actionLong = actionLong;
+        setOnLongClickListener(this);
+        disableOnPress();
+    }
+
+    /*public void enableOnPress() {
+        onPress = true;
+        setOnTouchListener(this);
+        setOnLongClickListener(null);
+    }*/
+
+    private void disableOnPress() {
+        onPress = false;
+        setOnTouchListener(null);
+    }
+
     @Override
     public void onClick(View v) {
-        http.sendAction(action);
+        if (action != null) {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            http.sendAction(action);
+        }
     }
 
     @Override
     public boolean onLongClick(View v) {
-        http.sendAction(actionLong);
-        return true;
+        if (actionLong != null) {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            http.sendAction(actionLong);
+            return true;
+        }
+        return false;
     }
 
     @Override

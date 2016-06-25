@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import com.claha.showtimeremote.base.BaseActivity;
 
-public class SettingsScreen extends BaseActivity implements SettingsFragment.OnNestedPreferenceClickListener {
+public class SettingsScreen extends BaseActivity {
 
     private FragmentManager fragmentManager;
 
@@ -53,12 +53,8 @@ public class SettingsScreen extends BaseActivity implements SettingsFragment.OnN
         }
     }
 
-    @Override
+    /*@Override
     public void onClick(String key) {
-        if (key.equals(getResources().getString(R.string.settings_profiles_manage_key))) {
-            fragmentManager.beginTransaction().replace(R.id.content, new SettingsProfilesFragment()).addToBackStack(null).commit();
-            setTitle("Manage Profiles");
-        }
-    }
 
+    }*/
 }

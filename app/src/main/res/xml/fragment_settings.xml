@@ -1,24 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- PROFILES -->
+    <!-- NETWORK -->
     <PreferenceCategory
-        android:key="@string/settings_profiles_key"
-        android:title="@string/settings_profiles_title">
+        android:key="@string/settings_network_key"
+        android:title="@string/settings_network_title">
 
-        <!-- SELECT -->
+        <EditTextPreference
+            android:defaultValue="movian.local"
+            android:key="@string/settings_network_ipaddress_key"
+            android:summary="@string/settings_network_ipaddress_summary"
+            android:title="@string/settings_network_ipaddress_title" />
+
+    </PreferenceCategory>
+
+    <!-- PROGRAMMABLE BUTTONS -->
+    <PreferenceCategory
+        android:key="@string/settings_programmable_buttons_key"
+        android:title="Red Button">
+
         <ListPreference
-            android:dialogTitle=""
-            android:key="@string/settings_profiles_select_key"
-            android:shouldDisableView="true"
-            android:summary="@string/settings_profiles_select_summary"
-            android:title="@string/settings_profiles_select_title" />
+            android:entries="@array/actions"
+            android:entryValues="@array/actions"
+            android:key="@string/settings_programmable_buttons_red_button_action_key"
+            android:summary="@string/settings_programmable_buttons_red_button_action_summary"
+            android:title="@string/settings_programmable_buttons_red_button_action_title" />
 
-        <!-- MANAGE -->
-        <Preference
-            android:key="@string/settings_profiles_manage_key"
-            android:summary="@string/settings_profiles_manage_summary"
-            android:title="@string/settings_profiles_manage_title" />
+        <ListPreference
+            android:entries="@array/actions"
+            android:entryValues="@array/actions"
+            android:key="@string/settings_programmable_buttons_red_button_long_action_key"
+            android:summary="@string/settings_programmable_buttons_red_button_long_action_summary"
+            android:title="@string/settings_programmable_buttons_red_button_long_action_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Green Button">
+        <ListPreference
+            android:entries="@array/actions"
+            android:entryValues="@array/actions"
+            android:key="@string/settings_programmable_buttons_green_button_action_key"
+            android:summary="@string/settings_programmable_buttons_green_button_action_summary"
+            android:title="@string/settings_programmable_buttons_green_button_action_title" />
+
+        <ListPreference
+            android:entries="@array/actions"
+            android:entryValues="@array/actions"
+            android:key="@string/settings_programmable_buttons_green_button_long_action_key"
+            android:summary="@string/settings_programmable_buttons_green_button_long_action_summary"
+            android:title="@string/settings_programmable_buttons_green_button_long_action_title" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Blue Button">
+        <ListPreference
+            android:entries="@array/actions"
+            android:entryValues="@array/actions"
+            android:key="@string/settings_programmable_buttons_blue_button_action_key"
+            android:summary="@string/settings_programmable_buttons_blue_button_action_summary"
+            android:title="@string/settings_programmable_buttons_blue_button_action_title" />
+
+        <ListPreference
+            android:entries="@array/actions"
+            android:entryValues="@array/actions"
+            android:key="@string/settings_programmable_buttons_blue_button_long_action_key"
+            android:summary="@string/settings_programmable_buttons_blue_button_long_action_summary"
+            android:title="@string/settings_programmable_buttons_blue_button_long_action_title" />
 
     </PreferenceCategory>
 
@@ -30,9 +75,9 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/settings_developer_url_key"
-            android:title="@string/settings_developer_url_title"
             android:summary="@string/settings_developer_url_summary"
-            android:widgetLayout="@layout/preference_switch_layout"/>
+            android:title="@string/settings_developer_url_title"
+            android:widgetLayout="@layout/preference_switch_layout" />
 
     </PreferenceCategory>
 

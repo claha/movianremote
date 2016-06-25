@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Movian Remote</string>
+    <string name="app_name" translatable="false">Movian Remote</string>
 
-    <string name="version" translatable="false">v1.1.0</string>
+    <string name="version" translatable="false">v1.2.0</string>
 
-    <string name="settings_profiles_key" translatable="false">profiles</string>
-    <string name="settings_profiles_title" translatable="false">Profiles</string>
+    <string name="settings_network_key" translatable="false">network</string>
+    <string name="settings_network_title">Network</string>
+    <string name="settings_network_ipaddress_key" translatable="false">ipaddress</string>
+    <string name="settings_network_ipaddress_title">IP Address</string>
+    <string name="settings_network_ipaddress_summary">Set IP address of Movian</string>
 
-    <string name="settings_profiles_select_key" translatable="false">profiles_select</string>
-    <string name="settings_profiles_select_title">Select</string>
-    <string name="settings_profiles_select_summary">Select profile to use</string>
+    <string name="settings_programmable_buttons_key" translatable="false">programmable_buttons</string>
+    <string name="settings_programmable_buttons_red_button_action_key" translatable="false">programmable_buttons_red_button_action</string>
+    <string name="settings_programmable_buttons_red_button_action_title">On Click Action</string>
+    <string name="settings_programmable_buttons_red_button_action_summary">Set on click action for the red button</string>
+    <string name="settings_programmable_buttons_red_button_long_action_key" translatable="false">programmable_buttons_red_button_long_action</string>
+    <string name="settings_programmable_buttons_red_button_long_action_title">On Long Click</string>
+    <string name="settings_programmable_buttons_red_button_long_action_summary">Set on long click action for the red button</string>
+    <string name="settings_programmable_buttons_green_button_action_key" translatable="false">programmable_buttons_green_button_action</string>
+    <string name="settings_programmable_buttons_green_button_action_title">On Click</string>
+    <string name="settings_programmable_buttons_green_button_action_summary">Set on click action for the green button</string>
+    <string name="settings_programmable_buttons_green_button_long_action_key" translatable="false">programmable_buttons_green_button_long_action</string>
+    <string name="settings_programmable_buttons_green_button_long_action_title">On Long Click</string>
+    <string name="settings_programmable_buttons_green_button_long_action_summary">Set on long click action for the green button</string>
+    <string name="settings_programmable_buttons_blue_button_action_key" translatable="false">programmable_buttons_blue_button_action</string>
+    <string name="settings_programmable_buttons_blue_button_action_title">On Click</string>
+    <string name="settings_programmable_buttons_blue_button_action_summary">Set on click action for the blue button</string>
+    <string name="settings_programmable_buttons_blue_button_long_action_key" translatable="false">programmable_buttons_blue_button_long_action</string>
+    <string name="settings_programmable_buttons_blue_button_long_action_title">On Long Click</string>
+    <string name="settings_programmable_buttons_blue_button_long_action_summary">Set on long click action for the blue button</string>
 
-    <string name="settings_profiles_manage_key" translatable="false">profiles_manage</string>
-    <string name="settings_profiles_manage_title">Manage</string>
-    <string name="settings_profiles_manage_summary">Add, edit or delete profiles</string>
+
 
     <string name="settings_developer_key">developer</string>
     <string name="settings_developer_url_key">developer_url</string>
@@ -32,7 +49,6 @@
     <string name="settings_about_rate_title">Rate</string>
     <string name="settings_about_rate_summary">Please rate Movian Remote in Google Play</string>
 
-    <string name="search">Search</string>
     <string name="settings">Settings</string>
 
 </resources>
