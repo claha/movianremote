@@ -1,3 +1,5 @@
+Movian does not seem to be update anymore, will archive this repository. Feel free to fork it.
+
 # Movian Remote
 Use your Android phone as a remote for Movian (https://movian.tv/). Now available on Google Play (https://play.google.com/store/apps/details?id=com.claha.showtimeremote)
 
